@@ -1,0 +1,11 @@
+@import "../../../styles.scss";
+
+.inbuilt-form-data {
+    .form-group.required {
+        .col-form-label{
+            &::after {
+            color: $primary;
+        }
+        }
+    }
+}

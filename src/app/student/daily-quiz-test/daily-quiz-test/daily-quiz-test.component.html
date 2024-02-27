@@ -1,0 +1,231 @@
+<section>
+
+    <div
+        *ngIf="(currentQuestion?.question?.questions !== null && currentQuestion?.question?.questions !== ''); else elseBlock">
+        <div class="row mock_tab">
+            <div class="col-auto tab_content" [ngClass]="{'active': tab === currentTab}"
+                *ngFor="let tab of tabs let i =index ">
+                <span>
+                    Questions
+                </span>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="row align-items-stretch mock_qus">
+            <div class="col-lg-8 col-md-8 col-12">
+                <div class="question_bck p-4">
+                    <p *ngIf="currentQuestion?.question?.questions.includes('<math>')"
+                        [appMath]="'Q'+' '+(index+1)+'). '+currentQuestion?.question?.questions"
+                        class=" question d-block">
+                    </p>
+                    <p *ngIf="!currentQuestion?.question?.questions.includes('<math>')"
+                        [innerHTML]="'Q'+' '+(index+1)+'). '+currentQuestion?.question?.questions"
+                        class=" question d-block">
+                    </p>
+                    <ul class="mock_single_qus ps-0">
+                        <li class="position-relative">
+                            <span *ngIf="isResulted && currentQuestion?.question.answer =='a'" class="correct_option">
+                                <img src="../../../assets/img/correct.png" class="img-fluid">
+                            </span>
+                            <div class="form-check">
+                                <input
+                                    [ngClass]="isResulted && currentQuestion?.question.answer == currentQuestion?.userAnswer?'true':isResulted && currentQuestion.question.answer != currentQuestion.userAnswer?'wrong':''"
+                                    [disabled]="isResulted" class="form-check-input"
+                                    [checked]="currentQuestion?.userAnswer=='a'" (change)="changeSelection($event, 'a')"
+                                    type="checkbox" value="" id="flexCheckDefault" />
+                                <label *ngIf="currentQuestion?.question?.option1.includes('<math>')"
+                                    [appMath]="'A.   '+currentQuestion?.question?.option1"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault">
+                                    <span class="me-3 ms-2"></span></label>
+                                <label *ngIf="!currentQuestion?.question?.option1.includes('<math>')"
+                                    [innerHTML]="'A.   '+currentQuestion?.question?.option1"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault">
+                                    <span class="me-3 ms-2"></span></label>
+                            </div>
+                        </li>
+                        <li class="position-relative">
+                            <span *ngIf="isResulted && currentQuestion?.question.answer =='b'" class="correct_option">
+                                <img src="../../../assets/img/correct.png" class="img-fluid">
+                            </span>
+                            <div class="form-check">
+                                <input
+                                    [ngClass]="isResulted && currentQuestion?.question.answer == currentQuestion?.userAnswer?'true':isResulted && currentQuestion.question.answer != currentQuestion.userAnswer?'wrong':''"
+                                    [disabled]="isResulted" class="form-check-input"
+                                    [checked]="currentQuestion?.userAnswer=='b'" (change)="changeSelection($event, 'b')"
+                                    type="checkbox" value="" id="flexCheckDefault2" />
+                                <label *ngIf="currentQuestion?.question?.option2.includes('<math>')"
+                                    [appMath]="'B.   '+currentQuestion?.question?.option2"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault2">
+                                    <span class="me-3 ms-2"></span></label>
+                                <label *ngIf="!currentQuestion?.question.option2.includes('<math>')"
+                                    [innerHTML]="'B.   '+currentQuestion?.question?.option2"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault2">
+                                    <span class="me-3 ms-2"></span></label>
+                            </div>
+                        </li>
+                        <li class="position-relative">
+                            <span *ngIf="isResulted && currentQuestion?.question.answer =='c'" class="correct_option">
+                                <img src="../../../assets/img/correct.png" class="img-fluid">
+                            </span>
+                            <div class="form-check">
+                                <input
+                                    [ngClass]="isResulted && currentQuestion?.question.answer == currentQuestion?.userAnswer?'true ':isResulted && currentQuestion.question.answer != currentQuestion.userAnswer?'wrong':''"
+                                    [disabled]="isResulted" class="form-check-input"
+                                    [checked]="currentQuestion?.userAnswer=='c'" (change)="changeSelection($event, 'c')"
+                                    type="checkbox" value="" id="flexCheckDefault3" />
+                                <label *ngIf="currentQuestion?.question?.option3.includes('<math>')"
+                                    [appMath]="'C.   '+currentQuestion?.question?.option3"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault3">
+                                    <span class="me-3 ms-2"></span></label>
+                                <label *ngIf="!currentQuestion?.question?.option3.includes('<math>')"
+                                    [innerHTML]="'C.   '+currentQuestion?.question?.option3"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault3">
+                                    <span class="me-3 ms-2"></span></label>
+                            </div>
+                        </li>
+                        <li class="position-relative">
+                            <span *ngIf="isResulted && currentQuestion?.question.answer =='d'" class="correct_option">
+                                <img src="../../../assets/img/correct.png" class="img-fluid">
+                            </span>
+                            <div class="form-check">
+                                <input
+                                    [ngClass]="isResulted && currentQuestion?.question.answer == currentQuestion?.userAnswer?'true ':isResulted && currentQuestion.question.answer != currentQuestion.userAnswer?'wrong':''"
+                                    [disabled]="isResulted" class="form-check-input"
+                                    [checked]="currentQuestion?.userAnswer=='d'" (change)="changeSelection($event,'d')"
+                                    type="checkbox" value="" id="flexCheckDefault4" />
+                                <label *ngIf="currentQuestion?.question?.option4.includes('<math>')"
+                                    [appMath]="'D.   '+currentQuestion?.question?.option4"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault4">
+                                    <span class="me-3 ms-2"></span></label>
+                                <label *ngIf="!currentQuestion?.question?.option4.includes('<math>')"
+                                    [innerHTML]="'D.   '+currentQuestion?.question?.option4"
+                                    class="form-check-label question_option d-block" for="flexCheckDefault4">
+                                    <span class="me-3 ms-2"></span></label>
+                            </div>
+                        </li>
+                        <li class="position-relative">
+                            <span *ngIf="isResulted && currentQuestion?.question.answer =='e'" class="correct_option">
+                                <img src="../../../assets/img/correct.png" class="img-fluid">
+                            </span>
+                            <div class="form-check" *ngIf="currentQuestion?.question?.option5!=null">
+                                <input
+                                    [ngClass]="isResulted && currentQuestion?.question.answer == currentQuestion?.userAnswer?'true ':isResulted && currentQuestion.question.answer != currentQuestion.userAnswer?'wrong':''"
+                                    [disabled]="isResulted" class="form-check-input"
+                                    [checked]="currentQuestion?.userAnswer=='e'" (change)="changeSelection($event,'e')"
+                                    type="checkbox" value="" id="flexCheckDefault5" />
+                                <label *ngIf="currentQuestion?.question?.option5.includes('<math>')"
+                                    [appMath]="'E.   '+currentQuestion?.question?.option5"
+                                    class="form-check-label question_option" for="flexCheckDefault5">
+                                    <span class="me-3 ms-2"></span></label>
+                                <label *ngIf="!currentQuestion?.question?.option5.includes('<math>')"
+                                    [innerHTML]="'E.   '+currentQuestion?.question?.option5"
+                                    class="form-check-label question_option" for="flexCheckDefault5">
+                                    <span class="me-3 ms-2"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <div *ngIf="isResulted" class="">
+                        <p *ngFor="let sol of currentQuestion?.question?.explanations.split('       ')"
+                            class="solution-size d-block">
+                            <span *ngIf="sol.includes('<math>')" [appMath]="sol"></span>
+                            <span *ngIf="!sol.includes('<math>')" [innerHTML]="sol"></span>
+                        </p>
+                    </div>
+
+                    <div class="">
+                        <div class="row align-items-center justify-content-between bottm_btns py-4">
+                            <div class="col-lg-3 col-md-12 col-12">
+                                <button [disabled]="checkBack()" (click)="back()" class="btn border_btn">Back</button>
+                            </div>
+
+                            <div class="col-lg-9 col-md-12 col-12 text-lg-end text-md-start text-start">
+                                <button [disabled]="isResulted" [ngClass]="currentQuestion?.skip?'bg-red':''"
+                                    (click)="skip()" class="btn border_btn me-2">Skip</button>
+                                <button [disabled]="isResulted" [ngClass]="currentQuestion?.isMarkUp?'bg-colour':''"
+                                    (click)="markUp()" class="btn border_btn ">MarkUp</button>
+                                <button *ngIf="!isResulted" [disabled]="checkDisable()"
+                                    class="btn btn_nxt ms-2 text-white" (click)="save()">Save and Next</button>
+                                <button *ngIf="isResulted" class="btn btn_nxt ms-2 text-white"
+                                    (click)="next()">{{'Next'}}</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row rounded_text ">
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <p *ngIf="!isResulted" class="mb-0"><span
+                                    class=" me-2 rounded_clr rounded blue"></span>Answered
+                            </p>
+                            <p *ngIf="isResulted" class="mb-0"><span class="correct_option-2"> <img
+                                        src="../../../assets/img/correct.png" class="img-fluid"></span>Correct Answer
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <p class="mb-0"><span class=" me-2 rounded_clr rounded blank"></span>Not
+                                Answered
+                            </p>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <p class="mb-0"><span class=" me-2 rounded_clr rounded red"></span>Skip</p>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <p class="mb-0"><span class=" me-2 rounded_clr rounded yellow"></span>Mark Up
+                            </p>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <p *ngIf="isResulted" class="mb-0"><span class=" me-2 rounded_clr rounded red"></span>Wrong
+                                Answer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="student-sidebar col-lg-4 col-md-4 col-12 ">
+                <div class="quant_bck h-100 position-relative">
+                    <div class="quant_header p-lg-4 p-3">
+                        <h3 class="text-white text-center mb-0">
+                            <countdown #cd *ngIf="!isResulted && timeStart" [config]="config"
+                                (event)="handleEvent($event)">
+                            </countdown>
+                        </h3>
+                    </div>
+                    <div class="row row-cols-4 row-cols-lg-5 g-2 g-lg-3 px-4 pt-lg-5 pt-4 quant_numbers">
+                        <div *ngFor="let item of allQuestions let i =index"
+                            class="col d-flex justify-content-center align-items-center mt-0 p-0 ">
+                            <div *ngIf="!(item.isMarkUp || item.skip)"
+                                [ngClass]="{'active': i === index && item.userAnswer==null,'bg-successs':item.userAnswer!=null}"
+                                class="quant_num mb-4 cursor-pointer mock_numbers" (click)="changeQuestion(i)">{{i+1}}
+                            </div>
+                            <div *ngIf="item.isMarkUp" class="quant_num mb-4 bg-colour cursor-pointer"
+                                (click)="changeQuestion(i)">{{i+1}}</div>
+                            <div *ngIf="item.skip" class="quant_num mb-4 bg-red cursor-pointer"
+                                (click)="changeQuestion(i)">
+                                {{i+1}}</div>
+
+
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end p-3">
+
+                        <div class="text-end">
+                            <button *ngIf="!isResulted" (click)="submit()" class="create_btn">Submit</button>
+                        </div>
+                        <div class="text-end">
+                            <button *ngIf="isResulted" (click)="exit()" class="create_btn">Exit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <div class="loader_background">
+            <img src="../../assets/img/output-onlinegiftools.gif">
+        </div>
+    </ng-template>
+</section>

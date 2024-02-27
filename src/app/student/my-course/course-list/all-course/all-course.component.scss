@@ -1,0 +1,136 @@
+@import "../../../../../styles.scss";
+
+.price_heading {
+    font-size: 14px;
+}
+
+.stdnt_main_hding {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+img {
+    font-size: 12px;
+}
+.p-treeselect .p-treeselect-trigger {
+    background: transparent;
+    color: #6c757d;
+    width: 2.357rem;
+    border-top-right-radius: 3px;
+    display: none !important;
+    border-bottom-right-radius: 3px;
+}
+.stdnt_nav_content {
+    .card {
+        box-shadow: 0px 4px 30px #f2f2f2;
+        max-width: 92%;
+        height: 288px;
+        border-radius: 0px 0px 20px 20px;
+
+        .card-body {
+            border: 1px dashed $card-border;
+            border-radius: 0px 0px 20px 20px;
+
+            .card_top_heading {
+                .card_heading {
+                    font-size: 14px;
+                    font-weight: 600;
+                    max-width: 200px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .valid_date {
+                    font-size: 10px;
+                    font-weight: 500;
+                    color: $gray;
+                }
+            }
+            .button{
+                background-color: #319EAE;
+                color: #fff;
+                font-size: 12px;
+                 font-weight: 500;
+                padding: 3px 26px !important;
+                border-radius: 25px;
+            }
+
+            .card-text {
+                font-size: 12px;
+                color: $gray;
+            }
+
+            .footer {
+                span {
+                    color: $gray;
+                    font-size: 12px;
+                }
+            }
+
+            .view_btn {
+                background-color: $primary;
+                width: 28%;
+                font-size: 12px;
+                font-weight: 500;
+                padding: 2px 0px;
+
+            }
+        }
+    }
+}
+.footer{
+    position: absolute;
+    right: 9px;
+    width: 92%;
+    bottom: 12px;
+}
+
+
+@media screen and (max-width:991px) {
+    .stdnt_nav_content {
+        .card {
+            height: auto;
+            max-width: 100%;
+        }
+    }
+
+    .stdnt_nav_content {
+        .card {
+            .card-body {
+                .card_top_heading {
+                    .card_heading {
+                        font-size: 18px;
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:767px) {
+    .stdnt_nav_content {
+        .card {
+            .card-body {
+                .card_top_heading {
+                    text-align: center;
+
+                    .valid_dat {
+                        font-size: 11px;
+                    }
+                }
+
+                .card-text {
+                    font-size: 12px;
+                    text-align: center;
+                }
+
+                .footer {
+                    .view_btn {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,133 @@
+<form class="form-horizontal" autocomplete="off" #createAdminForm="ngForm" (ngSubmit)="save()">
+  <abp-modal-header [title]="'Create Sub-admin' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+
+  <div class="modal-body px-lg-5 px-md-3 px-2 pt-3 pb-0 ">
+    <div class="row justify-content-around">
+      <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "First Name" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" placeholder="First Name" name="name" id="name1"
+            (keydown.space)="$event.preventDefault();" maxlength="128" required [(ngModel)]="admin.name"
+            #nameModel="ngModel" #nameEl />
+          <abp-validation-summary [control]="nameModel" [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+      </div>
+
+      <div class="col-md-6 form-group mb-2">
+        <label class="col-form-label fw-normal  w-100" for="surname">
+          {{ "Last Name" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" (keydown.space)="$event.preventDefault();" placeholder="Last Name"
+            name="surname" id="surname1" maxlength="128" [(ngModel)]="admin.surname" #lastNameModel="ngModel"
+            #lastNameEl />
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-around"> 
+      <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="gender">
+          {{ "Gender" | localize }}
+        </label>
+        <div>
+          <select [(ngModel)]="admin.gender" #gender="ngModel" #genderE1 required name="gender" class="form-select"
+            aria-label="Default select example">
+            <option class="" selected value="undefined" disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="phoneNumber">
+          {{ "Mobile" | localize }}
+        </label>
+        <div>
+          <input type="tel" [(ngModel)]="admin.phoneNumber" #phoneNumber="ngModel" #phoneNumberE1
+            pattern="[6789][0-9]{9}" (keydown.space)="$event.preventDefault();" class="form-control"
+            placeholder="Mobile" name="phoneNumber" id="phoneNumber1" maxlength="128" required />
+          <abp-validation-summary [control]="phoneNumber" [controlEl]="phoneNumberE1"></abp-validation-summary>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-around">
+      
+
+      <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="emailAddress">
+          {{ "Email" | localize }}
+        </label>
+        <div>
+          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" class="form-control"
+            placeholder="Email" (keydown.space)="$event.preventDefault();" name="emailAddress" id="emailAddress1"
+            maxlength="128" required [(ngModel)]="admin.emailAddress" #emailModel="ngModel" #emailEl />
+          <abp-validation-summary [control]="emailModel" [controlEl]="emailEl"></abp-validation-summary>
+        </div>
+      </div>
+      <div class="col-md-6 form-group mb-2">
+        <label class="col-form-label fw-normal  w-100" for="image">
+          {{ "Image" | localize }}
+        </label>
+        <div>
+          <div class="popup_img_bck" *ngIf="admin.imageUrl!=''">
+            <img [src]="admin.imageUrl" class="h-100 w-100" alt="user image">
+            <span class="cross-icon bg-danger text-white position-absolute curser_pointer rounded-circle" (click)="admin.imageUrl=''">X</span>
+          </div>
+          <input *ngIf="admin.imageUrl==''" type="file" (change)="onUpload($event.target.files)" class="form-control"
+            id="image1" maxlength="128" />
+        </div>
+        <div *ngIf="isImageUpladedStatus=='start'" class="progress-bar__container">
+          <div [ngClass]="isImageUpladedStatus=='end'?'pb-full':''" class="progress-bar">
+          </div>
+        </div>
+        <!-- <div class="progress-bar__container">
+        <div class="progress-bar pb-full">
+        </div>
+      </div> -->
+      </div>
+</div>
+
+      <div class="row justify-content-around px-0">
+        
+
+        <div class="col-md-6 form-group required mb-2">
+          <label class="col-form-label fw-normal  w-100" for="name">
+            {{ "Status" | localize }}
+          </label>
+          <div>
+            <select class="form-select" required [(ngModel)]="admin.isActive" name="isActive"
+              aria-label="Default select example">
+              <option value="true">Active</option>
+              <option value="false">Inactive </option>
+            </select>
+          </div>
+        </div>
+
+
+      
+        <div class="col-md-6 form-group required mb-2">
+          <label class="col-form-label fw-normal  w-100" for="password">
+            {{ "Password" | localize }}
+          </label>
+          <div>
+            <input type="password" class="form-control" placeholder="******" name="password" id="password"
+              autocomplete="off" maxlength="128" required [(ngModel)]="admin.password" #passwordModel="ngModel"
+              #passwordEl />
+            <abp-validation-summary [control]="passwordModel" [controlEl]="passwordEl"></abp-validation-summary>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+  <div class="custm_footer">
+    <abp-modal-footer [saveDisabled]="!createAdminForm.form.valid" (onCancelClick)="bsModalRef.hide()">
+    </abp-modal-footer>
+  </div>
+</form>

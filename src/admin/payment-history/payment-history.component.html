@@ -1,0 +1,60 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<section class="mt-4">
+    <div class="row justify-content-end">
+    </div>
+    <div class="row">
+        <div class="table_bck">
+            <div class="card-body table-responsive p-0">
+                <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead class="bg-light border-0">
+                        <tr>
+
+                            <th class="custom-fw" width="200">Name</th>
+                            <th class="custom-fw">Date</th>
+                            <th class="custom-fw">Payment Type</th>
+                            <th class="custom-fw">Purchase Title</th>
+                            <th class="custom-fw">Price</th>
+                            <th class="custom-fw">Transaction ID</th>
+                            <th class="custom-fw">Payment Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of allPayment; let i = index">
+
+                            <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.name}}">{{data.name}}
+                            </td>
+                            <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="{{data.creationTime | date: 'MMM dd, yyyy HH:mm:ss'}}">
+                                {{data.creationTime | date: "'MMM dd, yyyy HH:mm:ss"}}</td>
+                            <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.paymentType}}">
+                                {{data.paymentType}}</td>
+                            <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.purchaseTitle}}">
+                                {{data.purchaseTitle |slice:0:15}}</td>
+                            <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.price |number:'1.0-0'}}">
+                                {{data.price |number:'1.0-0'}}</td>
+                            <td  *ngIf="data.transactionID!=null" data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.transactionID}}">
+                                {{data.transactionID}}</td>
+                            <td *ngIf="data.transactionID ==null"data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.transactionID}}">
+                                No Records</td>
+                            <td *ngIf="data.paymentStatus!=null && data.paymentStatus!='Failed'" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="{{data.paymentStatus}}">
+                                 <span class="success-bg">{{data.paymentStatus}}</span>
+                            </td>
+                            <td *ngIf="data.paymentStatus==null" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="{{data.paymentStatus}}">
+                                {{data?.paymentStatus}}
+                            </td>
+                            
+                            <td *ngIf="data.paymentStatus!=null && data.paymentStatus=='Failed'" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="{{data.paymentStatus}}"><span class="bg-danger failed-bg">{{data.paymentStatus}}</span>
+                            </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,87 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<section class="bg-white py-lg-1 p-2">
+  <div class="container-fluid">
+    <div class="row  mt-md-1 my-lg-3 mb-md-3 mt-0 mb-3 justify-content-end">
+      <div class="col-lg-6 col-md-6 col-12 text-lg-end text-md-end text-start">
+        <button class="create_btn text-white border-0" type="button" (click)="showCreateOrEditDialog()">
+          <i class="fas fa-plus-square me-2"></i>Create
+        </button>
+      </div>
+    </div>
+    <div class="table_bck">
+      <div class="card-body table-responsive p-0">
+        <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+          <thead class="border-0">
+            <tr>
+              <th class="custom-fw">Title</th>
+              <th class="custom-fw">Department Name</th>
+              <th class="custom-fw">Description</th>
+              <th class="custom-fw">Start Date</th>
+              <th class="custom-fw">Last Date</th>
+              <th class="custom-fw">Mode</th>
+              <th class="custom-fw">link</th>
+              <th class="custom-fw">Image</th>
+              <th class="custom-fw text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of allJobNotifications">
+              <td>{{ data.nameOfJob}}</td>
+              <td>{{ data.departmentName}}</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.description}}">{{ data.description |
+                slice: 0:50 }}...</td>
+
+
+              <td>
+                <div *ngIf="data.startDate != null">
+                  {{ data?.startDate | date: 'MM/dd/YYYY' }}
+                </div>
+                <div *ngIf="data.startDate == null">
+                  ---
+                </div>
+              </td>
+              <td>
+                <div *ngIf="data.lastDate != null">
+                  {{ data?.lastDate | date: 'MM/dd/YYYY' }}
+                </div>
+                <div *ngIf="data.lastDate == null">
+
+                  ---
+                </div>
+              </td>
+
+              <td>{{ data.mode }}</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.link }}">{{ data.link | slice: 0:10
+                }}...</td>
+              <td>
+                <img *ngIf="data.image == ''" _ngcontent-ric-c100="" src="../../assets/img/user-img.png"
+                  alt="user image" />
+                <img *ngIf="data.image != ''" _ngcontent-ric-c100="" [src]="data.image" alt="user image" />
+              </td>
+              <td class="text-right">
+                <ul class="action-column mb-0 ps-0">
+                  <li>
+                    <button type="button" (click)="showCreateOrEditDialog(data.id)"
+                      class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2">
+                      <!-- <i class="fa-solid fa-pen"></i> -->
+                      <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" (click)="delJobNotification(data)"
+                      class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2">
+                      <!-- <i class="fa-solid fa-trash text-fs-sm"></i> -->
+                      <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                    </button>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

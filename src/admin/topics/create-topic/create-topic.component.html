@@ -1,0 +1,45 @@
+<form class="form-horizontal" autocomplete="off" #createTopicForm="ngForm" (ngSubmit)="save()">
+  <abp-modal-header [title]="'Create Topic' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+  <div class="modal-body px-lg-5 px-md-3 px-sm-2 pt-3 pb-0">
+    <div class="row justify-content-around">
+      <div class="col-md-12 form-group required">
+        <div class="row">
+          <label class="col-md-3 col-form-label fw-normal" for="subjectId">
+            {{ "Subject Name" | localize }}
+          </label>
+          <div class="col-md-9">
+            <select [(ngModel)]="topic.subjectId" class="w-100 form-select" name="subjectId" required
+              #subjectIdModel="ngModel" #subjectIdeEl placeholder="Select Subject">
+              <option value="-1" selected="">Select Subject</option>
+              <option *ngFor="let item of allSubjectItems" [value]="item.id">
+
+                {{item.subjectName}}
+              </option>
+            </select>
+            <abp-validation-summary [control]="subjectIdModel" [controlEl]="subjectIdeEl"></abp-validation-summary>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of topic.topics; let i = index" class="form-group row required p-0">
+        <label class="col-md-3 col-form-label mb-0" for="title">
+          {{ "Topic Name" | localize }}
+        </label>
+        <div class="col-md-9 ">
+          <div class="input-group mb-0">
+            <input [(ngModel)]="data.title" (blur)='trimStart(data)' [ngModelOptions]="{standalone: true}"
+              class=" form-control dlt_input" type="text" name="title{{i}}" id="topics" required
+              placeholder="Enter Topic Name" />
+
+            <span *ngIf="(topic.topics.length==i+1)" maxlength="128" class="input-group-text icon_area curser_pointer" (click)="add();"
+              id="basic-addon1"><i class="fa-sharp fa-solid fa-circle-plus px-1"></i></span>
+            <span *ngIf="!(topic.topics.length==i+1)" class="input-group-text bg-danger border border-danger curser_pointer"
+              (click)="delTopic(i);" id="basic-addon1"><i class="fa-sharp fa-solid fas fa-trash px-1"></i></span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <abp-modal-footer [saveDisabled]="!createTopicForm.form.valid " (onCancelClick)="bsModalRef.hide()">
+  </abp-modal-footer>
+</form>

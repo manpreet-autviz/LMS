@@ -1,0 +1,187 @@
+
+<hr>
+<form class="form-horizontal inbuilt-form-data" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="save()">
+
+  <div _ngcontent-hlo-c171="" class="row px-3 create_heading">
+    <h4 _ngcontent-hlo-c171="">Edit Test</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2">
+        <div class="col form-group required">
+
+          <label class="col-form-label w-100" for="courseManagementId">
+            {{ "Course" | localize }}
+          </label>
+
+          <select [(ngModel)]="test.courseManagementId" class="w-100 form-select" name="courseManagementId"
+            placeholder="Select Course">
+            <option disabled value="-1">Select Course</option>
+            <option *ngFor="let data of allCourses" [value]="data.id">
+              {{data.name}}
+            </option>
+          </select>
+
+        </div>
+
+      <div class="col form-group required">
+        <label class="col-md-12 col-form-label w-100" for="subjectId">
+          {{ "Subjects" | localize }}
+        </label>
+        <div>
+          <div class="position-relative">
+            <ng-multiselect-dropdown required name="selectedSubject" id="subjectId" (onSelect)="onSelectItem()"
+              (onSelectAll)="onSelectAll()" (onDeSelectAll)="onUnSelectAll()" (onDeSelect)="onItemDeSelect()"
+              [placeholder]="'Select Subjects'" [settings]="dropdownSetting" [data]="allSubjectItems"
+              [(ngModel)]="selectedSubjects">
+            </ng-multiselect-dropdown>
+            <i class="fas fa-angle-down position-absolute customeup-down"></i>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col form-group required">
+        <label class="col-form-label w-100" for="topicsId">
+          {{ "Topics" | localize }}
+        </label>
+        <div>
+          <div class="position-relative">
+            <ng-multiselect-dropdown required name="selectedTopics" id="topicsId" [placeholder]="'Select Topics'"
+              [settings]="dropdownSettings" [data]="allTopics" (onDeSelectAll)="onUnSelectAll()"
+              (onDeSelect)="onItemDeSelect()" [(ngModel)]="selectedTopics">
+            </ng-multiselect-dropdown>
+            <i class="fas fa-angle-down position-absolute customeup-down"></i>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-group row required">
+        <label class="col-form-label w-100" for="startDate">
+          {{ "Date" | localize }}
+        </label>
+        <div>
+          <input type="date" class="form-control" name="startDate" id="startDate" maxlength="128" required
+            [(ngModel)]="dates" #startDateModel="ngModel" #startDateEl (change)="Date()" />
+          <abp-validation-summary [control]="startDateModel" [controlEl]="startDateEl"></abp-validation-summary>
+        </div>
+      </div>
+
+
+      <div class="col form-group required">
+        <label class="col-form-label w-100" for="durationTime">
+          {{ "Duration" | localize }}
+        </label>
+        <div>
+          <input type="time" class="form-control" name="durationTime" id="durationTime" maxlength="128" required
+            [(ngModel)]="test.durationTime" #durationTimeModel="ngModel" #durationTimeEl />
+          <abp-validation-summary [control]="durationTimeModel" [controlEl]="durationTimeEl"></abp-validation-summary>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="d-lg-flex d-md-flex justify-content-between my-3">
+      <div class="">
+        <h2 class="mb-0 perview_heading">Selected Questions Perview</h2>
+      </div>
+
+      <button *ngIf="questions?.length>0" type="button" (click)="accordionCollapse()" class="create_btn text-white">
+        {{isCollapse?'Exapand All':'Collapse All'}}
+      </button>
+
+    </div>
+
+    <div class="accordion accordion_sec" id="accordion_sec">
+      <div *ngFor="let question of questions let i = index" class="accordion-item">
+        <h2 class="accordion-header" id="headingOne{{i}}">
+
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapseOne' + i" aria-expanded="true" aria-controls="collapseOne0">
+            Q{{i+1}} {{question.questions}}
+
+          </button>
+        </h2>
+
+        <div id="collapseOne{{i}}" [ngClass]="isCollapse?'':'show'" class="accordion-collapse collapse px-3"
+          aria-labelledby="headingOne{{i}}" data-bs-parent="#accordion_sec">
+          <div class="accordion-body px-0">
+            <div class="row">
+              <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                <div class="box">
+                  <div class="form-check d-flex align-items-center">
+                    <input [checked]="question.answer=='a'" class="form-check-input mt-0" type="radio"
+                      name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                    <label class="form-check-label" for="flexRadioDefault1{{i}}">
+                      {{question.option1}}
+                    </label>
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                <div class="box">
+                  <div class="form-check d-flex align-items-center">
+                    <input [checked]="question.answer=='b'" class="form-check-input mt-0" type="radio"
+                      name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                    <label class="form-check-label" for="flexRadioDefault1{{i}}">
+                      {{question.option2}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                <div class="box">
+                  <div class="form-check d-flex align-items-center">
+                    <input [checked]="question.answer=='c'" class="form-check-input mt-0" type="radio"
+                      name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                    <label class="form-check-label" for="flexRadioDefault1{{i}}">
+                      {{question.option3}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                <div class="box">
+                  <div class="form-check d-flex align-items-center">
+                    <input [checked]="question.answer=='d'" class="form-check-input mt-0" type="radio"
+                      name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                    <label class="form-check-label" for="flexRadioDefault1{{i}}">
+                      {{question.option4}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div *ngIf="!(question.explanations.includes('data:image/png;base64'))" class="box">
+            <div class="qa-heading fw-bold pb-3">Solution:-</div>
+
+            <p *ngFor="let sol of question.explanations.split('       ')" class="solution-size">
+              {{sol}}
+            </p>
+          </div>
+          <div *ngIf="(question.explanations.includes('data:image/png;base64'))" class="box">
+            <div class="qa-heading fw-bold pb-3">Solution:-</div>
+            <img [attr.src]="question.explanations" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <abp-modal-footer [saveDisabled]="!createTenantForm.form.valid" (onCancelClick)="cancel()"></abp-modal-footer>
+</form>

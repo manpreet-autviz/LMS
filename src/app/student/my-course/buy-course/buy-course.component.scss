@@ -1,0 +1,141 @@
+// $black: #212121;
+// $gray: #929292;
+// $light-border: #E9E9E9;
+
+@import "../../../../styles.scss";
+
+h6 {
+    font-size: 17px;
+    color: $black;
+}
+.noto-font {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 12px !important;
+    color: white !important;
+}
+.top_back_btn {
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 10px 30px;
+    border: 1px solid #E6E6E6;
+    color: #565656;
+}
+.custome_font {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+p {
+    color: $gray;
+}
+
+.img-bck {
+    background-color: #f4f4f4;
+    border-radius: 9px;
+    height: 225px;
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+
+    img {
+        object-fit: contain;
+    }
+}
+.nav-link.active{
+    color: #fff;
+    background-color: #319eae !important;
+}
+
+.buy-course {
+    border-top: 1px solid #EFEFEF;
+
+    .course-details-box {
+        border: 1px dashed #D1CB97;
+        border-radius: 11px;
+        width: 80%;
+        margin: 0 auto;
+
+        .back_btn {
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            padding: 10px 30px;
+            border: 1px solid $light-border;
+            color: #565656;
+        }
+    }
+
+    .student-sidebar {
+        border-left: 1px solid #EFEFEF;
+        max-height: calc(100vh - 6rem);
+        overflow-y: scroll;
+
+        ul {
+            list-style: none;
+            padding: 0;
+
+            iframe {
+                border-radius: 11px;
+            }
+        }
+    }
+}
+
+.course_video {
+    .videoimg {
+        border-radius: 12px;
+    }
+
+    .text {
+        font-size: 15px;
+        line-height: 19px;
+    }
+}
+
+
+.play_btn {
+    background-color: $green;
+    border-radius: 50px;
+    padding: 12px 12px 12px 15px;
+    color: white;
+    font-size: 14px;
+}
+
+.black_back {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #0000006b;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #00000005;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .buy-course {
+        .course-details-box {
+            width: 100%;
+
+            .create_btn,
+            .back_btn {
+                padding: 13px 20px;
+            }
+        }
+
+        .course-details-box {
+            .back_btn {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+
+        .student-sidebar {
+            border-left: none;
+        }
+    }
+
+}

@@ -1,0 +1,54 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="content py-lg-1 p-2">
+    <div class="container-fluid">
+        <div class="row mt-lg-3 mt-md-1 mb-lg-3 mb-md-3 mt-0 mb-3 align-items-center justify-content-between">
+            <div class="col-md-12 text-end">
+                <button type="button" (click)="showTopics()" class="create_btn text-white"><i
+                        class="fas fa-plus-square me-2"></i>Add Topics</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table_bck">
+                    <div class="card-body table-responsive p-0">
+                        <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions"
+                            [dtTrigger]="dtTrigger">
+                            <thead class="bg-light border-0 ">
+                                <tr>
+                                    <th class="custom-fw">Subject name</th>
+                                    <th class="custom-fw">Topics
+                                    </th>
+                                    <th class="text-right custom-fw">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let data of allTopics">
+                                    <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.subjectName}}">
+
+                                        {{data.subjectName|slice:0:70}}</td>
+                                    <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="{{getTopicName(data.topics)}}">
+                                        {{getTopicName(data.topics).slice(0,70)}}...</td>
+
+                                    <td class="text-right">
+                                        <ul class="action-column mb-0 ps-0">
+                                            <li><button type="button" (click)="showTopics(data.id)"
+                                                    class="edit-icons radius-10 d-block text-center p-1 mx-2"
+                                                    title="edit" data-toggle="edit">
+                                                    <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                                                    </button></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

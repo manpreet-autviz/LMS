@@ -1,0 +1,66 @@
+<form class="form-horizontal" autocomplete="off" #createCategoryForm="ngForm" (ngSubmit)="save()">
+  <abp-modal-header [title]="'Create Category' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+  
+  <div class="modal-body px-lg-5 px-md-3 px-2 pt-3 pb-0">
+    
+    <!-- <div class="form-group row mb-2">
+      <label class="col-md-3 col-form-label fgfg" for="parentId">
+        {{ "Category" | localize }}
+      </label>
+      <div class="col-md-9">
+        <p-treeSelect [(ngModel)]="data" (change)="changeCategory($event)" [options]="treeData"
+          name="parentId"  placeholder="Select Category" #categoryModel="ngModel" #categoryEl required>
+           </p-treeSelect>
+      </div>
+      </div> -->
+
+      <div class="form-group row mb-2">
+        <label class="col-md-3 col-form-label fgfg" for="parentId">
+          {{ "Category" | localize }}
+        </label>
+        <div class="col-md-9">
+          <select [(ngModel)]="data" (change)="changeCategory()" class="form-select" aria-label="Default select example"
+            name="parentId" id="parentId" >
+            <option value="" disabled selected>Select Category</option>
+            <option *ngFor="let item of parentCategoryWithNullParentId" [value]="item.id">
+              {{ item.categoryName }}
+            </option>
+          </select>
+        </div>
+      </div>
+      
+       <div *ngFor="let data of category.categories; let i = index" class="form-group row p-0 required mb-2">
+      <label class="col-md-3 col-form-label" for="categoryname">
+        {{
+        category.parentId != null
+        ? "Child Category Name"
+        : ("Category Name" | localize)
+        }}
+      </label>
+
+     
+      <div class="col-md-9">
+        <div class="input-group">
+          <input [(ngModel)]="data.categoryName" [ngModelOptions]="{ standalone: true }" class="form-control dlt_input"
+            type="text" name="categoryname{{ i }}" id="categoryname{{ i }}" (blur)="trimStart(data)" placeholder="Enter Name"
+            #categoryNameModel+i="ngModel" #categoryNameEl+i required />
+          <span *ngIf="
+              category.categories.length == i + 1 && category.parentId != null
+            " class="input-group-text icon_area curser_pointer" (click)="add()" id="basic-addon1"><i
+              class="fa-sharp fa-solid fa-circle-plus px-1"></i></span>
+          <span *ngIf="!(category.categories.length == i + 1)" class="input-group-text bg-danger border border-danger curser_pointer"
+            (click)="delDesignation(i)" id="basic-addon1"><i class="fa-sharp fa-solid fas fa-trash px-1"></i></span>
+        </div>
+        <abp-validation-summary [control]="categoryNameModel + i" [controlEl]="categoryNameEl + i">
+        </abp-validation-summary>
+      </div>
+    </div>
+  </div>
+  <div class="custm_footer">
+  <abp-modal-footer [saveDisabled]="!createCategoryForm.form.valid" (onCancelClick)="bsModalRef.hide()">
+  </abp-modal-footer>
+
+  </div>
+
+ 
+</form>

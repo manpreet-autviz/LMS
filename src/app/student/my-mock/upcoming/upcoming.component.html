@@ -1,0 +1,89 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+
+<section class="bg-white mocktest_content">
+  <div class="tab-content stdnt_nav_content" id="nav-tabContent">
+
+
+    <div class="row align-items-center justify-content-between">
+      <div class="col-lg-6">
+        <!-- <h2 class="stdnt_main_hding text-lg-left text-md-left text-center">
+          All Course List
+        </h2> -->
+        <div *ngIf="allCourses==0" class="no_data text-center">
+          <span class="no_data_text">No Data Found</span></div>
+      </div>
+    </div>
+    <div *ngIf="allCourses !=0" class="card_bck">
+      <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-2 g-lg-3 g-2 g-lg-3 pt-2">
+        <div class="col" *ngFor="let course of allCourses; let i = index">
+          <div class="card">
+            <div (click)="navigateToBuyCourse(course.id)" class="text-center card_imagebck">
+              <img *ngIf="course.imagePath == ''" src="../../../../assets/img/ssc.svg" class="card-img-top img-fluid"
+                alt="..." />
+              <img *ngIf="course.imagePath != ''" height="" [src]="course.imagePath" class="card-img-top img-fluid"
+                alt="Image not found" />
+            </div>
+
+
+            <div class="card-body border-top-0 p-3 position-relative">
+              <div (click)="navigateToBuyCourse(course.id)">
+                <div class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-2">
+                  <h3 class="card_heading mb-0">{{ course.name }}</h3>
+                  <p class="valid_date mb-0 text-lg-end text-md-start text-center">
+                    Course Duration : {{ course.validateDuration }}
+                  </p>
+                </div>
+                <div>
+                  <p *ngIf="course.detail!=null" class="card-text mb-lg-3 mb-md-3 mb-2" data-bs-placement="top" title="{{course.detail}}">
+                    {{course.detail | slice : 0:100}}</p>
+                    <p *ngIf="course.detail==null" class="card-text mb-lg-3 mb-md-3 mb-2">
+                      No Details available</p>
+
+                </div>
+              </div>
+              
+              <div class="footer row justify-content-end align-items-center w-100 px-3">
+                <div class="col-6 text-lg-left text-md-left text-center">
+                  <h3 *ngIf="course.price!=0" class="card_heading main-heading price_heading mb-0  "><span class="noto-font">₹ </span> {{ course.price |number:'1.0-0'}}
+                  </h3>
+              </div>
+
+                <div  class="col-6 text-end">
+                  <button *ngIf="course.price==0 && !course.isBuy" type="button" (click)="startFreeTrialCourse(course.id)"
+                    class="btn p-0 text-white  trial-btn"> Start FREE
+                  </button>
+
+                <button *ngIf="course.isBuy" type="button" (click)="onclick(course.id)"
+                  class="btn p-0 text-white button">
+                  View
+                </button>
+                <div  class=" text-white mt-lg-0 mt-md-0 mt-1">
+                  <button *ngIf="!course.isBuy && course.price!=0" type="button" (click)="navigateToBuyCourse(course.id)"
+                    class="btn p-0 text-white button">View</button>
+                </div>
+
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ******TIME-OVER****** -->
+
+    <!-- <div class="time_over bg-white text-center">
+  <h1>Oops</h1>
+  <i class="fas fa-exclamation icon my-3"></i>
+  <p>Time Over</p>
+  <button class="btn text-white">Ok</button>
+
+</div> -->
+
+    <!-- ******TIME-OVER****** -->
+
+  </div>
+</section>

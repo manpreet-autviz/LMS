@@ -1,0 +1,76 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+
+<section class="content py-lg-1 p-2">
+  <div class="container-fluid">
+    <div class="row mt-lg-3 mt-md-1 mb-lg-3 mb-md-3 mt-0 mb-3 align-items-center justify-content-between">
+      <div class="col-lg-2 col-md-6 col-sm-12 mb-lg-0 mb-md-0 mb-2">
+        <div class="position-relative">
+        <p-treeSelect [(ngModel)]="selectedNode" [options]="treeData" (onNodeSelect)="getAllSyllabus($event.node.id)"
+          placeholder="{{
+            syllabus.categoryId == -1 ? 'Filters by Category' : 'All Category'
+          }}"></p-treeSelect>
+          <i class="fas fa-angle-down position-absolute customeup-down"></i>
+      </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 mb-lg-0 mb-md-0 mt-2 text-lg-end text-md-end text-start">
+        <button (click)="showCreateOrEditDialog()" type="button" class="create_btn text-white">
+          <i class="fas fa-plus-square me-2"></i>Add Syllabus
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table_bck">
+          <div class="card-body table-responsive p-0">
+            <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead class="bg-light border-0">
+                <tr>
+                  <th class="custom-fw">Category</th>
+                  <th class="custom-fw">Course</th>
+                  <th class="custom-fw">Level</th>
+                  <th class="custom-fw">Subject</th>
+                  <th class="custom-fw">Topics</th>
+
+                  <th class="text-end custom-fw">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of allSyllabus">
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.category?.categoryName }}">{{
+                    data?.category?.categoryName |slice:0:10 }}</td>
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ data.courseManagement.name}}">{{
+                    data.courseManagement.name |slice:0:10}}</td>
+                  <td>{{ data.level }}</td>
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ data?.subject?.subjectName}}">{{
+                    data?.subject?.subjectName |slice:0:10}}</td>
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.topicsName}}">{{ data.topicsName
+                    |slice:0:10 }}
+                  </td>
+                  <td class="text-right">
+                    <ul class="action-column mb-0 ps-0">
+                      <li>
+                        <button class="edit-icons radius-10 d-block text-center p-1 mx-2"
+                          (click)="showCreateOrEditDialog(data.id)" title="edit" data-toggle="edit">
+                          <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                        </button>
+                      </li>
+
+                      <li>
+                        <button class="edit-icons radius-10 d-block text-center  p-1 mx-2"
+                          (click)="delSyllabus(data)" title="delete" data-toggle="delete">
+                          <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                        </button>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

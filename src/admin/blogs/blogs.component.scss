@@ -1,0 +1,23 @@
+@import "../../styles.scss";
+
+.form-select {
+    height: 40px;
+    width: 25%;
+    font-size: 12px;
+    border-color: $light-border;
+    color: $gray;
+    border-radius: 4px;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .form-select{
+        width: 100%;
+    }
+    .select_area{
+        width: 100% !important;
+    }
+}

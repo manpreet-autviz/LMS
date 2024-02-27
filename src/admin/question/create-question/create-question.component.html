@@ -1,0 +1,393 @@
+<section *ngIf="checkSection">
+  <div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif" />
+  </div>
+  <hr>
+  <form class="form-horizontal inbuilt-form-data" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="save()">
+    <div class="row px-3 create_heading">
+      <h4>Create Questions</h4>
+    </div>
+    <div class="modal-body pt-0">
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+
+        <div class="col form-group required mb-0">
+          <label class="col-form-label fw-normal w-100" for="courseManagementId">
+            {{ "Course" | localize }}
+          </label>
+          <div>
+            <select [(ngModel)]="question.courseManagementId" class="w-100 form-select curser_pointer"
+              name="courseManagementId" id="courseManagementId" placeholder="Select Course">
+              <option value="-1" disabled>Select Course</option>
+
+              <option *ngFor="let item of allCourses" [value]="item.id">
+
+                {{item.name}}
+
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col form-group required mb-0">
+          <label class="col-form-label w-100" for="subjectId">
+            {{ "Subject" | localize }}
+          </label>
+          <div>
+            <div class="position-relative">
+              <select [(ngModel)]="question.subjectId" (change)="getTopics($event)" name="subjectId"
+                class="w-100 form-select curser_pointer" required placeholder="Select Subject">
+                <option value="-1">Select Subject</option>
+                <option *ngFor="let item of allSubjects" [value]="item.id">
+                  {{item.subjectName}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col form-group mb-0">
+          <label class="col-form-label fw-normal" for="topicsId">
+            {{ "Topic" | localize }}
+          </label>
+          <div>
+            <div class="position-relative">
+              <ng-multiselect-dropdown class="multiselect_button" required name="selectedTopics" id="topicsId"
+                [placeholder]="'Select Topics'" [settings]="dropdownSetting" [data]="allTopics"
+                [(ngModel)]="selectedTopics">
+              </ng-multiselect-dropdown>
+              <i class="fas fa-angle-down position-absolute customeup-down"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col form-group required mb-0">
+          <label class="col-form-label fw-normal w-100" for="fileName">
+            {{ "File Name" | localize }}
+          </label>
+          <div>
+            <input type="file" (change)="onFileUpload($event.target.files)" class="form-control" name="fileName"
+              id="fileName" maxlength="128" required [(ngModel)]="question.fileName" #fileNameModel="ngModel"
+              #fileNameEl />
+            <abp-validation-summary [control]="fileNameModel" [controlEl]="fileNameEl"></abp-validation-summary>
+          </div>
+        </div>
+
+        <!-- <div class="col form-group ">
+        <label class=" col-form-label" for="createdDate">
+          {{ "Created Date" | localize }}
+        </label>
+        <div>
+          <input type="date" class="form-control" name="createdDate" id="createdDate" maxlength="128"  
+            [(ngModel)]="question.createdDate" #CreatedDateModel="ngModel" #CreatedDateEl />
+          <abp-validation-summary [control]="CreatedDateModel" [controlEl]="CreatedDateEl"></abp-validation-summary>
+        </div>
+      </div> -->
+
+      </div>
+
+
+      <div *ngIf="questions?.length!=0" class="d-lg-flex d-md-flex justify-content-between align-items-center my-3">
+        <div class="">
+          <h2 class="mb-0 perview_heading">Selected Questions Preview</h2>
+        </div>
+
+        <button *ngIf="questions?.length>0" type="button" (click)="accordionCollapse()" class="create_btn text-white">
+          {{isCollapse?'Expand All':'Collapse All'}}
+        </button>
+      </div>
+
+
+      <div *ngIf="questions?.length!=0" class="accordion accordion_sec" id="accordion_sec">
+        <div *ngFor="let question of questions let i = index" class="accordion-item">
+          <h2 class="accordion-header position-relative" id="headingOne{{i}}">
+            <button *ngIf="question.questions.includes('<math>')" [appMath]="'Q'+(i+1)+' '+question.questions"
+              class="accordion-button d-block pe-5 bg-transparent" type="button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapseOne' + i" aria-expanded="true" aria-controls="collapseOne0">
+            </button>
+            <button *ngIf="!question.questions.includes('<math>')" [innerHTML]="'Q'+(i+1)+' '+question.questions"
+              class="accordion-button d-block pe-5 bg-transparent" type="button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapseOne' + i" aria-expanded="true" aria-controls="collapseOne0">
+            </button>
+            <button type="button" (click)="editPreviewedQuestion(i)"
+              class=" btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center  p-2 mx-2 position-absolute">
+              <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+            </button>
+          </h2>
+
+
+
+          <div id="collapseOne{{i}}" [ngClass]="isCollapse?'':'show'" class="accordion-collapse collapse"
+            aria-labelledby="headingOne{{i}}" data-bs-parent="#accordion_sec">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                  <div class="box">
+                    <div class="form-check d-flex align-items-center">
+                      <input [checked]="question.answer=='a'" class="form-check-input mt-0" type="radio"
+                        name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                      <label *ngIf="question.option1.includes('<math>')" class="form-check-label d-block"
+                        [appMath]="question.option1" for="flexRadioDefault1{{i}}">
+
+                      </label>
+                      <label *ngIf="!question.option1.includes('<math>')" class="form-check-label d-block"
+                        [innerHTML]="question.option1" for="flexRadioDefault1{{i}}">
+
+                      </label>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+                <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                  <div class="box">
+                    <div class="form-check d-flex align-items-center">
+                      <input [checked]="question.answer=='b'" class="form-check-input mt-0" type="radio"
+                        name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                      <label *ngIf="question.option2.includes('<math>')" [appMath]="question.option2"
+                        class="form-check-label d-block" for="flexRadioDefault1{{i}}">
+
+                      </label>
+                      <label *ngIf="!question.option2.includes('<math>')" [innerHTML]="question.option2"
+                        class="form-check-label d-block" for="flexRadioDefault1{{i}}">
+
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                  <div class="box">
+                    <div class="form-check d-flex align-items-center">
+                      <input [checked]="question.answer=='c'" class="form-check-input mt-0" type="radio"
+                        name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                      <label *ngIf="question.option3.includes('<math>')" [appMath]="question.option3"
+                        class="form-check-label d-block" for="flexRadioDefault1{{i}}">
+                      </label>
+                      <label *ngIf="!question.option3.includes('<math>')" [innerHTML]="question.option3"
+                        class="form-check-label d-block" for="flexRadioDefault1{{i}}">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                  <div class="box">
+                    <div class="form-check d-flex align-items-center">
+                      <input [checked]="question.answer=='d'" class="form-check-input mt-0" type="radio"
+                        name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                      <label *ngIf="question.option4.includes('<math>')" [appMath]="question.option4"
+                        id="option-4-{{i}}" class="form-check-label d-block" for="flexRadioDefault1{{i}}">
+                      </label>
+                      <label *ngIf="!question.option4.includes('<math>')" [innerHTML]="question.option4"
+                        id="option-4-{{i}}" class="form-check-label d-block" for="flexRadioDefault1{{i}}">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="question.option5" class="col-md-3 col-12 mb-lg-0 mb-md-0 mb-2">
+                  <div class="box">
+                    <div class="form-check d-flex align-items-center">
+                      <input [checked]="question.answer=='e'" class="form-check-input mt-0" type="radio"
+                        name="flexRadioDefault1{{i}}" id="flexRadioDefault1{{i}}">
+                      <label *ngIf="question.option5.includes('<math>')" [appMath]="question.option5"
+                        class="form-check-label  d-block" for="flexRadioDefault1{{i}}">
+                      </label>
+                      <label *ngIf="!question.option5.includes('<math>')" [innerHTML]="question.option5"
+                        class="form-check-label  d-block" for="flexRadioDefault1{{i}}">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+            </div>
+
+            <div class="box">
+              <div class="qa-heading fw-bold pb-3 d-block">Solution:-</div>
+
+              <p *ngFor="let sol of question.explanations.split('       ')" class="solution-size">
+                <span *ngIf="sol.includes('<math>')" [appMath]="sol"></span>
+                <span *ngIf="!sol.includes('<math>')" [innerHTML]="sol"></span>
+              </p>
+
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <abp-modal-footer (onCancelClick)="cancel()">
+
+    </abp-modal-footer>
+  </form>
+</section>
+
+
+
+
+
+<section *ngIf="!checkSection">
+  <hr>
+  <div class="row px-3 create_heading">
+    <h4>Edit Questions</h4>
+  </div>
+  <!-- {{previewedQuestion|json}} -->
+  <div class="modal-body pt-0">
+    <div class="table_bck">
+      <div class="row">
+
+        <!-- <div class="col form-group required mb-0">
+            <label class="col-form-label w-100" for="courseManagementId">
+              {{ "Course" | localize }}
+            </label>
+            <div>
+              <select [(ngModel)]="previewedQuestion.courseManagementId" class="w-100 form-select curser_pointer"
+                name="courseManagementId" id="courseManagementId" placeholder="Select Course">
+                <option disabled>Select Course</option>
+
+                <option *ngFor="let item of allCourses" [value]="item.id">
+
+                  {{item.name}}
+
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col form-group required mb-0">
+            <label class="col-form-label w-100" for="subjectId">
+              {{ "Subject" | localize }}
+            </label>
+            <div>
+              <div>
+                <select [(ngModel)]="previewedQuestion.subjectId" (change)="getAllTopics($event)" name="subjectId"
+                  class="w-100 form-select curser_pointer" (change)="getAllTopics($event)" required
+                  placeholder="Select Subject">
+                  <option value="-1">Select Subject</option>
+                  <option *ngFor="let item of allSubjectItems" [value]="item.id">
+                    {{item.subjectName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col form-group mb-0 ">
+            <label class="col-form-label" for="topicsId">
+              {{ "Topic" | localize }}
+            </label>
+            <div>
+              <div class="position-relative">
+                <ng-multiselect-dropdown name="selectedTopics" id="topics" [placeholder]="' Select Topics'"
+                  [data]="allTopics" [(ngModel)]="selectedTopics" [settings]="dropdownSettings">
+                </ng-multiselect-dropdown>
+                <i class="fas fa-angle-down position-absolute customeup-down"></i>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-md-12 form-group required px-0">
+          <label class="col-form-label fw-normal w-100" for="questions">
+            {{ "Question" | localize }}
+          </label>
+          <div>
+            <input type="text" class="form-control" placeholder="Question" name="questions" id="questions" required
+              [(ngModel)]="previewedQuestion.questions" #questionsModel="ngModel" #questionsEl />
+            <abp-validation-summary [control]="questionsModel" [controlEl]="questionsEl"></abp-validation-summary>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-4 form-group required">
+            <label class="col-form-label fw-normal w-100" for="option1">
+              {{ "Option 1" | localize }}
+            </label>
+            <div>
+              <input type="text" class="form-control" placeholder="Option 1" name="option1" id="option1" maxlength="128"
+                required [(ngModel)]="previewedQuestion.option1" #option1Model="ngModel" #option1El />
+              <abp-validation-summary [control]="option1Model" [controlEl]="option1El"></abp-validation-summary>
+            </div>
+          </div>
+          <div class="col-md-4 form-group required">
+            <label class="col-form-label fw-normal w-100" for="option2">
+              {{ "Option 2" | localize }}
+            </label>
+            <div>
+              <input type="text" class="form-control" placeholder="Option 2" name="option2" id="option2" maxlength="128"
+                required [(ngModel)]="previewedQuestion.option2" #option2Model="ngModel" #option2El />
+              <abp-validation-summary [control]="option2Model" [controlEl]="option2El"></abp-validation-summary>
+            </div>
+          </div>
+          <div class="col-md-4 form-group required">
+            <label class="col-form-label fw-normal w-100" for="option3">
+              {{ "Option 3" | localize }}
+            </label>
+            <div>
+              <input type="text" class="form-control" placeholder="Option 3" name="option3" id="option3" maxlength="128"
+                required [(ngModel)]="previewedQuestion.option3" #option3Model="ngModel" #option3El />
+              <abp-validation-summary [control]="option3Model" [controlEl]="option3El"></abp-validation-summary>
+            </div>
+          </div>
+          <div class="col-md-4 form-group required">
+            <label class="col-form-label fw-normal w-100" for="option4">
+              {{ "Option 4" | localize }}
+            </label>
+            <div>
+              <input type="text" class="form-control" placeholder="Option 4" name="option4" id="option4" maxlength="128"
+                required [(ngModel)]="previewedQuestion.option4" #option4Model="ngModel" #option4El />
+              <abp-validation-summary [control]="option4Model" [controlEl]="option4El"></abp-validation-summary>
+            </div>
+          </div>
+          <div class="col-md-4 form-group required">
+            <label class="col-form-label fw-normal w-100" for="option5">
+              {{ "Option 5" | localize }}
+            </label>
+            <div>
+              <input type="text" class="form-control" placeholder="Option 5" name="option5" id="option5" maxlength="128"
+                required [(ngModel)]="previewedQuestion.option5" #option5Model="ngModel" #option5El />
+              <abp-validation-summary [control]="option5Model" [controlEl]="option5El"></abp-validation-summary>
+            </div>
+          </div>
+          <div class="col-md-4 form-group required">
+            <label class="col-form-label fw-normal w-100" for="answer">
+              {{ "Answer" | localize }}
+            </label>
+            <div>
+              <input type="text" class="form-control" placeholder="Answer" name="answer" id="answer" maxlength="128"
+                required [(ngModel)]="previewedQuestion.answer" #answerModel="ngModel" #answerEl />
+              <abp-validation-summary [control]="answerModel" [controlEl]="answerEl"></abp-validation-summary>
+            </div>
+          </div>
+        </div>
+        <div class="form-group required position-relative">
+          <label class="col-form-label fw-normal" for="explanations">
+            {{ "Explanations" | localize }}
+          </label>
+          <div>
+            <input type="text" class="form-control" placeholder="Explanations" name="explanations" id="explanations"
+              required [(ngModel)]="previewedQuestion.explanations" #explanationsModel="ngModel" #explanationsEl />
+            <abp-validation-summary [control]="explanationsModel" [controlEl]="explanationsEl"></abp-validation-summary>
+          </div>
+        </div>
+     
+    </div>
+  <div class="text-end">
+    <button class="create_btn" (click)="saveQuestion()">Update Question</button>
+  </div>
+    <!-- <abp-modal-footer [saveDisabled]="!createTenantForm.form.valid" (onCancelClick)="cancel()">
+    </abp-modal-footer> -->
+  </div>
+
+</section>

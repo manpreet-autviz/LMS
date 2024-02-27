@@ -1,0 +1,103 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="buy-course">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-12 p-3">
+      <div class="px-3">
+        <div class="course-desc-box mb-3">
+          <h2 class="stdnt_main_hding mb-4">{{studentCourse.name}}</h2>
+          <div class=" img-bck p-2">
+            <img *ngIf="studentCourse.imagePath == ''" src="../../../../assets/img/ssc.png"
+              class="card-img-top img-fluid w-100 h-100" alt="..." />
+            <img *ngIf="studentCourse.imagePath != ''" [src]="studentCourse.imagePath"
+              class="card-img-top img-fluid w-100 h-100" alt="..." />
+
+          </div>
+          <div class="row align-items-center mt-lg-5 mt-md-3 mt-3 mb-3">
+            <div class="col-md-12">
+              <h6 class="">Description</h6>
+
+              <p class="custome_font" data-bs-placement="top" title="{{studentCourse.detail}}">{{studentCourse.detail | slice:0:100}}</p>
+              <span>
+                <p class="custome_font description_pera mb-2">Total Notes : {{studentCourse?.notes?.length}}</p>
+              </span>
+              <span *ngIf="studentCourse.type=='Hybrid' || studentCourse.type=='Video'">
+                <p class="custome_font description_pera mb-2">Total Videos : {{studentCourse?.videos?.length}}</p>
+              </span>
+              <span *ngIf="studentCourse.type=='Hybrid' || studentCourse.type=='Mock'">
+                <p class="custome_font description_pera mb-2">Total MockTest : {{studentCourse?.mockTests?.length}}</p>
+              </span>
+            </div>
+            <div *ngIf="!studentCourse.isBuy" class="col-md-12 text-end">
+              <div *ngIf="studentCourse.price!=0" class="rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1 d-inline-block">
+                <button type="button" class="create_btn color-white" (click)="getCourseDetails(studentCourse.id)">Buy <span class="ps-1 noto-font text-white">₹ </span>
+                  {{studentCourse.price| number:'1.0-0'}}</button>
+              </div>
+              <div *ngIf="studentCourse.price==0 ">
+                <!-- <button type="button" class="create_btn">Free
+                 </button> -->
+              </div>
+
+              <button type="button" class="ms-lg-2 ms-md-2 ms-0 bg-transparent  top_back_btn"
+                (click)="back()">Back</button>
+
+            </div>
+          </div>
+        </div>
+        <!-- Buy course -->
+        <div *ngIf="!studentCourse.isBuy" class="course-details-box mt-5 p-lg-4 p-md-4 p-3 w-100 student_tabset">
+          <tabset>
+            <tab *ngIf="studentCourse.type=='Mock' || studentCourse.type=='Hybrid'" id="mock-test"
+              (selectTab)="checkActive('mock-test')" [heading]="'Mock Test' | localize" class="pt-3 px-2">
+              <app-course-questions [mockTestProps]="studentCourse.mockTests"></app-course-questions>
+            </tab>
+            <tab id="notes" class="pt-3 px-2 tab-pane active" (selectTab)="checkActive('notes')" [heading]="'Notes' | localize" class="pt-3 px-2">
+              <app-course-notes [notesProps]="studentCourse.notes"></app-course-notes>
+            </tab>
+            <tab *ngIf="studentCourse.type=='Hybrid' || studentCourse.type=='Video'" id="videos"
+              (selectTab)="checkActive('videos')" [heading]="'Videos' | localize" class="pt-3 px-2">
+              <app-course-videos [videosProps]="studentCourse.videos"></app-course-videos>
+            </tab>
+          </tabset>
+
+        </div>
+        <!--After Buy Course-->
+        <div *ngIf="studentCourse.isBuy" class="mt-5 student_tabset">
+          <tabset>
+            <tab *ngIf="studentCourse.type=='Mock' || studentCourse.type=='Hybrid'" id="mock-test"
+              (selectTab)="checkActive('mock-test')" [heading]="'Mock Test' | localize" class="pt-3 px-2">
+              <app-course-questions [mockTestProps]="studentCourse.mockTests"></app-course-questions>
+            </tab>
+            <tab id="notes" (selectTab)="checkActive('notes')" [heading]="'Notes' | localize" class="pt-3 px-2">
+              <app-course-notes [notesProps]="studentCourse.notes"></app-course-notes>
+            </tab>
+            <tab *ngIf="studentCourse.type=='Hybrid' || studentCourse.type=='Video'" id="videos"
+              (selectTab)="checkActive('videos')" [heading]="'Videos' | localize" class="pt-3 px-2">
+              <app-course-videos [videosProps]="studentCourse.videos"></app-course-videos>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+
+    <div class="student-sidebar col-lg-4 col-md-4 col-12 p-3 d-block">
+      <h6 *ngIf="freeVideos!= null && freeVideos.length>0" class="mt-lg-4 mt-md-3 mt-3 mb-3">Free Videos</h6>
+      <div *ngFor="let item of freeVideos">
+        <ul class="mb-1">
+          <div class="row course_video">
+
+            <div class="col-6" (click)="showVideo(item.id)">
+              <div class="d-flex justify-content-center align-items-center img_bck position-relative">
+                <div class="black_back position-absolute hop"></div>
+                <img class="img-fluid videoimg" src="https://img.youtube.com/vi/{{getVideoId(item.videoUrl)}}/0.jpg" />
+                <i class="fas fa-play position-absolute play_btn curser_pointer"></i>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>

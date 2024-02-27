@@ -1,0 +1,103 @@
+<div class="loader_background" *ngIf="loading">
+  <div class="spinner" role="alert" aria-live="assertive">
+    <div class="spinner__items" aria-hidden="true">
+      <div class="spinner__item"></div>
+      <div class="spinner__item"></div>
+      <div class="spinner__item"></div>
+    </div>
+    <p class="visually-hidden">New content is loading, please wait.</p>
+  </div>
+</div>
+<section class="bg-white py-lg-1 p-2">
+  <div class="container-fluid">
+    <div class="row mt-lg-3 mt-md-1 mb-lg-3 mb-md-3 mt-0 mb-3 justify-content-between align-items-center">
+      <div class="col-lg-10 col-md-12 col-12">
+        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 align-items-center">
+          <div class="col">
+            <div class="position-relative">
+              <ng-multiselect-dropdown class="test multi_dropdown" required name="selectedItem"
+                (onSelect)="getAllTopics()" (onSelectAll)="onSelectAll()" (onDeSelectAll)="onUnSelectAll()"
+                (onDeSelect)="onItemDeSelect()" id="subjectId" [placeholder]="'Select Subjects'"
+                [settings]="dropdownSetting" [data]="allSubjects" [(ngModel)]="selectedItem">
+              </ng-multiselect-dropdown>
+              <i class="fas fa-angle-down position-absolute customeup-down"></i>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="position-relative">
+              <ng-multiselect-dropdown class="test multi_dropdown" required name="selectedTopics"
+                (onSelect)="setTopic()" (onDeSelectAll)="onUnSelectAll()" id="topicsId" [placeholder]="' Select Topics'"
+                [settings]="dropdownSettings" [data]="allTopics" [(ngModel)]="selectedTopics">
+              </ng-multiselect-dropdown>
+              <i class="fas fa-angle-down position-absolute customeup-down"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 col-12 text-lg-end text-start mt-md-2 mt-lg-0">
+
+        <button type="submit" class="dropdown-item" routerLink="/app/create-testseries" class="create_btn text-white">
+          <i class="fas fa-plus-square me-2"></i> {{ "Create" | localize }}
+        </button>
+
+      </div>
+    </div>
+    <div class="table_bck">
+      <div class="card-body table-responsive p-0">
+        <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+          <thead class=" border-0 ">
+            <tr>
+              <th class="custom-fw">Course</th>
+              <th class="custom-fw">Subject</th>
+              <th class="custom-fw">Topics</th>
+              <th class="custom-fw">Date</th>
+              <th class="custom-fw">Duration</th>
+              <th class="custom-fw">File Name</th>
+              <th class="text-right custom-fw">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of this.allTest ">
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.courseManagement?.name}}">
+                {{data?.courseManagement?.name |slice:0:10}}...</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.subjectName }}">{{data.subjectName
+                |slice:0:10}}...
+              </td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.topicsName}}">{{data.topicsName
+                |slice:0:10}}...</td>
+              <td>{{data.startDate | date:"dd/MM/yyyy"}}</td>
+              <td>{{data.durationTime}}</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.fileName }}">
+                {{data.fileName |slice:0:10}}...</td>
+
+
+              <td class="text-right">
+                <ul class="action-column mb-0 ps-0">
+                  <li>
+                    <button type="button"
+                      class=" btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center  p-2 mx-2"
+                      (click)="showCreateOrEditDialog(data.id)"><i class="fa-solid fa-pen"></i>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button"
+                      class="edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2"
+                      title="delete" data-toggle="delete">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button"
+                      class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2"
+                      (click)="delTest(data)"><i class="fa-solid fa-trash text-fs-sm"></i></button>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

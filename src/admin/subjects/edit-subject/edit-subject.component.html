@@ -1,0 +1,35 @@
+
+<hr>
+<form class="form-horizontal inbuilt-form-data" autocomplete="off" #createSubjectForm="ngForm" (ngSubmit)="save()">
+  <div class="row px-3 create_heading">
+    <h4>Edit subject</h4>
+  </div>
+  <div class="modal-body pt-0">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-12 form-group required mb-1">
+        <label class="col-form-label fw-normal  w-100" for="subjectName">
+          {{ "Subject Name" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" name="subjectName" id="subjectName" pattern="\S(.*\S)?" required
+            [(ngModel)]="subject.subjectName" #subjectNameModel="ngModel" #subjectNameEl />
+          <abp-validation-summary [control]="subjectNameModel" [controlEl]="subjectNameEl"></abp-validation-summary>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-12 form-group mb-0">
+        <label class="col-form-label fw-normal" for="details">
+          {{ " Details" | localize }}
+        </label>
+        <div>
+          <textarea name="details" class="form-control" id="details" cols="30" rows="5" placeholder="Details"
+            [(ngModel)]="subject.details" #detailsModel="ngModel" #detailsEl></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <abp-modal-footer [saveDisabled]="!createSubjectForm.form.valid" (onCancelClick)="cancel()">
+  </abp-modal-footer>
+</form>

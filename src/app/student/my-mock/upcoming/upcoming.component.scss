@@ -1,0 +1,158 @@
+// $primary-gradient: linear-gradient(180deg, #65A35E 0%, #2F9EB1 100%);
+// $font-primary: 'Poppins', sans-serif;
+// $h-font: 'Lato', Arial, sans-serif;
+// $primary: #319EAE;
+// $black: #212121;
+// $gray: #929292;
+// $dark-gray: #ccc;
+// $white: #ffffff;
+// $light-white: #F9F9F9;
+// $dark_black: #000000;
+// $light-gray: #DBDBDB;
+// $green: #63A461;
+// $light-black: #262626;
+// $light-border: #E6E6E6;
+// $card-border: #C9C17F;
+
+@import "../../../../styles.scss";
+
+.stdnt_main_hding {
+    font-size: 18px;
+    font-weight: 500;
+}
+ img{
+     font-size: 12px;
+    }
+
+    text-center{
+        text:white;
+    }
+
+
+.mocktest_content {
+    .card {
+        box-shadow: 0px 4px 30px #f2f2f2;
+        border-radius: 11px;
+        max-width: 92%;
+        height: 288px;
+
+        .card-body {
+
+            .card_top_heading {
+                .card_heading {
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 19px;
+                }
+
+                .valid_date {
+                    font-size: 11px;
+                    font-weight: 500;
+                    color: $gray;
+                }
+            }
+    .button{
+     background-color: #319EAE;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 26px !important;
+    border-radius: 25px;
+            }
+            .card-text {
+                font-size: 13px;
+                color: $gray;
+                max-width: 700px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .footer {
+                .card_heading{
+                    font-size: 14px;
+                }
+                span {
+                    color: $gray;
+                    font-size: 12px;
+                }
+            }
+      .footer{
+        position: absolute;
+        right: 9px;
+        bottom: 12px;
+        width: 92%;
+      }
+
+       .main-heading{
+        font-size: 14px;
+       }
+       .footer .trial-btn{
+        background-color: #319EAE;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 3px 14px !important;
+        border-radius: 25px;
+       }
+            // .view_btn {
+            //     background-color: $primary;
+            //     width: 23%;
+            //     font-size: 12px;
+            //     font-weight: 500;
+            //     border-radius: 4px;
+            //     padding: 4px 0px;
+            // }
+        }
+    }
+}
+
+@media screen and (max-width:991px) {
+
+    .mocktest_content {
+        .card {
+            height: auto;
+
+            .card-body {
+                .card_top_heading {
+                    .card_heading {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    .mocktest_content {
+        .card {
+            .card-body {
+                .card_top_heading {
+                    text-align: center;
+
+                    .card_heading {
+                        font-size: 18px;
+                    }
+
+                    .valid_dat {
+                        font-size: 11px;
+                    }
+                }
+
+                .card-text {
+                    font-size: 12px;
+                    text-align: center;
+                }
+
+                .footer {
+                    .view_btn {
+                        width: 100%;
+                    }
+                }
+            }
+
+        }
+    }
+}

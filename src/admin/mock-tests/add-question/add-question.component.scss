@@ -1,0 +1,23 @@
+.modal-title {
+    font-size: 18px;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 400;
+}
+
+::ng-deep {
+    .modal-content {
+        .multiselect_button {
+            .dropdown-btn {
+                line-height: 15px !important;
+            }
+        }
+    }
+
+    *:disabled {
+        background-color: rgb(165, 156, 156);
+        color: linen;
+        opacity: 1;
+    }
+}

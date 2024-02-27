@@ -1,0 +1,9 @@
+::ng-deep.modal-content .modal-header{
+    padding-bottom: 21px !important;
+}
+
+@media screen and (max-width:767px) {
+    ::ng-deep.modal-content .modal-header{
+            padding-bottom: 0px !important;
+        }
+    }

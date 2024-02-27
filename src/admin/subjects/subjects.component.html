@@ -1,0 +1,64 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<section class="content py-lg-1 p-2">
+  <div class="container-fluid">
+    <div class="row mt-md-1 my-lg-3 mb-md-3 mt-0">
+      <div class="col-12 text-lg-end text-md-end text-start">
+        <button [routerLink]="['add-subject']" (click)="showCreateOrEditDialog()" type="button"
+          class="create_btn text-white">
+          <i class="fa-solid fa-circle-plus pe-1"></i>Add Subject
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table_bck">
+          <div class="card-body table-responsive p-0">
+            <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead class="bg-light border-0">
+                <tr>
+                  <th class="custom-fw">Subject name</th>
+                  <th class="custom-fw">Description</th>
+                  <th class="custom-fw text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of this.allSubjects">
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.subjectName }}">{{
+                    data.subjectName|slice:0:50 }}</td>
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ data.details }}">{{ data.details |
+                    slice: 0:100 }}...</td>
+                  <td class="text-right">
+                    <ul class="action-column mb-0 ps-0">
+                      <li>
+                        <button type="button" (click)="showCreateOrEditDialog(data.id)"
+                          class="edit-icons radius-10 d-block text-center p-1 mx-2" title="edit"
+                          data-toggle="edit">
+                          <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                        </button>
+                      </li>
+                      <li>
+                        <button  *ngIf="data.isDisableDelete != true" type="button" (click)="delSubject(data)"
+                          class="edit-icons radius-10 d-block text-center p-1 mx-2" title="delete"
+                          data-toggle="delete">
+                          <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                        </button>
+                        <button  *ngIf="data.isDisableDelete == true" disabled type="button" (click)="delSubject(data)"
+                          class="edit-icons radius-10 d-block text-center p-1 mx-2 border-0" title="Can't delete questions are created based in this subject "
+                          data-toggle="delete">
+                    
+                        <img src="../../assets/img/dlt-new.png" class="img-fluid w-auto" style="height: 80%;cursor: pointer;">
+                      </button>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

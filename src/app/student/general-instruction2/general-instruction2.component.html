@@ -1,0 +1,15 @@
+<div class="pdf_viewer">
+    <pdf-viewer style="height: 60vh;width:100%" src="{{mockTest.uploadFile}}" [original-size]="false"></pdf-viewer>
+</div>
+
+<div class="pt-0 modal-footer justify-content-lg-end justify-content-md-end justify-content-center  px-2 pb-3">
+    <div class="col-auto m-0 p-0">
+        <button *ngIf="!enrollmock.isSubmitted" type="button" class="btn btn-primary" (click)="start()">
+            {{enrollmock.isView==false?"Start":"Resume"}} </button>
+        <button *ngIf="enrollmock.isSubmitted" type="button" class="btn btn-primary ms-2" (click)="reattempt()"> Re
+            Attempt</button>
+    </div>
+    <div class="col-auto m-0 p-0">
+        <button class="btn btn-default ms-2" type="submit" (click)="cancel()"> Cancel </button>
+    </div>
+</div>

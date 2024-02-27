@@ -1,0 +1,145 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="bg-white py-lg-1 p-2">
+    <div class="container-fluid">
+        <div class="row  mt-md-1 my-lg-3 mb-md-3 mt-0 mb-3 justify-content-between align-items-center">
+            <div class=" col-lg-10 col-md-12 col-12">
+                <div class="row align-items-center row-cols-1 row-cols-xl-5 row-cols-lg-3 row-cols-md-3">
+                    <div class="col">
+                        <select [(ngModel)]="fileName" name="fileName" class="form-select w-100 curser_pointer"
+                            (change)="this.getAllQuestionFilters()" aria-label="Default select example">
+                            <option value="" disabled selected>Select FileName</option>
+                            <option value="" selected>Show All</option>
+                            <option *ngFor="let item of allQuestionsFileName" [value]="item.fileName">
+                                {{ item.fileName }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <select [(ngModel)]="courseId" name="courseName" class="form-select w-100 curser_pointer"
+                            (change)="this.getAllQuestionFilters()" aria-label="Default select example">
+                            <option value="0" disabled selected>Select Course</option>
+                            <option value="0" selected>Show All</option>
+                            <option *ngFor="let item of allCourses" [value]="item.id">
+                                {{ item.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <div class="position-relative">
+                            <ng-multiselect-dropdown class="test multi_dropdown d-block" required name="selectedItem"
+                                (onSelect)="getTopics()" id="subjectId" [placeholder]="'Select Subjects'"
+                                [settings]="dropdownSetting" (onDeSelectAll)="onUnSelectAll()"
+                                (onSelectAll)="onSelectAll()" (onDeSelect)="onItemDeSelect()" [data]="allSubjects"
+                                [(ngModel)]="selectedItem">
+                            </ng-multiselect-dropdown>
+                            <i class="fas fa-angle-down position-absolute customeup-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12 col-12 text-lg-end text-start mt-md-0 mt-lg-0">
+                <button type="submit" class="dropdown-item" routerLink="/app/create-question"
+                    class="create_btn text-white"><i _ngcontent-vwv-c159="" class="fas fa-plus-square me-2"></i>
+                    {{ "Create" | localize }}
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <button *ngIf="this.selectedFile == true" (click)="markAllQuestion()"
+                id="checkButton" name="checkButton"
+                class="text-white w-1 create_btn border-0 p-2 me-2">{{isMarkAllButton?"UnSelect
+                All":"Select All"}}</button>
+            <button *ngIf="this.selectedFile == true" (click)="deleteSelectedQuestion()"
+                class="text-white w-1 create_btn border-0 bg-danger p-2">Delete</button>
+        </div>
+
+        <div class="table_bck">
+            <div class="card-body table-responsive p-0">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table-data table  text-nowrap">
+                    <thead class=" border-0 ">
+                        <tr>
+                            <th></th>
+                            <th class="custom-fw">Questions</th>
+                            <th class="custom-fw">a</th>
+                            <th class="custom-fw">b</th>
+                            <th class="custom-fw">c</th>
+                            <th class="custom-fw">d</th>
+                            <th class="custom-fw">e</th>
+
+
+                            <th class="custom-fw">Answers</th>
+                            <th class="custom-fw">Course</th>
+                            <th class="custom-fw">Subjects</th>
+                            <th class="custom-fw">Topics</th>
+                            <th class="custom-fw">File Name</th>
+                            <th class="custom-fw">Created Date</th>
+                            <th class="text-right custom-fw">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of allQuestions; let i = index">
+                            <td>
+                                <div *ngIf="isCallFromBlog" class="checkbox">
+                                    <input #allQuestions (click)="addQuestion($event,data.id)" type="checkbox"
+                                        data-toggle="toggle">
+                                </div>
+                                <div *ngIf="selectedFile" class="checkbox">
+                                    <input #allQuestions [(ngModel)]="data.isMarkDelete"
+                                        (click)="addQuestionToDelete($event,data.id)" type="checkbox"
+                                        data-toggle="toggle">
+                                </div>
+
+                            </td>
+                            <td>{{data.questions | slice:0:20}}</td>
+                            <td>{{data.option1}}</td>
+                            <td>{{data.option2}}</td>
+                            <td>{{data.option3}}</td>
+                            <td>{{data.option4}}</td>
+                            <td>{{data.option5}}</td>
+                            <td>{{data.answer}}</td>
+                            <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="{{data?.courseManagement?.name}}">{{data?.courseManagement?.name|slice:0:10}}
+                            </td>
+                            <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.subjectName}}">
+                                {{data?.subjectName |slice:0:10}}..</td>
+
+                            <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.topicsName}}">
+                                {{data?.topicsName |slice:0:10}}...</td>
+
+                            <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.fileName}}">
+                                {{data?.fileName |slice:0:10}}...</td>
+
+                            <td>{{data.creationTime| date: "dd/MM/yyyy"}}</td>
+                            <td class="text-right">
+                                <ul class="action-column mb-0 ps-0">
+                                    <li>
+                                        <button type="button" (click)="showCreateOrEditDialog(data.id)"
+                                            class=" btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center  p-2 mx-2">
+                                            <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                                        </button>
+                                    </li>
+
+                                    <li><button type="button" (click)="delQuestion(data)"
+                                            class="edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2"
+                                            title="delete" data-toggle="delete">
+                                            <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                                            </button></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-end">
+                <button *ngIf="isCallFromBlog" (click)="backToBlogs()" id="checkButton" name="checkButton"
+                    class="remove_btn btn">Cancel</button>&nbsp;
+                <button *ngIf="isCallFromBlog" (click)="checkback()" style="padding: 5px ;" id="checkButton"
+                    name="checkButton" class="text-white w-1 create_btn border-0">Done</button>
+            </div>
+        </div>
+    </div>
+</section>

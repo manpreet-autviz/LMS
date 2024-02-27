@@ -1,0 +1,112 @@
+<hr>
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+
+<form class="form-horizontal inbuilt-form-data " autocomplete="off" #createContentMangementForm="ngForm" (ngSubmit)="save()">
+  <div class="row px-3 create_heading">
+    <h4>Edit Content</h4>
+  </div>
+
+  <div class="modal-body px-4 pt-0">
+    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2">
+      <div class="col form-group required mb-0">
+        <label class="col-form-label w-100" for="subjectName">
+          {{ "Category" | localize }}
+        </label>
+        <div>
+          <div class="position-relative">
+            <p-treeSelect [(ngModel)]="selectedCategory"  [disabled]="butDisabled" (onNodeSelect)="setCategory($event.node.id)"
+              [options]="treeData" name="categoryId" [placeholder]="placeholder"></p-treeSelect>
+           
+          </div>
+        </div>
+      </div>
+
+      <div class="col form-group required mb-0">
+        <label class="col-form-label w-100" for="subjectName">
+          {{ "Course" | localize }}
+        </label>
+        <div>
+          <select [(ngModel)]="contentMang.courseManagementId" [disabled]="butDisabled"
+            (change)="getAllMockTestsBasedOnCourse()" class="w-100 form-select curser_pointer" name="name" required
+            placeholder="Select Course">
+            <option disabled value="0">Select Course</option>
+            <option *ngFor="let item of allCourses" [value]="item.id">
+              {{item.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col form-group  mb-0 required">
+        <label class=" col-form-label w-100" for="subjectName">
+          {{ "Subject" | localize }}
+        </label>
+        <div class="position-relative">
+          <ng-multiselect-dropdown  name="selectedSubjects" (onSelect)="onSelectItem()" required
+            (onSelectAll)="onSelectAll()" (onDeSelect)="onDeSelectItem()" (onDeSelectAll)="onUnSelectAll()" id="subject"
+            [placeholder]="' Select Subjects'" [data]="allSubjectItems" [(ngModel)]="selectedSubjects"
+            [settings]="dropdownSetting" class="multi-custom-arrow">
+          </ng-multiselect-dropdown>
+         
+        </div>
+      </div>
+
+      <div class=" col form-group mb-0">
+        <label class=" col-form-label" for="title">
+          {{ "Topic" | localize }}
+        </label>
+        <div class="position-relative">
+          <ng-multiselect-dropdown name="selectedTopics" id="topics" [placeholder]="' Select Topics'" [data]="allTopics"
+            [(ngModel)]="selectedTopics" [settings]="dropdownSettings"  class="multi-custom-arrow">
+          </ng-multiselect-dropdown >
+         
+        </div>
+      </div>
+
+      <div class=" col form-group mb-0">
+        <div class="row">
+          <div class=" col form-group mb-0 py-0">
+            <label class="col-form-label w-100">
+              Add notes
+            </label>
+            <div>
+              <button type="button" (click)="addNote(contentMang.id)" class="create_btn text-white w-100 px-0"
+                title="Add Notes" data-toggle="Add More"><i *ngIf="!isNotesAddes" class="fa-solid fa-upload"></i>&nbsp;
+                {{!isNotesAddes?'Update
+                Notes':'View Notes link'}} </button>
+            </div>
+          </div>
+          <div *ngIf="courseType=='Hybrid' || courseType=='Video'" class="py-0 col form-group mb-0">
+            <label class="col-form-label ">
+              Add video
+            </label>
+            <div>
+              <button type="button" (click)="addVideos(contentMang.id)" class="create_btn text-white w-100 px-0"
+                title="Add Video" data-toggle="Add More"><i *ngIf="!isVideosAddes" class="fa-solid fa-upload"></i>&nbsp;
+                {{!isVideosAddes?'Update
+                Videos':'View Videos link'}} </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="courseType=='Hybrid' || courseType=='Mock'" class="col form-group mb-0 required">
+        <label class="col-form-label" for="title">
+          {{ "Mock Test" | localize }}
+        </label>
+        <div class="position-relative">
+          <ng-multiselect-dropdown name="selectedMockTests" id="topics"
+            [placeholder]="contentMang.courseManagementId==0?'Please Select Course First':'Select MockTest'"
+            [settings]="dropdownSettings" [data]="allMockTests" required [(ngModel)]="selectedMockTests" class="multi-custom-arrow">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+  <abp-modal-footer [saveDisabled]="!createContentMangementForm.form.valid" (onCancelClick)="cancel()">
+  </abp-modal-footer>
+</form>

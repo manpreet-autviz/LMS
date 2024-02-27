@@ -1,0 +1,66 @@
+<form class="form-horizontal" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)=" save()">
+    <abp-modal-header [title]="'Create Promotion' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+<div class="modal-body px-lg-5 px-md-3 px-sm-2 pt-3 pb-0">
+    <div class="row ">
+    <div class="col-md-6 form-group required mb-2" >
+        <label class="col-form-label fw-normal  w-100" for="title">
+            {{ "Title" | localize }}
+        </label>
+        <div>
+            <input type="text" class="form-control" name="title" id="name" placeholder="Title"
+               [(ngModel)]="promotion.title" #titleModel="ngModel" #titleEl required />
+                <abp-validation-summary [control]="titleModel" [controlEl]="titleEl"></abp-validation-summary>
+         </div>
+    </div>
+
+    <div class="col-md-6 form-group ">
+        <label class="col-form-label fw-normal  w-100" for="discription">
+            {{ "Description" | localize }}
+        </label>
+        <div>
+            <input type="text" class="form-control" name="description" id="name"  placeholder="description"
+             [(ngModel)]="promotion.discription"  #discrpModel="ngModel" #discrpEl   />
+            <abp-validation-summary [control]="discrpModel" [controlEl]="discrpEl"></abp-validation-summary>
+          </div>
+    </div>
+
+    <div class="col-md-6 form-group mb-2 required">
+        <label class="col-form-label fw-normal  w-100" for="image">
+            {{ "Image" | localize }}
+        </label>
+        <div>
+            <div>
+                <div class="popup_img_bck" *ngIf="promotion.image != ''">
+                    <img [src]="promotion.image" class="h-100 w-100" alt="user image" />
+                    <span class="cross-icon bg-danger text-white position-absolute curser_pointer rounded-circle"
+                        (click)="promotion.image = ''">X</span>
+                </div>
+                <input type="file" class="form-control" name="image" id="image" maxlength="128"
+                    *ngIf="promotion.image == ''" (change)="onUpload($event.target.files)" required/>
+            </div>
+        </div>
+        <div *ngIf="isImageUpladedStatus == 'start'" class="progress-bar__container">
+            <div [ngClass]="isImageUpladedStatus == 'end' ? 'pb-full' : ''" class="progress-bar"></div>
+        </div>
+    </div>
+
+    <div  class="col-md-6 form-group mb-2 ">
+        <label class="col-form-label w-100" for="link">
+            {{ "link" | localize }}
+        </label>
+        <div>
+            <input type="url" class="form-control" name="link" id="link" minlength="2" maxlength="64" 
+                placeholder="Add Link Here" [(ngModel)]="promotion.link"/>
+        </div>
+    </div>
+</div>
+</div>
+<abp-modal-footer [saveDisabled]="
+                  !createTenantForm.form.valid  "(onCancelClick)="bsModalRef.hide()">
+</abp-modal-footer>
+
+<!-- <abp-modal-footer [saveDisabled]="
+                  !createTenantForm.form.valid 
+                " (onCancelClick)="cancel()">
+</abp-modal-footer> -->
+</form>

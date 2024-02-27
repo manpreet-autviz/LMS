@@ -1,0 +1,112 @@
+<form class="form-horizontal" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="save()">
+  <abp-modal-header [title]="'Edit Sub-admin' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+  <div class="modal-body px-lg-5 px-md-3 px-2 pt-3 pb-0">
+    <div class="row justify-content-around">
+      <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "First Name" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" (keydown.space)="$event.preventDefault();" placeholder="First Name"
+            name="name" id="name1" maxlength="128" required [(ngModel)]="admin.name" #nameModel="ngModel" #nameEl />
+          <abp-validation-summary [control]="nameModel" [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+      </div>
+
+      <div class="col-md-6 form-group mb-2">
+        <label class="col-form-label fw-normal  w-100" for="surname">
+          {{ "Last Name" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" (keydown.space)="$event.preventDefault();" placeholder="Pow"
+            name="surname" id="surname1" maxlength="128" [(ngModel)]="admin.surname" />
+          <!-- <abp-validation-summary [control]="surnameModel" [controlEl]="surnameEl"></abp-validation-summary> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-around">
+
+      <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "Gender" | localize }}
+        </label>
+        <div>
+          <select [(ngModel)]="admin.gender" #gender="ngModel" required #genderE1 name="gender" class="form-select"
+            aria-label="Default select">
+            <option value="" selected disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <abp-validation-summary [control]="gender" [controlEl]="genderE1"></abp-validation-summary>
+        </div>
+      </div>
+      <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "Mobile" | localize }}
+        </label>
+        <div>
+          <input type="tel" [(ngModel)]="admin.phoneNumber" #phoneNumber="ngModel" #phoneNumberE1
+            pattern="[6789][0-9]{9}" (keydown.space)="$event.preventDefault();" class="form-control"
+            placeholder="Mobile" name="phoneNumber" id="phoneNumber1" maxlength="128" required />
+          <abp-validation-summary [control]="phoneNumber" [controlEl]="phoneNumberE1"></abp-validation-summary>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row justify-content-around">
+     <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "Email" | localize }}
+        </label>
+        <div>
+          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" class="form-control"
+            (keydown.space)="$event.preventDefault();" placeholder="Email" name="emailAddress" id="emailAddress1"
+            maxlength="128" required [(ngModel)]="admin.emailAddress" #emailModel="ngModel" #emailEl />
+          <abp-validation-summary [control]="emailModel" [controlEl]="emailEl"></abp-validation-summary>
+        </div>
+      </div>
+      <div class="col-md-6 form-group mb-2">
+        <label class="col-form-label fw-normal  w-100" for="image">
+          {{ "Image" | localize }}
+        </label>
+        <div>
+          <div class="popup_img_bck" *ngIf="admin.pofileImage != ''">
+            <img [src]="admin.pofileImage" class="h-100 w-100" alt="user image" />
+            <span class="cross-icon bg-danger text-white position-absolute curser_pointer rounded-circle" (click)="admin.pofileImage = ''">X</span>
+          </div>
+
+          <input *ngIf="admin.pofileImage==''" [(ngModel)]="imageFile" [ngModelOptions]="{standalone: true}"
+            (change)="onUpload($event.target.files)" type="file" class="form-control" id="image1" maxlength="128" />
+        </div>
+        <div *ngIf="isImageUpladedStatus=='start'" class="progress-bar__container">
+          <div [ngClass]="isImageUpladedStatus=='end'?'pb-full':''" class="progress-bar">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+     <div class="col-md-6 form-group required mb-2">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "Status" | localize }}
+        </label>
+        <div>
+          <select class="form-select" [(ngModel)]="admin.isActive" required name="isActive" aria-label="Default select">
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <abp-modal-footer [saveDisabled]="!createTenantForm.form.valid || isImageUpladedStatus=='start' "
+    (onCancelClick)="bsModalRef.hide()">
+  </abp-modal-footer>
+</form>

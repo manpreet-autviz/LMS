@@ -1,0 +1,13 @@
+@import "../../styles.scss";
+
+.form-select {
+    height: 45px;
+    font-size: 14px;
+    border-color: $light-border;
+    color: $gray;
+    border-radius: 4px;
+
+    &:focus {
+        box-shadow: none;
+    }
+}

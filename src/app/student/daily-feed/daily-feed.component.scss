@@ -1,0 +1,35 @@
+$black: #212121;
+$gray: #929292;
+$light-border: #E9E9E9;
+
+
+h6 {
+    font-size: 17px;
+    color: $black;
+}
+
+p {
+    color: $gray;
+}
+
+.buy-course {
+    border-top: 1px solid #EFEFEF;
+
+    .student-sidebar {
+        border-left: 1px solid #EFEFEF;
+
+        ul {
+            list-style: none;
+        }
+    } 
+}
+
+
+@media only screen and (max-width: 767px) {
+    .buy-course {
+        .student-sidebar {
+            border-left: none;
+        }
+    }
+
+}

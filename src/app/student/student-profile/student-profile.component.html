@@ -1,0 +1,171 @@
+<div class="tittle_header">
+    <!-- <h1 class="mb-0">My Profile</h1> -->
+</div>
+<hr>
+<section class="help-section">
+    <div class="row align-items-stretch">
+        <div class="col-lg-4 col-md-4 col-12">
+            <div class="card h-100 profile-image-wrap">
+                <div class="card-body ">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <!-- <img *ngIf="user.pofileImage==''" src="../../assets/img/avatar7.png" alt="Admin"
+                            class="rounded-circle" width="115"> -->
+                        <div class="profile-image-bck rounded-circle">
+                            <img *ngIf="user.pofileImage!=''" [src]="user.pofileImage" alt="Admin" class="rounded-circle">
+                        </div>
+                        <div class="mt-3">
+                            <h4 class="admin_name">{{user.name}}</h4>
+                            <p class="text-secondary mb-1 admin-content">Do not disturb, doing a study right now. </p>
+                            <div class="position-relative">
+                                <button class="create_btn mt-2" (click)="openImageSelectorBox()">
+                                    Edit
+                                    Image</button>
+                                <input id="inputFileBtn" class="inputFile position-absolute" accept="image/png, image/gif, image/jpeg"
+                                    (change)="onUpload($event.target.files)" type="file">
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+        <div class="col-lg-8 col-md-8 col-12">
+            <div class="card mb-3 h-100 persional-details">
+                <div class="card-body ">
+                   
+                    <div class="row g-3 align-items-center">
+                        <div class="col-lg-2 col-3">
+                            <label for="inputPassword6" class="col-form-label">Name</label>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="m-0"> {{user.name}}</h3>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-lg-2 col-3">
+                            <label for="inputPassword6" class="col-form-label">Surname</label>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="m-0">{{user.surname}}</h3>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-lg-2 col-3">
+                            <label for="inputPassword6" class="col-form-label">Email</label>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="m-0">  {{user.emailAddress }}</h3>
+                        </div>
+                    </div>
+                     <div class="row g-3 align-items-center">
+                        <div class="col-lg-2 col-3">
+                            <label for="inputPassword6" class="col-form-label">Mobile</label>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="m-0"> {{user?.userName}}</h3>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end">
+                        <div class="col-sm-12 text-end">
+                            <button type="button" (click)="showCreateOrEditDialog()" class="create_btn">Edit
+                                Profile</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- <div class="row gutters-sm">
+                <div class="col-sm-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h6 class="d-flex align-items-center mb-3"><span
+                                    class="primary-info mr-2">My courses</span>progress</h6>
+                            <small>SSC</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>RBI</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>Banking</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>PBC</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>PPC</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h6 class="d-flex align-items-center mb-3"><span
+                                    class="primary-info mr-2">My Videos</span> Status</h6>
+                            <small>IBPS PO2</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>MCQ</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>SBI</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>IBPS PO2</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>IBPS PO2</small>
+                            <div class="progress position-relative mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary position-absolute left-0" role="progressbar"
+                                    style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+       <div class="col-lg-4 col-md-4 col-12">
+        <div class="card mt-3 update_listing">
+            <ul class="list-group list-group-flush">
+               
+                <li class="py-3 list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                    style="cursor: pointer;">
+                    <h6 class="mb-0" (click)="UpdateDialog()"><i class="bi bi-key me-1"></i> Update Password</h6>
+                </li>
+
+                <li class="py-3 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><i class="bi bi-chat-left-dots me-1"></i> Chat</h6>
+                </li>
+            </ul>
+        </div>
+       </div>
+    </div>
+</section>

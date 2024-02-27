@@ -1,0 +1,87 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<div>
+  <section class="content py-lg-1 p-2">
+    <div class="container-fluid">
+      <div class="row my-lg-3 mt-md-1 mt-0 mb-3">
+        <div class="col-12 text-md-end text-start">
+          <button type="button" (click)="showCreateOrEditDialog()" class="create_btn text-white">
+            <i class="fas fa-plus-square me-2"></i>Create
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table_bck">
+            <div class="card-body table-responsive p-0">
+              <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead class="bg-light border-0">
+                  <tr>
+                    <th class="custom-fw">First Name</th>
+                    <th class="custom-fw">Last Name</th>
+                    <th class="custom-fw">Gender</th>
+                    <th class="custom-fw">Mobile</th>
+                    <th class="custom-fw">Email</th>
+                    <th class="custom-fw">Password</th>
+                    <th class="custom-fw">Image</th>
+                    <th class="custom-fw">Status</th>
+                    <th class="text-right custom-fw">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of allAdmins">
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.surname }}</td>
+                    <td>{{ data?.gender }}</td>
+                    <td>{{ data?.phoneNumber }}</td>
+                    <td class="email_td">{{ data.emailAddress }}</td>
+                    <td>{{ data?.normalPassword }}</td>
+                    <td *ngIf="data.pofileImage == ''">
+                      <img src="../../assets/img/user-img.png" alt="user image" />
+                    </td>
+                    <td *ngIf="data.pofileImage != ''">
+                      <img [src]="data.pofileImage" alt="user image" />
+                    </td>
+                    <td>{{ data.isActive == true ? "Active" : "Inactive" }}</td>
+                    <td class="text-right">
+                      <ul class="action-column mb-0 ps-0">
+                        <li>
+                          <button type="button" [disabled]="data.userName=='admin'?true:false"
+                            (click)="showCreateOrEditDialog(data.id)"
+                            class="edit-icons radius-10 d-block text-center  p-1 mx-2 border-0" title="edit" data-toggle="edit">
+                            <img *ngIf="data.userName != 'admin'" src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                            <img *ngIf="data.userName == 'admin'" src="../../assets/img/disables-edit.png" class="img-fluid table_edit_image" title="Can't edit">
+                          </button>
+                        </li>
+
+                        <li>
+                          <button [disabled]="data.userName=='admin'?true:false" (click)="delAdmin(data)"
+                            class="edit-icons radius-10 d-block text-center p-1 mx-2 border-0" title="delete"
+                            data-toggle="delete">
+                            <img *ngIf="data.userName != 'admin'" src="../../assets/img/delete_icon.png"
+                              class="img-fluid table_edit_image">
+                            <img *ngIf="data.userName == 'admin'" src="../../assets/img/dlt-new.png" title="Can't delete"
+                              class="img-fluid w-auto" style="height: 80%;cursor: pointer;">
+                          </button>
+                        </li>
+                        <li>
+                          <button  [disabled]="data.userName=='admin'?true:false" (click)="resetPassword(data.id)"
+                            class="edit-icons radius-10 d-block text-center p-1 mx-2  border-0" title="reset password"
+                            data-toggle="lock">
+                            <img *ngIf="data.userName!='admin'" src="../../assets/img/table_reset_image.png" class="img-fluid table_edit_image">
+                            <img *ngIf="data.userName=='admin'" src="../../assets/img/disabled-lock.png" class="img-fluid table_edit_image" title="Can't reset">
+                          </button>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

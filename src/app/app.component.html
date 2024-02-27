@@ -1,0 +1,12 @@
+<div class="wrapper" style="height: 100% !important;min-height: 100% !important;">
+  <app-header></app-header>
+  <sidebar></sidebar>
+  <div class="side_effect"></div>
+  <div class="content-wrapper bg-white position-relative after-line px-4 overflow-auto">
+   
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+  <div id="sidebar-overlay" (click)="toggleSidebar()"></div>
+</div>
+

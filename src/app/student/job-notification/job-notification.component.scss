@@ -1,0 +1,142 @@
+
+@import "../../../styles.scss";
+
+.stnd-job-card {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+
+.card_pera{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    font-size: 14px;
+}
+.stdnt_main_hding {
+    font-size: 18px;
+    font-weight: 500;
+}
+.create_newbtn{
+    background-color: $primary;
+    font-size: 11px;
+    font-weight: 400;
+    border-radius: 4px;
+    padding: 7px 18px;
+    border: 1px solid $primary;
+    color: #ffffff;
+    height: 35px;
+}
+
+
+
+.pdf_button{
+    i{
+        color: $primary;
+        font-size: 22px;
+    }
+}
+
+.stdnt_nav_content {
+    .card {
+        box-shadow: 0px 4px 30px #f2f2f2;
+        max-width: 92%;
+    height: 293px;
+    border-radius: 0px 0px 20px 20px;
+
+        .card-body {
+            border: 1px dashed $card-border;
+            border-radius: 0px 0px 20px 20px;
+
+            .card_top_heading {
+                .card_heading {
+                    font-size: 14px;
+                    font-weight: 600;
+                    max-width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+                }
+
+                .valid_date {
+                    font-size: 10px;
+                    font-weight: 500;
+                    color: $gray;
+                }
+            }
+
+            .card-text {
+                font-size: 12px;
+                color: $gray;
+            }
+
+            .footer {
+                p {
+                    color: $gray;
+                    font-size: 11px;
+                    line-height: 13px;
+                }
+            }
+
+            .view_btn {
+                background-color: $primary;
+                width: 31%;
+                font-size: 12px;
+                font-weight: 500;
+                padding: 6px 0px;
+            }
+        }
+    }
+}
+@media screen and (max-width:991px) {
+
+    .stnd-job-notify {
+        .card {
+            height: auto;
+
+            .card-body {
+                .card_top_heading {
+                    .card_heading {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    .create_newbtn{
+        width: 100%;
+    }
+    .stnd-job-notify {
+        .card {
+            min-height: 161px !important;
+            max-height: 100%;
+            .card-body {
+                .card_top_heading {
+                    text-align: center;
+
+                    .card_heading {
+                        font-size: 21px;
+                    }
+
+                    .valid_dat {
+                        font-size: 11px;
+                    }
+                }
+
+                .card-text {
+                    font-size: 12px;
+                    text-align: center;
+                }
+
+                .footer {
+                    .view_btn {
+                        width: 100%;
+                    }
+                }
+            }
+
+        }
+    }
+}

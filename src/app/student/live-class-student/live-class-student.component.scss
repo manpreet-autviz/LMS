@@ -1,0 +1,134 @@
+@import "../../../styles.scss";
+
+.video_sec {
+    .main_row {
+        border-top: 1px solid #EBEBEB;
+    }
+
+    .video_heading {
+        top: 0;
+
+        h2 {
+            font-size: 19px;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 14px;
+            color: $gray;
+        }
+    }
+
+    iframe {
+        border-radius: 10px;
+        padding: 62px 0px;
+    }
+
+    .call_icons {
+        bottom: -9px;
+
+        .video_icons {
+            border: 1px solid #EDEDED;
+            border-radius: 5px;
+            font-size: 20px;
+            color: $primary;
+        }
+
+        .mute_vide {
+            padding: 14px 13px;
+        }
+
+        .microphone_icon {
+            padding: 14px 18px;
+        }
+
+        .call_icon {
+            color: white;
+            background-color: #d10000fa;
+            border-radius: 5px;
+            padding: 16px 17px;
+            font-size: 18px;
+        }
+    }
+
+    .cht_area {
+        background-color: #F5F7FB;
+
+        .cht_box {
+            bottom: 12px;
+            padding: 16px 20px;
+            border-radius: 7px;
+            background-color: white;
+            width: 90% !important;
+
+            .image_icon {
+                color: #ddd;
+                font-size: 19px;
+                border-right: 1px solid #ddd;
+                padding: 6px 11px 6px 0px;
+            }
+
+            .send_icon {
+                background-color: #249782;
+                color: white;
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+.live-chat{
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width:767px) {
+    .video_sec {
+        .video_heading {
+            h2 {
+                font-size: 12px;
+            }
+
+            p {
+                font-size: 11px;
+            }
+        }
+
+        .call_icons {
+            .video_icons {
+                font-size: 14px;
+            }
+
+            .microphone_icon {
+                padding: 12px 16px;
+            }
+
+            .mute_vide {
+                padding: 12px 12px;
+            }
+
+            .call_icon {
+                padding: 12px 14px;
+                font-size: 15px;
+            }
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrapper {
+    padding: 32px;
+}

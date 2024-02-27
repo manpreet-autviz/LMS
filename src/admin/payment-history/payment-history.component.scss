@@ -1,0 +1,35 @@
+.card-body {
+    ::ng-deep.dataTables_wrapper {
+        .dataTables_paginate {
+            .paginate_button.current {
+                color: #fff !important;
+            }
+        }
+    }
+
+}
+
+.table-data {
+    th{
+        width: 20% !important;
+    }
+    td {
+    padding: 14px 12px !important;
+    max-width: 115px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+}
+.success-bg{
+        background-color: #63a261;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 17px;
+            font-size: 13px !important;
+}
+.failed-bg{
+    padding: 4px 21px;
+        border-radius: 17px;
+        font-size: 13px !important;
+}

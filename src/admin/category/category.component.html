@@ -1,0 +1,171 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+
+<section class="bg-white py-lg-1 p-2">
+  <div class="container-fluid">
+    <div class="row mt-lg-3 mt-md-1  mt-0 mb-0">
+      <div class="col-12 text-lg-end text-md-end text-start">
+        <button class="border-0 create_btn text-white" type="button" (click)="showCreateOrEditDialog()">
+          <i class="fas fa-plus-square me-2"></i>Create
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body table-responsive cat-p-treetable p-0 table-data table text-nowrap">
+      <p-treeTable #tt [value]="treeData" [value]="treeData" class="d-inline-block" [columns]="cols" paginator="true"
+        rows="10">
+        <ng-template pTemplate="caption">
+          <div class="row justify-content-end">
+            <div class="col-auto">
+              <div style="text-align: right " class="ps-3 p_treetable">
+                <img src="../../assets/img/searchh.png" class="img-fluid">
+                <input class="border ms-1 inputt" type="search" pInputText size="20"
+                  (input)="tt.filterGlobal($event.target.value, 'contains')"
+                  (change)="onSearchClick($event.target.value)" style="width:auto">
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="custom-fw">Category Name</th>
+            <th class="text-end custom-fw">Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+          <tr>
+            <td>
+              <p-treeTableToggler [rowNode]="rowNode"><i class="fas fa-chevron-right"></i></p-treeTableToggler>
+              {{ rowData.categoryName }}
+            </td>
+            <td class="text-right">
+              <ul class="action-column mb-0 ps-0">
+                <li>
+                  <button type="button"
+                    class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2"
+                    (click)="showCreateOrEditDialog(rowData.id)" title="edit">
+                    <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                  </button>
+                </li>
+                <li>
+                  <button class="edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2"
+                    title="delete" data-toggle="delete" (click)="delCategory(rowData)">
+                    <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                  </button>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="cols.length">No matching records found.</td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="mock_instructions">
+  <div class="text-left">
+    <h1 class="mb-0">SSC CGL Tier 2(New Pattern)2022 : Mock Test 1</h1>
+    <hr>
+    <h2 class="mb-0">Please read the following instructions carefully</h2>
+
+    <h3>General Instructions:</h3>
+    <div>
+      <ul>
+        <li class="mt-3">
+         <span class="me-2">1</span> The clock has been set at the server and the countdown timer at the top right corner of your screen will display the time remaining for you to complete the exam. When the clock runs out the exam ends by default - you are not required to end or submit your exam. 
+
+        </li>
+        <li>
+          <span class="me-2">2</span>  The question palette at the right of screen shows one of the following statuses of each of the questions numbered:
+         <ul class="under_ul">
+          <li class="mt-3">
+            <span class="me-2 border_number ">1</span>You have not visited the question yet.
+          </li>
+          <li>
+            <span class="me-2 red_border">3</span>You have not answered the question.
+          </li>
+          <li>
+            <span class="me-2 green_border">5</span>You have answered the question.
+          </li>
+          <li>
+            <span class="me-2 blue_border">7</span>You have NOT answered the question but have marked the question for review.
+          </li>
+          <li class="position-relative">
+            <span class="me-2 blue_border">9</span> <span class="position-absolute"></span>You have answered the question but marked it for review. 
+          </li>
+
+         </ul>
+
+         <p>The Marked for Review status simply acts as a reminder that you have set to look at the question again
+          <span class="text-red"> If an answer is selected for a question that is Marked for Review, the answer will be considered in the final evaluation.</span>
+
+         </p>
+        </li>
+      </ul>
+    </div>
+
+    <h3 >Navigating to a question:</h3>
+    <ul>
+      <li>
+        <span class="me-2">3.</span>To select a question to answer, you can do one of the following:
+        <ul>
+          <span class="me-2">a.</span> Click on the question number on the question palette at the right of your screen to go to that numbered question directly. Note that using this option does NOT save your answer to the current question.
+          <span class="me-2">b.</span>Click on Save and Next to save answer to current question and to go to the next question in sequence.
+          <span class="me-2"> c.</span>Click on Mark for Review to save answer to current question, mark it for review, and to go to the next question in sequence.
+        </ul>
+      </li>
+      <li>
+        <span class="me-2">4.</span>You can view the entire paper by clicking on the <span class="text-bold">Question Paper</span> button.
+      </li>
+    </ul>
+
+    <h3>Answering questions:</h3>
+    <ul>
+    <li>
+      <span class="me-2">5.</span>For multiple choice type question:
+      <ul>
+        <span class="me-2">a.</span>To select your answer, click on one of the option buttons
+        <span class="me-2">b.</span>To change your answer, click the another desired option button
+        <span class="me-2">c.</span>To save your answer, you MUST click on <span class="text-bold">Save & Next</span>.
+        <span class="me-2">d.</span>To deselect a chosen answer, click on the chosen option again or click on the  <span class="text-bold">Clear Response</span> button.
+        <span class="me-2">e.</span>To mark a question for review click on <span class="text-bold">Mark for Review</span>. <span class="text-red">If an answer is selected for a question that is Marked for Review, the answer will be considered in the final evaluation.</span>
+      </ul>
+    </li>
+    <li>
+      <span class="me-2">6.</span>
+      To change an answer to a question, first select the question and then click on the new answer option followed by a click on the <span class="text-bold">Save & Next</span> button.
+    </li>
+    <li>
+      <span class="me-2">7.</span>
+      Questions that are saved or marked for review after answering will ONLY be considered for evaluation.
+    </li>
+    </ul>
+
+    <h3>Navigating through section:</h3>
+    <ul>
+      <li>
+        <span class="me-2">8.</span>
+        Sections in this question paper are displayed on the top bar of the screen. Questions in a section can be viewed by clicking on the section name. The section you are currently viewing is highlighted.
+      </li>
+      <li>
+        <span>9.</span>
+        After clicking the  <span class="text-bold"> Save & Next </span>button on the last question for a section, you will automatically be taken to the first question of the next section.
+      </li>
+      <li>
+        <span class="me-2">10.</span>
+        You can move the mouse cursor over the section names to view the status of the questions for that section.
+      </li>
+      <li>
+        <span class="me-2">11.</span>
+        You can shuffle between sections and questions anytime during the examination as per your convenience.
+      </li>
+    </ul>
+  </div>
+</section>  -->

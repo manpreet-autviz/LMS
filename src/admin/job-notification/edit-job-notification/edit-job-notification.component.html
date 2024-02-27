@@ -1,0 +1,141 @@
+<hr />
+
+<form class="form-horizontal inbuilt-form-data" autocomplete="off" #createJobNotificationForm="ngForm"
+  (ngSubmit)="save()">
+  <div class="row px-3 create_heading">
+    <h4>Edit Job Notification</h4>
+  </div>
+
+  <div class="modal-body pt-0">
+    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2">
+      <div class="col form-group required mb-0">
+        <label class="col-form-label fw-normal" for="nameOfJob">
+          {{ "Title" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" placeholder=" Title" name="nameOfJob" id="nameOfJob"
+            pattern="\S(.*\S)?" required [(ngModel)]="jobNoti.nameOfJob" #nameOfJobModel="ngModel" #nameOfJobEl />
+          <abp-validation-summary [control]="nameOfJobModel" [controlEl]="nameOfJobEl"></abp-validation-summary>
+        </div>
+      </div>
+      <div class="col form-group required mb-0">
+        <label class="col-form-label fw-normal" for="departmentName">
+          {{ "Department Name" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" placeholder="Department Name" name="departmentName"
+            id="departmentName" pattern="\S(.*\S)?" required [(ngModel)]="jobNoti.departmentName"
+            #departmentNameModel="ngModel" #departmentNameEl />
+          <abp-validation-summary [control]="departmentNameModel" [controlEl]="departmentNameEl">
+          </abp-validation-summary>
+        </div>
+      </div>
+
+
+      <div class="col form-group mb-0">
+        <label class="col-form-label w-100" for="startDate">
+          {{ "Start Date" | localize }}
+        </label>
+        <div>
+          <input type="date" class="form-control curser_pointer" name="startDate" id="startDate" minlength="2" maxlength="64"
+            [min]="dateRange" [(ngModel)]="startDate" #startDateModel="ngModel" #startDateEl />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group row mb-0">
+          <label class="col-md-12 col-form-label w-100" for="lastDate">
+            {{ "Last Date" | localize }}
+          </label>
+          <div class="col-md-12">
+            <input type="date" class="form-control curser_pointer" name="lastDate" id="lastDate" minlength="2" maxlength="64"
+              [min]="startDate" [(ngModel)]="lastDate" #lastDateModel="ngModel" #lastDateEl />
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group row mb-0">
+          <label class="col-md-12 col-form-label w-100" for="mode">
+            {{ "Mode" | localize }}
+          </label>
+          <div class="col-md-12">
+            <select [(ngModel)]="jobNoti.mode" class="w-100 form-select curser_pointer" name="mode" placeholder="Select Mode">
+              <option value="-1" disabled selected>Select Mode</option>
+              <option value="Online">Online</option>
+              <option value="Offline">Offline</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="jobNoti.mode=='Online'" class="col">
+        <div  class="form-group row mb-0 required">
+          <label class="col-md-12 col-form-label w-100" for="link">
+            {{ "link" | localize }}
+          </label>
+          <div class="col-md-12">
+            <input type="url" class="form-control" name="link" id="link" minlength="2" maxlength="64"
+              placeholder="Add Link Here" [(ngModel)]="jobNoti.link" #linkModel="ngModel" #linkEl />
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group row mb-0">
+          <label class="col-md-12 col-form-label w-100" for="image">
+            {{ "Image" | localize }}
+          </label>
+          <div class="col-md-12">
+            <div class="popup_img_bck" *ngIf="jobNoti.image != ''">
+              <img  [src]="jobNoti.image" class="h-100 w-100" alt="user image" />
+              <span class="cross-icon bg-danger text-white position-absolute curser_pointer rounded-circle" (click)="jobNoti.image = ''">X</span>
+            </div>
+            <input *ngIf="jobNoti.image == ''" type="file" class="form-control" name="image" id="image" minlength="2"
+              maxlength="64" (change)="onUpload($event.target.files)" />
+          </div>
+          <div *ngIf="isImageUpladedStatus == 'start'" class="progress-bar__container">
+            <div [ngClass]="isImageUpladedStatus == 'end' ? 'pb-full' : ''" class="progress-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col form-group mb-0">
+        <label class="col-md-12 col-form-label fw-normal" for="notesUrl">
+          {{ "Upload File" | localize }}
+        </label>
+        <div class="col-md-12">
+          <div class="">
+            <input (change)="onFileUpload($event.target.files)" required class=" form-control dlt_input" type="file"
+              name="notesUrl" placeholder="Enter Notes Url" />
+  
+            <!-- <span *ngIf="(createContentManDto.contentManagementNotes.length==i+1)" class="input-group-text icon_area"
+              (click)="addMultiNotes();" id="basic-addon1"><i class="fa-sharp fa-solid fa-circle-plus px-1"></i></span>
+            <span *ngIf="!(createContentManDto.contentManagementNotes.length==i+1)"
+              class="input-group-text bg-danger border border-danger" (click)="delNote(i);" id="basic-addon1"><i
+                class="fa-sharp fa-solid fas fa-trash px-1"></i></span> -->
+                <div  *ngIf="jobNoti.notesUrl">
+                  <a href="{{jobNoti.notesUrl}}" target='_blank' class="text-info " style="font-size: 11px;"><p class="mt-1 mb-0">Preview File</p></a>
+                </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 col-12 form-group">
+        <label class="col-form-label w-100" for="description">
+          {{ "Description" | localize }}
+        </label>
+        <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="jobNoti.description" name="description"
+        id="description" [config]="config"></angular-editor>
+        <!-- <div>
+          <textarea class="form-control" name="description" id="description" cols="30" rows="5"
+            [(ngModel)]="jobNoti.description" placeholder="Description"></textarea>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <abp-modal-footer [saveDisabled]="
+      !createJobNotificationForm.form.valid || isImageUpladedStatus == 'start'
+    " (onCancelClick)="cancel()">
+  </abp-modal-footer>
+</form>

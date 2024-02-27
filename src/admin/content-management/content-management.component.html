@@ -1,0 +1,122 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<section class="bg-white py-lg-1 p-2">
+  <div class="container-fluid">
+    <div
+      class="row mt-lg-3 mt-md-1 mb-lg-3 mb-md-3 mt-0 mb-3 justify-content-xl-between justify-content-lg-end justify-content-md-end  align-items-center">
+      <div class="col-xl-10 col-lg-12 col-md-12 col-12">
+        <div class="row row-cols-1 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 align-items-center" for="category">
+          <div class="col">
+            <div class="position-relative">
+            <p-treeSelect [(ngModel)]="selectedNode" [options]="treeData" class="w-100 form "
+              (onNodeSelect)="getCategory($event.node.id)" placeholder="Filter by Category">
+            </p-treeSelect>
+            </div>
+          </div>
+
+          <div class="col">
+            <select [(ngModel)]="courseId" [disabled]="selectedNode == null? true: false" name="courseName" class="form-select w-100 curser_pointer"
+              aria-label="Default select example" (change)="renderer()">
+              <option value="0" disabled selected>Select Course</option>
+              <option value="0" selected>Show All</option>
+              <option *ngFor="let item of allCourses" [value]="item.id">
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col">
+            <div class="position-relative">
+              <ng-multiselect-dropdown class="test multi_dropdown w-100" required name="selectedItems"
+                (onSelect)="getAllTopics()" (onSelectAll)="onSelectAll($event)" (onDeSelect)="onDeSelectItem()"
+                (onDeSelectAll)="onUnSelectAll()" id="subjectId" [placeholder]="'Select Subjects'"
+                [settings]="dropdownSetting" [data]="allSubjects" [(ngModel)]="selectedItems">
+
+              </ng-multiselect-dropdown>
+              <!-- <i class="fas fa-angle-down position-absolute customeup-down"></i> -->
+            </div>
+          </div>
+          <!-- <div class="col">
+            <div class="position-relative">
+              <ng-multiselect-dropdown class="test multi_dropdown w-100 d-block" required name="selectedTopics"
+                (onSelect)="setTopic()" (onSelectAll)="onSelectAllTopics()" (onDeSelect)="onDeSelectTopic()"
+                id="topicsId" [placeholder]="' Select Topics'" [settings]="dropdownSettings" [data]="allTopics"
+                [(ngModel)]="selectedTopics">
+              </ng-multiselect-dropdown>
+              <i class="fas fa-angle-down position-absolute customeup-down"></i>
+            </div>
+          </div> -->
+          <!-- <div class="col">
+            <button type="button" class="col text-white create_btn border-0" (click)="resetFilter()">
+              <i class="fa-light fa-filters"></i> Reset Filters
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="col text-white create_btn border-0" (click)="getAllComtentMang()">
+              Search
+            </button>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 col-12 text-lg-end text-start mt-md-2 mt-lg-0">
+        <button class="create_btn text-white border-0" type="button" (click)="showCreateOrEditDialog()">
+          <i class="fas fa-plus-square me-2"></i>Create
+        </button>
+      </div>
+    </div>
+    <div class="table_bck">
+      <div class="card-body table-responsive p-0">
+        <table class="table-data table text-nowrap w-100" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+          <thead class="border-0">
+            <tr>
+              <th class="custom-fw">Category</th>
+              <th class="custom-fw">Course</th>
+              <th class="custom-fw">Subject</th>
+              <th class="custom-fw">Topic</th>
+              <th class="text-right custom-fw">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of allContent">
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.category?.categoryName }}">{{
+                data?.category?.categoryName |slice:0:10}}</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.courseManagement?.name }}">{{
+                data?.courseManagement?.name |slice:0:10}}</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.subjectName }}">{{ data.subjectName|
+                slice:0:10 }}</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.topicsName }}">{{data.topicsName |
+                slice:0:10 }}...
+              </td>
+
+              <td class="text-right">
+                <ul class="action-column mb-0 ps-0">
+                  <li>
+                    <button type="button"
+                      class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2"
+                      (click)="showCreateOrEditDialog(data.id)">
+                      <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button"
+                      class="edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2"
+                      title="delete" (click)="delContentMang(data)" data-toggle="delete">
+                      <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                    </button>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="!allContent || allContent?.length == 0">
+            <tr>
+                <td class="no-data-available text-center" colspan="8">No data!</td>
+            </tr>
+        <tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</section>

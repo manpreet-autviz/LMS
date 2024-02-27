@@ -1,0 +1,39 @@
+@import "../../styles.scss";
+
+::ng-deep.multi_dropdown {
+    .dropdown-btn {
+        font-size: 12px;
+        border-color: $light-border !important;
+        .selected-item{
+            color: #8d8d8d !important;
+        }
+    }
+}
+::ng-deep.dataTables_empty {
+    display: none;
+}
+.form-select {
+    height: 40px;
+    width: 40%;
+    font-size: 13px;
+    border-color: $light-border;
+    color: $gray;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.dropdown-list {
+    .filter-textbox {
+        input {
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width:991px) {
+    .form-select {
+        width: 100%;
+    }
+}

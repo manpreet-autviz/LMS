@@ -1,0 +1,90 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<form class="form-horizontal">
+    <abp-modal-header [title]="'Add Questions' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+    <div class="modal-body px-lg-5 px-md-4 px-4 pb-0 pt-3">
+
+        <div class="form-group col-md-12 p-0">
+            <div *ngFor="let data of questions; let i = index" class="form-group row p-0  mb-2 ">
+                <div class="col-md-6 form-group required mb-2">
+                    <label class="col-form-label fw-normal w-100" for="subjectName">
+                        {{ "Subject" | localize }}
+                    </label>
+                    <div>
+                        <div class="position-relative required">
+                            <select [(ngModel)]="data.mockTestSection.subjectId" class="w-100 form-select"
+                                (change)="changeSubject(i,questionFile)" [ngModelOptions]="{standalone: true}" required
+                                placeholder="Select Subject" #subjectIdModel="ngModel" #subjectIdEl>
+                                <option value="-1" disabled>Select Subject</option>
+                                <option *ngFor="let item of allSubject" [value]="item.id">
+                                    {{item.subjectName}}
+                                </option>
+                            </select>
+                            <abp-validation-summary [control]="subjectIdModel"
+                                [controlEl]="subjectIdEl"></abp-validation-summary>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isSectionBased=='true'" class="col-md-6 form-group required mb-2">
+                    <label class="col-form-label w-100" for="duration">
+                        {{ "Duration" | localize }}
+                    </label>
+                    <div class="position-relative">
+                        <div class="input-group ">
+                            <input [(ngModel)]="data.mockTestSection.duration" required class=" form-control dlt_input"
+                                type="number" name="duration{{i}}" placeholder="Enter Duration In Minutes"
+                                #durationModel="ngModel" #durationEl />
+                        </div>
+                        <abp-validation-summary [control]="durationModel"
+                            [controlEl]="durationEl"></abp-validation-summary>
+                    </div>
+                </div>
+                <div class="px-0 form-group required mb-2">
+                    <label class="col-md-3 col-form-label fw-normal" for="notesUrl">
+                        {{ "Upload Questions" | localize }}
+                    </label>
+                    <div class="col-md-12">
+                        <div class="input-group ">
+                            <input (change)="onFileUpload($event.target.files,i)" #questionFile
+                                class=" form-control dlt_input"
+                                [disabled]=" data.mockTestSection.subjectId!= -1? false : true" type="file"
+                                placeholder="Upload File" />
+
+                            <span *ngIf="(questions.length==i+1)" class="input-group-text icon_area curser_pointer"
+                                (click)="addMultiNotes(i);" id="basic-addon1"><i
+                                    class="fa-sharp fa-solid fa-circle-plus px-1"></i></span>
+                            <span *ngIf="!(questions.length==i+1)"
+                                class="input-group-text bg-danger border border-danger curser_pointer"
+                                (click)="delNote(i);" id="basic-addon1"><i
+                                    class="fa-sharp fa-solid fas fa-trash px-1"></i></span>
+
+                        </div>
+                        <div *ngIf="data.isFileUpladedStatus=='start'">
+                            <div class="progress-bar__container">
+                                <div [ngClass]="data.isFileUpladedStatus=='end'?'pb-full':''" class="progress-bar">
+                                </div>
+
+                            </div>
+                            <span class="text-info" style="font-size: 12px;">Please wait</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="custm_footer">
+        <div class="pt-0 modal-footer justify-content-lg-end justify-content-md-end justify-content-center">
+            <div class="col-auto m-0 p-0">
+                <button type="submit" (click)="cancel()" class="btn btn-default"> Cancel </button>
+            </div>
+            <div class="col-auto m-0 p-0">
+                <button type="submit" (click)="submit()" class="btn btn-primary"> Save </button>
+            </div>
+        </div>
+    </div>
+    <!--</div>
+     </div> -->
+</form>

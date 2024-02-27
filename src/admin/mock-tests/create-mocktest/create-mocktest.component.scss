@@ -1,0 +1,202 @@
+@import "../../../styles.scss";
+
+.click_here_btn {
+    font-size: 11px;
+    background-color: #319eae6b;
+    line-height: 12px;
+    height: 40px;
+    border-radius: 3px;
+    padding: 4px 26px;
+
+    .bold_text {
+        font-weight: 500;
+        color: $primary;
+    }
+}
+
+.inbuilt-form-data {
+    .form-group.required {
+        .col-form-label {
+            &::after {
+                color: $primary;
+            }
+        }
+    }
+
+    input[type=file]::file-selector-button {
+        border: 2px solid $primary;
+        padding: .2em 1.6em;
+        color: $gray;
+        border-radius: 0.25rem 0 0 0.25rem;
+        background-color: $primary !important;
+        transition: 0.5s;
+        height: 40px;
+        color: $white;
+        font-size: 12px;
+    }
+}
+.sol_line{
+        line-height: 2;
+    
+}
+::ng-deep.multiselect_button {
+    .dropdown-btn {
+        padding: 11px 10px !important;
+        overflow: hidden;
+        height: 40px;
+        border-color: $input-border !important;
+        color: $placeholder !important;
+        border-radius: 5px !important;
+        font-size: 12px;
+
+        &::placeholder {
+            font-size: 12px;
+            color: $placeholder !important;
+        }
+
+        .selected-item {
+            background-color: $light-white !important;
+            border-color: $light-white !important;
+            color: $gray !important;
+            font-size: 12px;
+            font-weight: 400;
+            padding: 0px 7px !important;
+            border-radius: 4px !important;
+
+            a {
+                color: $gray !important;
+            }
+        }
+    }
+
+}
+
+.accordion_sec {
+    border: 1px solid #DBDBDB;
+    border-radius: 4px;
+    overflow-y: scroll;
+    max-height: 331px;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        height: 9px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $light-gray;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $primary;
+        outline: none;
+    }
+
+    .accordion-item {
+        border: none;
+    }
+
+    .accordion-button {
+        border-bottom: 1px solid #DBDBDB;
+        color: $light-black !important;
+        font-weight: 500;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .edit-icons {
+        right: 0;
+        top: 11px;
+        color: $green;
+        background-color: #62a36438;
+        z-index: 9999;
+        img{
+            width: 12px;
+        }
+    }
+
+    .answer-box {
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid #60a36773;
+        background-color: #76b17921 !important;
+        font-weight: 400;
+
+        &:hover {
+            background: $on-hover;
+        }
+
+        .course {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .circle {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #ddd;
+            display: inline-block
+        }
+    }
+}
+
+.add_btn {
+    background-color: $primary;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 11px 22px;
+}
+
+.perview_heading {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.cstm_chkbox {
+    accent-color: $primary;
+    width: 20px !important;
+}
+
+.solution-size {
+    font-size: small;
+    line-height: 14px;
+}
+.select_question{
+    border-radius: 5px;
+    font-size: 12px;
+    color: #959595;
+    border: 1px solid #ced4da;
+    background-color: $primary;
+    select{
+        border-radius: 0px 4px 4px 0px;
+        padding: 0px 40px 0px 0px;
+    }
+}
+.cancel_button{
+    height: 42px !important;
+}
+.bold_text{
+    font-weight: 600;
+}
+.clicking_text{
+    .invalid_text{
+          font-size: 13px;
+    }
+  
+    .detail_text{
+        font-size:12px;
+        color: #149712;
+    }
+}
+
+@media(max-width:767px) {
+    .subject {
+        font-size: 12px
+    }
+}

@@ -1,0 +1,30 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="main-y-scroll">
+    <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-3">
+        <div class="" *ngFor="let item of notes">
+            <div class="col" *ngIf="item.notesUrl.includes('lmsnotesstore')">
+                <div *ngIf="courseDetails?.isBuy" (click)="showPdf(item.id)" class="note_bck d-flex align-items-center">
+                    <span class="bg-white rounded-pill count-width-hei text-center"><i
+                            class="fas fa-file-pdf icon"></i></span>
+                    <p class="m-0 ml-2"> {{item.title}}
+                    </p>
+                </div>
+
+                <div *ngIf="!courseDetails?.isBuy"  (click)="startFreeTrialCourse(courseDetails.price,courseDetails.id)"
+                    class="note_bck d-flex align-items-center justify-content-between">
+                    <div class="">
+                        <span class="rounded-pill count-width-hei text-center"><i
+                                class="fas fa-file-pdf icon"></i></span>
+                        <span class="m-0 ml-2"  > {{item.title}}
+                        </span>
+                    </div>
+                    <div class="">
+                        <i class="fas fa-lock lock_icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

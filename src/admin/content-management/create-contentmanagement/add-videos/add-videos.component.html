@@ -1,0 +1,136 @@
+<form class="form-horizontal inbuilt-form-data" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="submit()">
+  <abp-modal-header [title]="'Add Videos' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+  <div class="modal-body px-lg-5 px-md-3 px-2 pt-3 pb-0">
+    <div class="form-group col-md-12 p-0">
+
+      <div *ngFor="let subject of subjects; let j=index">
+        <div class="form-group row p-0  required mb-3">
+          <label class="col-md-3 col-form-label" for="subjectId">
+            {{ "Subject" | localize }}
+          </label>
+          <div class="col-md-9">
+            <div class="input-group ">
+              <select [(ngModel)]="subject.subjectId" (change)="getTopicsBySubjectId(subject.subjectId,j)" required
+                class="form-control w-100 form-select" type="text" placeholder="Select Subject" name="subjectId{{j}}">
+                <option value="-1" disabled>Select Subject</option>
+                <option *ngFor="let item of allSubjectItems" [value]="item.id">
+                  {{item.subjectName}}
+                </option>
+              </select>
+             
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let data of videosArray[j]; let i = index" class="mb-3 videoBorder">
+          <div class="form-group row p-0  mb-3">
+            <label class="col-md-3 col-form-label" for="topicsId">
+              {{ "Topic" | localize }}
+            </label>
+            <div class="col-md-9">
+              <div class="input-group ">
+                <select [(ngModel)]="data.topicsId" [disabled]="subject.subjectId == '-1'? true:false"
+                  class="form-control w-100 form-select" type="text" placeholder="Select Topic"
+                  [ngModelOptions]="{standalone: true}">
+                  <option value="-1" disabled>Select Topic</option>
+                  <option *ngFor="let item of allTopics[j]" [value]="item.id">
+                    {{item.title}}
+                  </option>
+                </select>
+
+              </div>
+            </div>
+          </div>
+          <div class="form-group row p-0 required mb-3">
+            <label class="col-md-3 col-form-label" for="videoUrl">
+              {{ "Upload YouTube Video" | localize }}
+            </label>
+            <div class="col-md-9 ">
+              <div class="input-group ">
+                <input [(ngModel)]="data.videoUrl" [ngModelOptions]="{standalone: true}"
+                  class=" form-control dlt_input " pattern='^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+'
+                  type="text" name="videoUrl{{i}}" placeholder="Enter VideoUrl" required minlength="1"
+                  #videoUrlModel="ngModel" #videoUrl>
+                <span *ngIf="(videosArray[j].length==i+1)" class="input-group-text icon_area curser_pointer"
+                  (click)="add(j);" id="basic-addon1"><i class="fa-sharp fa-solid fa-circle-plus px-1"></i></span>&nbsp;
+                <span *ngIf="(i >= 0 && videosArray[j].length > 1) || j > 0"
+                  class="input-group-text bg-danger border border-danger curser_pointer" (click)="delVideo(i,j)"
+                  id="basic-addon1"><i class="fa-sharp fa-solid fas fa-trash px-1"></i></span>
+              </div>
+              <abp-validation-summary [control]="videoUrlModel" [controlEl]="videoUrl"></abp-validation-summary>
+            </div>
+          </div>
+          <div class="form-group row p-0  required mb-3">
+            <label class="col-md-3 col-form-label" for="title">
+              {{ "Title" | localize }}
+            </label>
+            <div class="col-md-9">
+              <div class="input-group ">
+                <input [(ngModel)]="data.title" required class=" form-control dlt_input" type="text"
+                  [ngModelOptions]="{standalone: true}" placeholder="Enter Title" #titleModel="ngModel" #title />
+              </div>
+              <abp-validation-summary [control]="titleModel" [controlEl]="title"></abp-validation-summary>
+            </div>
+          </div>
+
+          <div *ngIf="price!=0" class="form-group row mb-3 px-0">
+            <label class="col-md-3 col-form-label">
+              {{ "IsFree" | localize }}
+            </label>
+            <div class="col-md-9">
+              <div class="custom-control custom-checkbox p-0">
+                <input type="checkbox" class="custom-control cstm_chkbox" name="isFree"
+                  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.isFree" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-3 px-0">
+            <label class="col-md-3 col-form-label">
+              {{ "IsLive" | localize }}
+            </label>
+            <div class="col-md-9">
+              <div class="custom-control custom-checkbox p-0">
+                <input type="checkbox" class="custom-control cstm_chkbox" name="isLive"
+                  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.isLive" />
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6 form-group required mb-0 p-0">
+              <div *ngIf="data.isLive==true" class="col form-group mb-0 p-0">
+                <label class="col-form-label" for="startDate">
+                  {{ "Start Date" | localize }}
+                </label>
+                <div>
+                  <input type="date" class="form-control curser_pointer" name="startDate{{j}}{{i}}" id="startDate"
+                    [min]="dateRange" minlength="2" maxlength="64" [(ngModel)]="data.startDate"
+                    #startDateModel="ngModel" #startDateEl />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 form-group required mb-3 p-0">
+              <div *ngIf="data.isLive==true" class="col form-group mb-0 p-0">
+                <div class="form-group row">
+                  <label class="col-form-label fw-normal" for="startTime">
+                    {{ "Start Time" | localize }}
+                  </label>
+                  <div>
+                    <input type="time" class="form-control" name="startTime{{j}}" maxlength="128"
+                      [ngModelOptions]="{standalone: true}" [(ngModel)]="data.startTime" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button *ngIf="(subjects.length-1)==j" type="button" class="btn btn-primary sky-btn " (click)="addmore(j+1)">Add
+          More</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="custm_footer">
+    <abp-modal-footer (onCancelClick)="bsModalRef.hide()">
+    </abp-modal-footer>
+  </div>
+</form>

@@ -1,0 +1,136 @@
+<form class="form-horizontal" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="save()">
+  <abp-modal-header [title]="'Edit Course' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+  <div class="modal-body px-lg-5 px-md-3 px-sm-2 pt-3 pb-0">
+    <div class="row justify-content-around">
+      <div class="col-md-6 form-group required">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "Course Title" | localize }}
+        </label>
+        <div>
+          <input type="text" class="form-control" placeholder="Course Title" pattern="\S(.*\S)?" name="name" id="name"
+            required [(ngModel)]="course.name" #nameModel="ngModel" #nameEl />
+          <abp-validation-summary [control]="nameModel" [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+      </div>
+
+      <div class="col-md-6 form-group required">
+        <label class="col-form-label fw-normal  w-100" for="subjectName">
+          {{ "Category" | localize }}
+        </label>
+        <div class="position-relative">
+          <div *ngIf="treeData?.length != 0">
+            <p-treeSelect [(ngModel)]="selectedCategory" (onNodeSelect)="setCategory($event.node.id)"
+              [options]="treeData" name="categoryId" [placeholder]="placeholder"></p-treeSelect>
+          </div>
+
+        </div>
+        <div *ngIf="treeData?.length == 0">
+          <select>
+            <option disabled>No Result Found</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-around">
+      <div class="col-md-6 form-group ">
+        <label class=" col-form-label fw-normal  w-100" for="imagePath">
+          {{ "Image" | localize }}
+        </label>
+        <div>
+          <div class="popup_img_bck" *ngIf="course.imagePath!=''">
+            <img [src]="course.imagePath" class="h-100 w-100" alt="user image">
+            <span class="cross-icon bg-danger text-white position-absolute curser_pointer rounded-circle"
+              (click)="course.imagePath=''">X</span>
+          </div>
+          <input type="file" class="form-control" name="imagePath" id="imagePath" maxlength="128"
+            *ngIf="course.imagePath==''" (change)="onUpload($event.target.files)" />
+        </div>
+      </div>
+
+
+
+      <div class="col-md-6 form-group required">
+        <label class="col-form-label fw-normal  w-100" for="price">
+          {{ "Price" | localize }}
+        </label>
+        <div>
+          <input type="number" class="form-control" placeholder="Price.." name="price" id="price" required
+            [(ngModel)]="course.price" #priceModel="ngModel" #priceEl />
+          <abp-validation-summary [control]="priceModel" [controlEl]="priceEl"></abp-validation-summary>
+        </div>
+      </div>
+    
+      <div class="row px-0">
+        <div class="col-md-6 form-group required mb-2">
+          <label class="col-form-label fw-normal  w-100" for="validateDuration">
+            {{ "Validate Upto" | localize }}
+          </label>
+          <div>
+            <select [(ngModel)]="course.validateDuration" class="w-100 form-select" name="validateDuration" required
+              placeholder="Select validate Type" #validateDurationModel="ngModel" #validateDurationEl>
+              <option value="" disabled selected>Select Course validate Duration</option>
+              <option value="6 months">6 Months</option>
+              <option value="1 year">1 year</option>
+              <option value="1.5 years">1.5 years</option>
+              <option value="2 years">2 years</option>
+              <option value="Unlimited">Unlimited</option>
+            </select>
+            <abp-validation-summary [control]="validateDurationModel" [controlEl]="validateDurationEl"></abp-validation-summary>
+          </div>
+        </div>
+        <div class="col-md-6 form-group required mb-2">
+          <label class="col-form-label fw-normal  w-100" for="type">
+            {{ "Type" | localize }}
+          </label>
+          <div>
+            <select [(ngModel)]="course.type" class="w-100 form-select" name="type" required [disabled]="isDisabled"
+              placeholder="Select Course Type" #typeModel="ngModel" #typeEl>
+              <option value="" disabled selected>Select Course Type</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Video">Video</option>
+              <option value="Mock">Mock</option>
+            </select>
+            <abp-validation-summary [control]="typeModel" [controlEl]="typeEl"></abp-validation-summary>
+          </div>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label class="col-form-label fw-normal  w-100" for="emailAddress">
+            {{ "Assigned to Student" | localize }}
+          </label>
+          <div class="position-relative">
+
+            <ng-multiselect-dropdown (onSelectAll)="onSelectAll()" (onDeSelect)="onDeSelectItem()"
+              (onSelect)="getAllStudents()" (onDeSelectAll)="onUnSelectAll()" 
+              name="selectedStudent" [data]="allStudents" id="emailAddress" [(ngModel)]="selectedStudent"
+              [settings]="dropdownSettings"  class="multi-custom-arrow">
+            </ng-multiselect-dropdown>
+       
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="row justify-content-around px-0">
+        <div class="col-md-12 form-group mb-0">
+          <label class="col-form-label fw-normal" for="detail">
+            {{ "Details" | localize }}
+          </label>
+          <div>
+            <textarea name="detail" class="form-control" id="detail" cols="30" rows="6" id="detail" minlength="2"
+              placeholder="Details" [(ngModel)]="course.detail" #detailModel="ngModel" #detailEl></textarea>
+            <abp-validation-summary [control]="detailModel" [controlEl]="detailEl"></abp-validation-summary>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <abp-modal-footer [saveDisabled]="!createTenantForm.form.valid || isImageUpladedStatus=='start'"
+    (onCancelClick)="bsModalRef.hide()">
+  </abp-modal-footer>
+</form>

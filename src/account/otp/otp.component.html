@@ -1,0 +1,82 @@
+<section class="signin">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center p-4">
+            <div class="col-lg-6  col-12  signin-form text-align-left">
+               <div class="h-lg-100 d-flex align-items-center">
+                <form class="text-align-left" (ngSubmit)="confirmOtp()">
+                    <h1 class=" text-center fw-bold main_heading text-dark mb-3">OTP Verification</h1>
+                    <p class="text-center pb-lg-3 pb-0 number_text">Please enter the OTP sent to your <strong class="text-dark custom-fw">E-mail Address</strong></p>
+
+                    <div class="mb-3 w-100">
+                        <label for="exampleInputText" class="form-label fw-normal mb-1">Enter OTP</label>
+                        <input type="text" name="otp" [(ngModel)]="otp" placeholder="Enter OTP" class="form-control  input-area mt-2 px-3 py-2" />
+                    </div>
+                    <button class="w-100 custom-fw btn mt-3 border custom-primary text-white"
+                        type="submit">Verify & Proceed <i class="bi bi-arrow-right ms-2"></i></button>
+                      <div class="mb-lg-5 mt-lg-4 mb-4 mt-3 text-center">
+                        <a class="green-color text-fs-sm custom-fw mb-1" (click)="resendOtp()">
+                          Resend OTP
+                        </a>
+                      </div>
+                   
+                </form>
+                <!-- <p class="px-lg-5 copy_right position-absolute mt-lg-0 mt-3 text-lg-start text-center d-lg-block d-md-block d-none">&copy; 2022 Teacher’s Vision. All Rights Reserved</p> -->
+      
+               </div>
+            </div>
+            <div class="col-lg-6 col-12 h-100 p-0">
+              <div class="signin-slider d-flex align-items-center">
+                <div class="inner-slider-bg border border-white m-2 ">
+                  <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators align-items-center justify-content-start">
+                      <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" class="mx-2" data-bs-target="#carouselCaptions" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner h-100">
+                      <div class="carousel-item active h-100">
+                        <div class="px-lg-4 pt-lg-4 px-3 pt-3">
+                          <h1 class="text-white slide_text">
+                            Learning is not attained by chance, it must be sought for
+                            with <span class="bold_text">ARDOR AND ATTENDED</span> to
+                            with diligence.
+                          </h1>
+                        </div>
+                        <img src="../../assets/img/login-slide1.png" class="d-block w-100" alt="..." />
+                      </div>
+                      <div class="carousel-item h-100">
+                        <div class="px-lg-4 pt-lg-4 px-3 pt-3">
+                          <h1 class="text-white slide_text">
+                            Learning is not attained by chance, it must be sought for
+                            with <span class="bold_text">ARDOR AND ATTENDED</span> to
+                            with diligence.
+                          </h1>
+                        </div>
+                        <img src="../../assets/img/login-slide1.png" class="d-block w-100" alt="..." />
+                      </div>
+                      <div class="carousel-item h-100">
+                        <div class="px-lg-4 pt-lg-4 px-3 pt-3">
+                          <h1 class="text-white slide_text">
+                            Learning is not attained by chance, it must be sought for
+                            with <span class="bold_text">ARDOR AND ATTENDED</span> to
+                            with diligence.
+                          </h1>
+                        </div>
+                        <img src="../../assets/img/login-slide1.png" class="d-block w-100" alt="..." />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <p class="px-lg-5 copy_right position-absolute mt-lg-0 mt-3 text-lg-start text-center d-lg-none d-md-none d-block">
+                &copy; 2022 Teacher’s Vision. All Rights Reserved
+              </p>
+            </div>
+
+        </div>
+    </div>
+</section>

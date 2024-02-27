@@ -1,0 +1,13 @@
+<div class="tittle_header"></div>
+<div class="mt-2 student_tabset">
+    <tabset>
+        <tab [active]="activeTab=='all-course'" (selectTab)="checkActive($event)" [heading]="'All Course'"
+            class="pt-3 px-2">
+            <app-all-course></app-all-course>
+        </tab>
+        <tab [active]="activeTab=='my-course'" (selectTab)="checkActive($event)" [heading]="'My Courses'"
+            class="pt-3 px-2">
+            <app-course-view></app-course-view>
+        </tab>
+    </tabset>
+</div>

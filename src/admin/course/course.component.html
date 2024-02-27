@@ -1,0 +1,93 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<section class="content py-lg-1 p-2">
+  <div class="container-fluid">
+    <div class="row mt-lg-3 mt-md-1 mb-lg-3 mb-md-3 mt-0 mb-3 align-items-center justify-content-between">
+      <div class="col-lg-2 col-md-6 col-sm-12 mb-lg-0 mb-md-0 mb-2">
+        <div class="position-relative">
+        <p-treeSelect class="select-cat-ptree" [(ngModel)]="selectedNode" [options]="treeData"
+          (onNodeSelect)="getAllCourses($event.node.id)" placeholder="Filter by Category"></p-treeSelect>
+         
+          </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 mt-lg-0 mt-md-0 mt-2 text-lg-end text-md-end text-start">
+        <button type="button" (click)="showCreateOrEditDialog()" class="create_btn text-white">
+          <i class="fas fa-plus-square me-2"></i>Create
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table_bck">
+          <div class="card-body table-responsive p-0">
+            <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead class="bg-light border-0">
+                <tr>
+                  <th class="custom-fw" width="200">Course</th>
+                  <th class="custom-fw">Category</th>
+                  <th class="custom-fw">Details</th>
+                  <th class="custom-fw">Images</th>
+                  <th class="custom-fw">Price</th>
+                  <th class="custom-fw">Valide Upto</th>
+                  <th class="custom-fw">Type</th>
+                 
+                 <th class="text-right custom-fw">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of allCourses; let i = index">
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.name }}">{{ data.name|slice:0:10
+                    }}</td>
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data?.category?.categoryName }}">{{
+                    data?.category?.categoryName |slice:0:10}}</td>
+                  <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.detail}}">{{ data.detail | slice:
+                    0:50 }}...</td>
+                  <!-- <td> {{ (data.detail.length>6)? (data.detail | slice:0:6)+'..':(detail) }}</td> -->
+                  <td *ngIf="data.imagePath == ''">
+                    <img src="../../assets/img/user-img.png" alt="user image" />
+                  </td>
+                  <td *ngIf="data.imagePath != ''">
+                    <img [src]="data.imagePath" alt="user image" />
+                  </td>
+                  <td>{{ data.price |number:'1.0-0'}}</td>
+                  <td>{{ data.validateDuration }}</td>
+                  <td>{{ data.type }}</td>
+                 
+                  <td class="text-right">
+                    <ul class="action-column mb-0 ps-0">
+                  
+                      <li>
+                        <button type="button" (click)="showCreateOrEditDialog(data.id)"
+                          class="edit-icons radius-10 d-block text-center  p-1 mx-2" title="Edit"
+                          data-toggle="edit">
+                          <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                        </button>
+                      </li>
+
+                      <li>
+                    
+                        <button *ngIf="data.disableDelete!=true" type="button" (click)="delCourse(data)"
+                          class="edit-icons radius-10 d-block text-center  p-1 mx-2" title="Delete"
+                          data-toggle="delete">
+                          <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                        </button>
+                        <button *ngIf="data.disableDelete==true" disabled type="button" (click)="delCourse(data)"
+                        class="edit-icons radius-10 d-block text-center  p-1 mx-2 border-0" title="Can't delete purchased course"
+                        data-toggle="delete">
+                        <!-- <i class="fas fa-check"></i> -->
+                        <img src="../../assets/img/dlt-new.png" class="img-fluid w-auto" style="height: 80%;cursor: pointer;">
+                      </button>
+                      </li> 
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

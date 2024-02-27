@@ -1,0 +1,82 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+
+<section class="bg-white">
+  <div class="tab-content stdnt_nav_content" id="nav-tabContent">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-lg-6">
+        <div *ngIf="allCourses==0" class="no_data text-center">
+          <span class="no_data_text">No Data Found</span>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-12 mb-lg-0 mb-md-0 mb-2">
+        <div class="position-relative">
+          <p-treeSelect class="select-cat-ptree" [(ngModel)]="selectedNode" [options]="treeData"
+            (onNodeSelect)="getAllCourses($event.node.id)" placeholder="Filter by Category"></p-treeSelect>
+          <i class="fas fa-angle-down position-absolute customeup-down"></i>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="allCourses !=0" class="card_bck">
+      <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-2 g-lg-3 g-2 g-lg-3 pt-2">
+        <div class="col" *ngFor="let course of allCourses; let i = index">
+          <div  class="card overflow-hidden">
+            <div (click)="navigateToBuyCourse(course.id)" class="text-center card_imagebck w-auto">
+              <img *ngIf="course.imagePath == ''" src="../../../../assets/img/ssc.png" class="card-img-top img-fluid"
+                alt="..." />
+              <img *ngIf="course.imagePath != ''" height="" [src]="course.imagePath" class="card-img-top img-fluid"
+                alt="Image not found" />
+            </div>
+
+
+            <div class="card-body border-top-0 p-3 position-relative">
+              <div (click)="navigateToBuyCourse(course.id)">
+                <div class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-2">
+                  <h3 class="card_heading overflow-hidden mb-0">{{ course.name }}</h3>
+                  <p class="valid_date mb-0 text-lg-end text-md-start text-center">
+                    Course Duration : {{ course.validateDuration}}
+                  </p>
+                </div>
+                <div>
+                  <p *ngIf="course.detail !=null" class="card-text mb-lg-3 mb-md-3 mb-2" data-bs-placement="top" title="{{course.detail}}">
+                    {{course.detail | slice : 0:100}}</p>
+                    <p *ngIf="course.detail==null" class="card-text mb-lg-3 mb-md-3 mb-2">
+                     No Details available</p>
+
+                </div>
+              </div>
+              <div  class="footer row justify-content-end align-items-center w-100 px-3">
+
+                <div class="col-6 text-lg-left text-md-left text-center">
+               
+                <h3 *ngIf="course.price!=0" class="card_heading price_heading mb-0 mt-2  overflow-hidden"><span class="noto-font">₹ </span> {{
+                  course.price |number:'1.0-0'}} </h3>
+                
+                </div>
+ 
+                <div class="col-6 text-end">
+                  <button *ngIf="course.price==0 && !course.isBuy" type="button" (click)="startFreeTrialCourse(course.id)"
+                  class="btn  rounded-pill button text-white mt-lg-0 mt-md-0 mt-1">
+                 Start FREE 
+              </button>
+                <button *ngIf="course.isBuy" type="button" (click)="onclick(course.id)"
+                  class="btn  rounded-pill button text-white mt-lg-0 mt-md-0 mt-1">
+                  View
+                </button>
+                <div *ngIf="course.price!=0">
+                  <button *ngIf="!course.isBuy" type="button"
+                    class="rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1 text-center"
+                    (click)="navigateToBuyCourse(course.id)" class="btn p-0 button">View</button>
+                </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

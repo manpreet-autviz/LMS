@@ -1,0 +1,272 @@
+$primary-gradient: linear-gradient(180deg, #65A35E 0%, #2F9EB1 100%);
+$font-primary: 'Poppins', sans-serif;
+$font-primary: 'Poppins', sans-serif;
+$h-font: 'Lato', Arial, sans-serif;
+$primary: #319EAE;
+$black: #212121;
+$gray: #929292;
+$dark-gray: #ccc;
+$white: #ffffff;
+$light-white: #F9F9F9;
+$dark_black: #000000;
+$light-gray: #DBDBDB;
+$green: #63A461;
+$light-black: #262626;
+$light-border: #ced4da;
+
+
+::ng-deep.p-paginator .p-paginator-pages .p-paginator-page:hover {
+    background: none !important;
+    background-color: #319fafb8 !important;
+    border-color: #319faf40 !important;
+    border-radius: 5px;
+}
+::ng-deep button.p-ripple.p-element.p-paginator-next.p-paginator-element.p-link:hover {
+    background-color: #319fafb8 !important;
+    border-color: #319faf40 !important;
+    padding: 8px 22px 10px 14px;
+}
+::ng-deep button.p-ripple.p-element.p-paginator-prev.p-paginator-element.p-link:hover{
+    background-color: #319fafb8 !important;
+    border-color: #319faf40 !important;
+}
+.table {
+    font-family: $font-primary !important;
+
+    tr {
+        &:hover {
+            td {
+                border-top: 1px solid #4DC69F !important;
+                border-bottom: 1px solid #4DC69F !important;
+            }
+
+            .text-right {
+                border-top: 1px solid #4DC69F !important;
+            }
+        }
+    }
+}
+
+
+.table-responsive {
+    overflow-x: visible !important;
+}
+
+.table-customiz tr th:nth-child(5) {
+    width: 170px !important;
+}
+
+.table td {
+    border-top: 1px solid #dee2e6 !important;
+}
+
+::ng-deep.p-treetable .p-treetable-header {
+    background: transparent;
+    border: 0px solid #e9ecef;
+    border-width: 0px 0 0px 0;
+    padding: 15px 12.9px 0 15px;
+    margin-bottom: 8px;
+
+}
+
+.table-customiz table,
+::ng-deep.table-customiz p-treetable {
+    border: 0px #ececec solid !important;
+    box-shadow: 0px 0px 0px rgb(0 0 0 / 15%);
+}
+
+::ng-deep.p-treetable .p-paginator-bottom {
+    border-width: 0;
+    border-radius: 0;
+    justify-content: end;
+    margin-top: 12px;
+    padding-bottom: 0;
+}
+
+::ng-deep.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: $primary;
+    border-color: $primary;
+    color: #ffff;
+    padding: 10px 14px;
+    border-radius: 4px;
+    border: none;
+}
+
+
+::ng-deep.p-treetable-wrapper {
+    border: 0px #ececec solid !important;
+    box-shadow: none;
+    background-color: #fff;
+    border-radius: 0px !important;
+    overflow: hidden;
+    font-family: $font-primary !important;
+}
+
+::ng-deep.p-treetable .p-treetable-thead>tr>th {
+    background: #f8f9fa;
+    font-size: 14px;
+    color: #000000;
+}
+
+.table-customiz table tr:nth-of-type(odd),
+::ng-deep.table-customiz p-treetable tr:nth-of-type(odd) {
+    background-color: transparent !important;
+}
+
+.table-customiz table tr:nth-of-type(2n+2),
+::ng-deep.table-customiz p-treetable tr:nth-of-type(2n+2) {
+    background-color: transparent !important;
+}
+
+::ng-deep.p-treetable-header label {
+    font-size: 14px;
+    color: #172a70;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif !important;
+}
+
+
+::ng-deep.p-component .p-paginator-first span::before,
+::ng-deep.p-component .p-paginator-last span::before {
+    content: none;
+}
+
+::ng-deep.p-component .p-paginator-prev span::before,
+::ng-deep.p-component .p-paginator-next span::before {
+    content: 'Pervious';
+    font-family: "Roboto", sans-serif !important;
+    font-weight: 500;
+    color: #333 !important;
+    font-size: 14px;
+    margin: 0 12px;
+}
+
+::ng-deep.p-component .p-paginator-next span::before {
+    content: 'Next';
+    margin: 0 0 0 7px;
+}
+
+::ng-deep.p-paginator .p-paginator-first,
+::ng-deep.p-paginator .p-paginator-last {
+    display: none;
+}
+
+::ng-deep.p-treetable .p-treetable-header .fas.fa-times {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+::ng-deep.cat-p-treetable table {
+    border-collapse: separate !important;
+    border-spacing: 0 1rem !important;
+
+    td {
+        border-bottom: 1px solid #DBDBDB;
+    }
+}
+
+
+
+
+::ng-deep.p-paginator {
+    .p-paginator-prev {
+        border: none !important;
+    }
+
+    .p-paginator-next {
+        border: none !important;
+    }
+}
+
+.p_treetable {
+    border: 1px solid #dbdbdb!important;
+    border-radius: 5px;
+img{
+    width: 17px;
+}
+.inputt {
+    height: 38px;
+    max-width: 126px;
+    margin: 0 0 0 10px;
+    padding: 10px !important;
+    font-size: 13px;
+    padding-left: 10px !important;
+    border-radius: 6px !important;
+    border: none !important;
+
+        &:focus-visible {
+            outline: 0;
+        }
+
+    }
+}
+    
+
+
+
+// ::ng-deep.p_treetable {
+//     position: relative;
+//     .lable {
+//         color: $light-black;
+//         font-weight: 400;
+//         font-size: 0px !important;
+//         &::after{
+//             content: "";
+//             display: block;
+//             background: url("../../assets/img/searchh.png") no-repeat;
+//             width: 29px;
+//     height: 30px;
+//     float: left;
+//     position: absolute;
+//     top: 12px;
+//     background-size: 17px;
+//     left: 18px;
+//         }
+
+//         input {
+//             height: 40px;
+//             max-width: 169px;
+//             margin: 0 0 0 10px;
+//             padding: 10px !important;
+//             border: 1px solid #DBDBDB !important;
+//             font-size: 13px;
+//             padding-left: 41px !important;
+//             border-radius: 6px !important;
+
+//             &:focus-visible {
+//                 outline: 0;
+//             }
+//         }
+//     }
+// }
+
+@media screen and (max-width:1024px) {
+    .table-customiz tr th:nth-child(1) {
+        width: 250px !important;
+    }
+
+    .table-customiz tr th:nth-child(2) {
+        width: 130px !important;
+    }
+
+    .table-customiz tr th:nth-child(3) {
+        width: 130px !important;
+    }
+
+    .table-customiz tr th:nth-child(4) {
+        width: 130px !important;
+    }
+}
+
+.imageWidth {
+    width: 75px;
+    cursor: pointer;
+}
+
+
+
+
+

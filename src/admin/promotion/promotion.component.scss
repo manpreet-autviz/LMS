@@ -1,0 +1,122 @@
+@import "../../styles.scss";
+
+.table-data {
+    border-collapse: separate;
+    border-spacing: 0 7px !important;
+    color: $light-black !important;
+    border-bottom: 0 !important;
+
+    thead {
+        th {
+            border: 0 !important;
+            color: $dark-black;
+            padding: 14px 12px !important;
+            // font-size: 13px !important;
+            font-weight: 500 !important;
+
+            &:last-child {
+                padding-right: 25px !important;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border: 1px solid $light-gray;
+            background-color: $white;
+
+            &:hover {
+                background: rgba(77, 198, 159, 0.18);
+                border: 1px solid $green;
+
+                td {
+                    border-top-color: $green;
+                }
+
+                td:nth-child(1) {
+                    border-left: 1px solid $green !important;
+                }
+
+                td:last-child {
+                    border-right: 1px solid $green !important;
+                }
+            }
+
+        }
+
+    }
+
+    ul.action-column {
+        li {
+            display: inline-block;
+
+            .edit-icons {
+                width: 35px;
+                height: 35px;
+                border: 2px solid #f8f9fa;
+                box-shadow: 0px 4px 65px rgb(135 135 135 / 10%);
+
+                &:focus {
+                    border: 2px solid #dae0e5;
+                }
+
+                &:hover {
+                    border: 2px solid $primary;
+                    background-color: $white ;
+                }
+            }
+        }
+    }
+
+    td:first-child,
+    th:first-child {
+        border-radius: 10px 0 0 10px;
+        padding-left: 19px !important;
+    }
+
+    td:last-child,
+    th:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+
+    td.text-right {
+        max-width: 100%;
+    }
+
+    .email_td {
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    td {
+        padding: 5px 12px !important;
+        max-width: 115px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        .table_edit_image {
+            width: auto !important;
+            height: 14px !important;
+            border-radius: 0px;
+        }
+
+        img {
+            width: 39px;
+            border-radius: 10px;
+            height: 39px;
+            object-fit: cover;
+            font-size: 11px !important;
+            color: #999999;
+        }
+
+        &:last-child {
+            border-right: 1px solid $light-gray !important;
+        }
+
+        &:nth-child(1) {
+            border-left: 1px solid $light-gray !important;
+        }
+    }
+
+}

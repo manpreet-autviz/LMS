@@ -1,0 +1,143 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+
+<div class="bg-white">
+  <section class="content px-2 pt-5 dashboard">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-12">
+           <a href="http://app.teachersvision.co.in/#/app/students"> 
+              <!-- <a [routerLink]="['/app/students']"> -->
+
+            <div class="small-box d-flex flex-column justify-content-center bg-white p-3">
+              <div class="d-flex align-items-start justify-content-between">
+                <div class="profile-icons green">
+                  <img src="../../assets/img/student.svg" alt="Student">
+                </div>
+
+                <div class="inner ms-lg-3 ms-md-3">
+                  <h2 class="mb-md-0 dashboard_heding text-dark text-end">Total Student</h2>
+                  <h2 class="fw-bold number_text text-end">{{adminDashboard?.studentData?.totalStudent}}</h2>
+                </div>
+              </div>
+
+              <div class="box-footer-data d-flex align-items-start justify-content-between pt-4">
+                <h4 class="heading" target="_blank">
+                  Present : <strong class="strong_number">{{adminDashboard?.studentData?.active}}</strong>
+                </h4>
+                <h4 class="heading" target="_blank">
+                  Absent : <strong class="strong_number">{{adminDashboard?.studentData?.inactive}}</strong>
+                </h4>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="small-box d-flex flex-column justify-content-center bg-white p-3">
+            <a href="http://app.teachersvision.co.in/#/app/course">
+              <div class="d-flex align-items-start justify-content-between">
+                <div class="profile-icons red">
+                  <img src="../../assets/img/Video.svg" alt="Student">
+                </div>
+                <div class="inner ms-lg-3 ms-md-3">
+                  <h2 class="mb-md-0 dashboard_heding text-dark text-end">Total
+                    Course</h2>
+                  <h2 class="fw-bold number_text text-end">{{adminDashboard?.courseData?.totalCourses}}</h2>
+                </div>
+              </div>
+              <div class="box-footer-data d-flex align-items-start justify-content-between pt-4">
+                <h4 class="heading" target="_blank">
+                  Live Courses : <strong class="strong_number">{{adminDashboard?.courseData?.liveCourses}}</strong>
+                </h4>
+                <h4 class="heading" target="_blank">
+                  Courses : <strong class="strong_number">{{adminDashboard?.courseData?.courses}}</strong>
+                </h4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="small-box d-flex flex-column justify-content-center bg-white p-3">
+            <a href="http://app.teachersvision.co.in/#/app/mocktests">
+              <div class="d-flex align-items-start justify-content-between">
+                <div class="profile-icons purple">
+                  <img src="../../assets/img/classes.svg" alt="Student">
+                </div>
+                <div class="inner ms-lg-3 ms-md-3">
+                  <h2 class="mb-md-0 dashboard_heding text-dark text-end">Total
+                    MockTest</h2>
+                  <h2 class="fw-bold number_text text-end">{{adminDashboard?.enrollMockTestCount?.enrolledMockTestCount}}</h2>
+                </div>
+              </div>
+              <div class="box-footer-data d-flex align-items-start justify-content-between pt-4">
+                <h4 class="heading" target="_blank">
+                  Enrolled : <strong
+                    class="strong_number">{{adminDashboard?.enrollMockTestCount?.enrolledMockTestCount}}</strong>
+                </h4>
+                <h4 class="heading" target="_blank">
+                  Total : <strong class="strong_number">{{adminDashboard?.enrollMockTestCount?.totalMockTest}}</strong>
+                </h4>
+              </div>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="small-box d-flex flex-column justify-content-center bg-white p-3">
+            <!-- <a href="http://localhost:4200/#/app/payment-history"> -->
+              <a href="http://app.teachersvision.co.in/#/app/payment-history">
+
+              <div class="d-flex align-items-start justify-content-between">
+                <div class="profile-icons brown">
+                  <img src="../../assets/img/Revenue.svg" alt="Student">
+                </div>
+                <div class="inner ms-lg-3 ms-md-3">
+                  <h2 class="mb-md-0 dashboard_heding text-dark text-end">Revenue
+                    Details</h2>
+                  <h2 class="fw-bold number_text text-end">{{adminDashboard?.revenueDetails?.revenueDetailsCount}}</h2>
+                </div>
+              </div>
+              <div class="box-footer-data d-flex align-items-start justify-content-between pt-4">
+                <h4 class="heading" target="_blank">
+                  Offline : <strong class="strong_number">{{adminDashboard?.revenueDetails?.offline}}</strong>
+                </h4>
+                <h4 class="heading" target="_blank">
+                  Online : <strong class="strong_number">{{adminDashboard?.revenueDetails?.online}}</strong>
+                </h4>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="bg-white">
+        <div class="graph_bck small-box ">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom px-3">
+            <h2 class="dashboard_top_heading text-dark">View Statistic</h2>
+          </div>
+
+          <!-- <input type="text" class="border calentder" matInput
+  
+        ngxDaterangepickerMd [showDropdowns]="true" 
+  
+        [showCustomRangeLabel]="true" [alwaysShowCalendars]="true"
+  
+        startKey="start" endKey="end"
+  
+        (datesUpdated)="changeDateRange($event)"
+  
+        [(ngModel)]="selectedDateRange" [maxDate]='maxDate' name="daterange"
+  
+        placeholder="Filter By Date"  /> -->
+          <div id="chartdiv" style="width: 100%; height: 500px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

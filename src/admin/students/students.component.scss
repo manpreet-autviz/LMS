@@ -1,0 +1,12 @@
+img[alt]{font-size:11px;}
+
+.card-body {
+    ::ng-deep.dataTables_wrapper {
+        .dataTables_paginate {
+            .paginate_button.current {
+                color: #fff !important;
+            }
+        }
+    }
+
+}

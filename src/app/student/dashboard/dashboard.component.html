@@ -1,0 +1,434 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+
+<div class="mt-3">
+    <swiper [slidesPerView]="3" [spaceBetween]="30" [pagination]="{
+      clickable: true
+    }" class="mySwiper">
+        <ng-template *ngFor="let data of allpromotion; let i = index" swiperSlide>
+            <div *ngIf="allpromotion ==0">
+                <div>
+                    No data found
+                </div>
+            </div>
+            <div class="Ongoing_course_sct mt-3">
+                <div class="stdnt_nav_content">
+                    <div *ngIf="allpromotion !=0">
+                        <div class="row ">
+                            <div class="col">
+                                <div class="card" style="height: unset;">
+                                    <div class="text-center card_imagebck">
+                                        <img *ngIf="data.image == ''" src="../../../../assets/img/ssc.svg"
+                                            class="card-img-top img-fluid w-auto" alt="..." />
+                                        <img *ngIf="data.image != ''" height="" [src]="data.image"
+                                            class="card-img-top img-fluid w-auto" alt="Image not found" />
+                                    </div>
+                                    <div class="card-body border-top-0">
+                                        <div
+                                            class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-4">
+                                            <h3 class="card_heading mb-0">
+                                                {{data.title}}
+                                            </h3>
+                                        </div>
+                                        <p *ngIf="data.discription!=''" class="card-text " data-bs-placement="top"
+                                            title="{{data.discription}}">
+                                            {{data.discription | slice : 0:100}}</p>
+                                        <p *ngIf="data.discription==''" class="card-text ">No Details available</p>
+
+                                        <div class="col-12 text-end py-0">
+
+                                            <button class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-4"
+                                                style="max-width: 95px;">
+                                                <a href="{{data.link}}" class="text-white">Get Now</a></button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </swiper>
+</div>
+
+<div class="mt-4">
+    <div class="Ongoing_course_sct mt-3">
+        <div class="d-flex align-items-center justify-content-between mb-2 mt-2">
+            <h2 class="stdnt_main_hding mb-0">Ongoing Video Courses</h2>
+            <button (click)="navigateallviewcourse()" class="bg-transparent border-none topview_btn">View All</button>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-12 mb-lg-0 mb-md-0 mb-2 px-0">
+        <div class="position-relative">
+            <p-treeSelect class="select-cat-ptree" [(ngModel)]="selectedNode" [options]="treeData"
+                (onNodeSelect)="getAllCourseVIdeoMock($event.node.id)" placeholder="Filter by Category"></p-treeSelect>
+            <i class="fas fa-angle-down position-absolute customeup-down"></i>
+
+        </div>
+    </div>
+    <div *ngIf="allVideoMockCourse == 0" class="no_data">
+        <span class="no_data_text">No Data Found</span>
+    </div>
+
+    <swiper id="snd_swiper" class="mt-3 " [slidesPerView]="3" [spaceBetween]="30" [pagination]="{
+      clickable: true
+    }" class="mySwiper">
+
+        <ng-template *ngFor="let course of allVideoMockCourse; let i = index" swiperSlide>
+            <div class="Ongoing_course_sct mt-3">
+                <div class="stdnt_nav_content">
+                    <div *ngIf="allVideoMockCourse !=0">
+                        <div class="row ">
+                            <div class="col">
+                                <div class="card">
+                                    <div (click)="navigateToBuyCourse(course.id)" class="text-center card_imagebck">
+                                        <img *ngIf="course.imagePath == ''" src="../../../../assets/img/ssc.svg"
+                                            class="card-img-top img-fluid w-auto" alt="..." />
+                                        <img *ngIf="course?.imagePath != ''" height="" [src]="course?.imagePath"
+                                            class="card-img-top img-fluid w-auto" alt="Image not found" />
+                                    </div>
+
+
+                                    <div class="card-body border-top-0">
+                                        <div (click)="navigateToBuyCourse(course.id)">
+                                            <div
+                                                class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-4">
+                                                <h3 class="card_heading mb-0">{{ course.name }}</h3>
+
+                                                <p class="valid_date mb-0 text-lg-start text-md-start text-center">
+                                             Course Duration: {{course.validateDuration }}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p *ngIf="course.detail!=null" class="card-text "
+                                                    data-bs-placement="top" title="{{course.detail}}">
+                                                    {{course.detail | slice : 0:100}}</p>
+                                                <p *ngIf="course.detail==null" class="card-text">
+                                                    No Details available</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="footer row justify-content-end align-items-center w-100 px-3 ">
+                                            <div class="col-6 text-lg-left text-md-left text-center">
+                                                <h3 *ngIf=" course.price!=0"
+                                                    class="card_heading mb-0 hgj price_heading mb-0 mt-2  overflow-hidden">
+                                                    <span class="noto-font">₹</span>{{
+                                                    course.price | number: '1.0-0'}}
+                                                </h3>
+
+                                            </div>
+
+                                            <div class="col-6 text-end">
+                                                <button *ngIf="!course.isBuy && course.price==0" type="button"
+                                                    (click)="startFreeTrialCourse(course.id)"
+                                                    class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-4">
+                                                    Start FREE
+                                                </button>
+
+                                                <button *ngIf="course.isBuy" type="button" (click)="onclick(course.id)"
+                                                    class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                    View
+                                                </button>
+                                                <button *ngIf="!course.isBuy && course.price!=0" type="button"
+                                                    (click)="navigateToBuyCourse(course.id)"
+                                                    class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                    View
+                                                </button>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- <div class="footer d-lg-flex d-md-flex justify-content-between align-items-center">
+                                        <h3 class="card_heading mb-0 hgj price_heading"><span class="noto-font">₹ </span> {{
+                                            mock.price }} </h3>
+                                    
+                                        <button *ngIf="!mock.isBuy && mock.price!=0" type="button" (click)="getCourseDetails(mock.id)"
+                                            class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                            Buy
+                                        </button>
+                                    
+                                        <button *ngIf="!mock.isBuy && mock.price==0" type="button" (click)="onclick(mock.id)"
+                                            class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                            Free
+                                        </button>
+                                    
+                                    
+                                        <button *ngIf="mock.isBuy" type="button" (click)="onclick(mock.id)"
+                                            class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                            View
+                                        </button>
+                                    </div> -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-template>
+    </swiper>
+    <div class="mt-2">
+        <div class="Ongoing_course_sct mt-3">
+            <div class="d-flex align-items-center justify-content-between mb-2 mt-2">
+                <h2 class="stdnt_main_hding mb-0">Ongoing Mock Courses</h2>
+                <button (click)="navigateallMockTest()" class="bg-transparent border-none topview_btn">View All</button>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12 mb-lg-0 mb-md-0 mb-2 px-0">
+            <div class="position-relative">
+                <p-treeSelect class="select-cat-ptree" [(ngModel)]="selectedCategory" [options]="treeData"
+                    (onNodeSelect)="getmockCourse($event.node.id)" placeholder="Filter by Category"></p-treeSelect>
+                <i class="fas fa-angle-down position-absolute customeup-down"></i>
+            </div>
+        </div>
+
+        <div *ngIf="allMockCourse == 0" class="no_data">
+            <span class="no_data_text">No Data Found</span>
+        </div>
+
+        <swiper id="snd_swiper" class="mt-3 " [slidesPerView]="3" [spaceBetween]="30" [pagination]="{
+          clickable: true
+        }" class="mySwiper">
+
+            <ng-template *ngFor="let mock of allMockCourse; let i = index" swiperSlide>
+                <div class="Ongoing_course_sct mt-3">
+                    <div class="stdnt_nav_content">
+                        <div *ngIf="allMockCourse !=0">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="card">
+                                        <div (click)="navigateToBuyCourse(mock.id)" class="text-center card_imagebck">
+                                            <img *ngIf="mock.imagePath == ''" src="../../../../assets/img/ssc.svg"
+                                                class="card-img-top img-fluid w-auto" alt="..." />
+                                            <img *ngIf="mock.imagePath != ''" height="" [src]="mock.imagePath"
+                                                class="card-img-top img-fluid w-auto" alt="Image not found" />
+                                        </div>
+
+                                        <div class="card-body border-top-0 position-relative">
+                                            <div (click)="navigateToBuyCourse(mock.id)">
+                                                <div
+                                                    class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-4">
+                                                    <h3 class="card_heading mb-0">{{ mock.name }}</h3>
+                                                    <p class="valid_date mb-0 text-lg-start text-md-start text-center">
+                                                        Course Duration : {{mock.validateDuration
+                                                        }}
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <p *ngIf="mock.detail!=null" class="card-text mb-lg-3 mb-md-3 mb-3"
+                                                        data-bs-placement="top" title="{{mock.detail}}">
+                                                        {{mock.detail | slice : 0:100}}</p>
+                                                    <p *ngIf="mock.detail==null" class="card-text mb-lg-3 mb-md-3 mb-3"
+                                                        data-bs-placement="top" title="{{mock.detail}}">
+                                                        No Details available</p>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="footer row justify-content-end align-items-center w-100 px-3 ">
+                                                <div class="col-6 text-lg-left text-md-left text-center">
+                                                    <h3 *ngIf="mock.price!=0"
+                                                        class="card_heading mb-0 hgj price_heading mb-0 mt-2  overflow-hidden">
+                                                        <span class="noto-font">₹</span> {{
+                                                        mock.price| number: '1.0-0' }}
+                                                    </h3>
+
+
+                                                </div>
+
+
+                                                <div class="col-6  text-end">
+                                                    <button *ngIf="!mock.isBuy && mock.price==0" type="button"
+                                                        (click)="startFreeTrialCourse(mock.id)"
+                                                        class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                        Start FREE
+                                                    </button>
+
+
+                                                    <button *ngIf="mock.isBuy" type="button" (click)="onclick(mock.id)"
+                                                        class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                        View
+                                                    </button>
+                                                    <button *ngIf="!mock.isBuy && mock.price!=0" type="button"
+                                                        (click)="navigateToBuyCourse(mock.id)"
+                                                        class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                        View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-template>
+        </swiper>
+    </div>
+    <div class="mt-2">
+        <div class="Ongoing_course_sct mt-3">
+            <div class="d-flex align-items-center justify-content-between mb-2 mt-2">
+                <h2 class="stdnt_main_hding mb-0">Ongoing Hybrid Courses</h2>
+                <button (click)="navigateallviewcourse()" class="bg-transparent border-none topview_btn">View All</button>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12 mb-lg-0 mb-md-0 mb-2 px-0">
+            <div class="position-relative">
+                <p-treeSelect class="select-cat-ptree" [(ngModel)]="selectedCategory" [options]="treeData"
+                    (onNodeSelect)="getAllCourseHybridMock($event.node.id)"
+                    placeholder="Filter by Category"></p-treeSelect>
+                <i class="fas fa-angle-down position-absolute customeup-down"></i>
+            </div>
+        </div>
+
+        <div *ngIf="allHybridCourse == 0" class="no_data">
+            <span class="no_data_text">No Data Found</span>
+        </div>
+
+        <swiper id="snd_swiper" class="mt-3 " [slidesPerView]="3" [spaceBetween]="30" [pagination]="{
+          clickable: true
+        }" class="mySwiper">
+
+            <ng-template *ngFor="let hybrid of allHybridCourse; let i = index" swiperSlide>
+                <div class="Ongoing_course_sct mt-3">
+                    <div class="stdnt_nav_content">
+                        <div *ngIf="allHybridCourse !=0">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="card">
+                                        <div (click)="navigateToBuyCourse(hybrid.id)" class="text-center card_imagebck">
+                                            <img *ngIf="hybrid.imagePath == ''" src="../../../../assets/img/ssc.svg"
+                                                class="card-img-top img-fluid w-auto" alt="..." />
+                                            <img *ngIf="hybrid.imagePath != ''" height="" [src]="hybrid.imagePath"
+                                                class="card-img-top img-fluid w-auto" alt="Image not found" />
+                                        </div>
+
+                                        <div class="card-body border-top-0 position-relative">
+                                            <div (click)="navigateToBuyCourse(hybrid.id)">
+                                                <div
+                                                    class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-4">
+                                                    <h3 class="card_heading mb-0">{{ hybrid.name }}</h3>
+                                                    <p class="valid_date mb-0 text-lg-start text-md-start text-center">
+                                                        Course Duration : {{hybrid.validateDuration
+                                                        }}
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <p *ngIf="hybrid.detail!=null"
+                                                        class="card-text mb-lg-3 mb-md-3 mb-3" data-bs-placement="top"
+                                                        title="{{hybrid.detail}}">
+                                                        {{hybrid.detail | slice : 0:100}}</p>
+                                                    <p *ngIf="hybrid.detail==null"
+                                                        class="card-text mb-lg-3 mb-md-3 mb-3" data-bs-placement="top"
+                                                        title="{{hybrid.detail}}">
+                                                        No Details available</p>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="footer row justify-content-end align-items-center w-100 px-3 ">
+                                                <div class="col-6 text-lg-left text-md-left text-center">
+                                                    <h3 *ngIf="hybrid.price!=0"
+                                                        class="card_heading mb-0 hgj price_heading mb-0 mt-2  overflow-hidden">
+                                                        <span class="noto-font">₹</span> {{
+                                                        hybrid.price| number: '1.0-0' }}
+                                                    </h3>
+
+
+                                                </div>
+
+
+                                                <div class="col-6  text-end">
+                                                    <button *ngIf="!hybrid.isBuy && hybrid.price==0" type="button"
+                                                        (click)="startFreeTrialCourse(hybrid.id)"
+                                                        class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                        Start FREE
+                                                    </button>
+
+
+                                                    <button *ngIf="hybrid.isBuy" type="button"
+                                                        (click)="onclick(hybrid.id)"
+                                                        class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                        View
+                                                    </button>
+                                                    <button *ngIf="!hybrid.isBuy && hybrid.price!=0" type="button"
+                                                        (click)="navigateToBuyCourse(hybrid.id)"
+                                                        class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                                                        View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-template>
+        </swiper>
+    </div>
+
+    <div class="fram_sct pt-3">
+        <div class="d-lg-flex d-md-flex align-items-center justify-content-between top-heading">
+            <h2 class="stdnt_main_hding text-lg-start text-md-start text-center mb-0">Free Video</h2>
+
+        </div>
+
+
+
+        <swiper [slidesPerView]="3" [spaceBetween]="30" [pagination]="{
+            clickable: true
+          }" class="mySwiper trd_swiper">
+
+            <ng-template *ngFor="let item of videos" swiperSlide>
+
+                <div class="row">
+                    <div class="card dashboard_card p-2">
+                        <div >
+                            <!-- <div class="d-flex justify-content-center align-items-center img_bck position-relative">
+                                <div class="black_back position-absolute"></div>
+
+                                <div class="position-relative video_bck">
+                                    <div plyr plyrTitle="Video from Youtube" [plyrOptions]="plyrOptions"
+                                        [plyrSources]="item.source" class="video">
+                                    </div>
+                                </div> -->
+
+                                <!-- <img src="https://img.youtube.com/vi/{{getVideoId(item.fileName)}}/0.jpg"
+                                    class="img-fluid w-auto" />
+                                <i class="fas fa-play position-absolute play_btn"></i> -->
+                            <!-- </div> -->
+                            <div class="card-bg p-3">
+                                
+                                <div class="position-relative video_bck">
+                                    <div plyr plyrTitle="Video from Youtube" [plyrOptions]="plyrOptions"
+                                        [plyrSources]="item.source" class="video">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text_bck mt-2">
+                                <p *ngIf="item.title!=null" class="text mb-0 px-1 video_text"> {{item.title |
+                                    slice:0:20}}</p>
+                                <p *ngIf="item.title==null" class="text mb-0 px-1 video_text">No Details available</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+
+
+            </ng-template>
+        </swiper>
+        <h2 class="stdnt_main_hding mb-0">Upcoming Live Classes</h2>
+    </div>

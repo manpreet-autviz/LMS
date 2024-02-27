@@ -1,0 +1,49 @@
+@import "../../styles.scss";
+
+.form-select {
+    height: 40px;
+    width: 40%;
+    font-size: 12px;
+    border-color: $light-border;
+    color: $gray;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+::ng-deep{
+    .multi_dropdown{
+    .dropdown-btn {
+    padding: 10px 8px !important;
+    font-size: 12px;
+    border-color: $input-border !important;
+    color: $placeholder !important;
+    border-radius: 5px !important;
+    height: 40px;
+    line-height: 20px !important;
+    &::placeholder{
+        color: $placeholder;
+    }
+}
+}
+} 
+.checkbox{
+    accent-color: $primary;
+}
+.remove_btn{
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 3px;
+    padding: 4px 31px;
+    height: 41px;
+    background-color: #f8f9fa;
+    border-color: #e1e1e1;
+    &:hover{
+        border-color: #e1e1e1;
+    }
+}
+@media screen and (max-width:991px) {
+    .form-select{
+        width: 100%;
+    }
+}

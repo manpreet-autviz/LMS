@@ -1,0 +1,22 @@
+
+<section class="bg-white">
+
+    <div class="row video_sec main_row">
+        <div [ngClass]="data?.isLive?'col-lg-8 col-md-8':'col-lg-12 col-md-12'"  class="col-lg-8 col-md-8 col-12">
+            <div *ngIf="isVideoLoad" class="wrapper"  fxLayout="column" fxLayoutGap="32px">
+            <div  plyr plyrTitle="Video from Youtube" [plyrOptions]="plyrOptions" [plyrSources]="youtubeSources">
+            </div>
+        </div>
+        </div>
+        <div *ngIf="data?.isLive" class="col-lg-4 col-md-4 col-12">
+            <div class=" position-relative cht_area" style="height: 100vh;">
+                <iframe class="live-chat" src="https://www.youtube.com/live_chat?v={{getVideoId(data?.videoUrl)}}&embed_domain=http://app.teachersvision.co.in"></iframe>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+

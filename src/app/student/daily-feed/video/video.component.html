@@ -1,0 +1,32 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="main-y-scroll ggg">
+    <div class="row mt-3">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-end align-items-center mb-3">
+                <button class="btn student_cancel_btn" type="button"  (click)="back()">Back</button>
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
+                <div class="col mt-0" *ngFor="let item of allFeeds">
+                    <div class="card-bg p-3">
+                        <div class="pb-3">
+                            <div>
+                                <h6 class="heading-15 mb-0"> {{item.title}} {{item.creationTime | date: 'MMM dd, yyyy' }}
+                                </h6>
+                                <!-- <p class="text-9  mb-0">10 Sec ago</p> -->
+                            </div>
+
+                        </div>
+                        <div class="position-relative video_bck">
+                            <div plyr plyrTitle="Video from Youtube" [plyrOptions]="plyrOptions"
+                                [plyrSources]="item.source" class="video">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

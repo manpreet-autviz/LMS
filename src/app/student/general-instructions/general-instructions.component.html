@@ -1,0 +1,116 @@
+  <section class="mock_instructions">
+  <div class="text-left">
+    <h1 class="mb-0">{{title}}</h1>
+    <hr>
+    <h2 class="mb-0">Please read the following instructions carefully</h2>
+
+    <h3>General Instructions:</h3>
+    <div>
+      <ul>
+        <li class="mt-3">
+         <span class="me-2">1</span> The clock has been set at the server and the countdown timer at the top right corner of your screen will display the time remaining for you to complete the exam. When the clock runs out the exam ends by default - you are not required to end or submit your exam. 
+
+        </li>
+        <li>
+          <span class="me-2">2</span>  The question palette at the right of screen shows one of the following statuses of each of the questions numbered:
+         <ul class="under_ul">
+          <li class="mt-3">
+            <span class="me-2 border_number ">1</span>You have not visited the question yet.
+          </li>
+          <li>
+            <span class="me-2 red_border">3</span>You have not answered the question.
+          </li>
+          <li>
+            <span class="me-2 green_border">5</span>You have answered the question.
+          </li>
+          <li>
+            <span class="me-2 blue_border">7</span>You have NOT answered the question but have marked the question for review.
+          </li>
+          <li class="position-relative">
+            <span class="me-2 blue_border">9</span> <span class="position-absolute"></span>You have answered the question but marked it for review. 
+          </li>
+
+         </ul>
+
+         <p>The Marked for Review status simply acts as a reminder that you have set to look at the question again
+          <span class="text-red"> If an answer is selected for a question that is Marked for Review, the answer will be considered in the final evaluation.</span>
+
+         </p>
+        </li>
+      </ul>
+    </div>
+
+    <h3 >Navigating to a question:</h3>
+    <ul>
+      <li>
+        <span class="me-2">3.</span>To select a question to answer, you can do one of the following:
+        <ul>
+          <span class="me-2">a.</span> Click on the question number on the question palette at the right of your screen to go to that numbered question directly. Note that using this option does NOT save your answer to the current question.
+          <span class="me-2">b.</span>Click on Save and Next to save answer to current question and to go to the next question in sequence.
+          <span class="me-2"> c.</span>Click on Mark for Review to save answer to current question, mark it for review, and to go to the next question in sequence.
+        </ul>
+      </li>
+      <li>
+        <span class="me-2">4.</span>You can view the entire paper by clicking on the <span class="text-bold">Question Paper</span> button.
+      </li>
+    </ul>
+
+    <h3>Answering questions:</h3>
+    <ul>
+    <li>
+      <span class="me-2">5.</span>For multiple choice type question:
+      <ul>
+        <span class="me-2">a.</span>To select your answer, click on one of the option buttons
+        <span class="me-2">b.</span>To change your answer, click the another desired option button
+        <span class="me-2">c.</span>To save your answer, you MUST click on <span class="text-bold">Save & Next</span>.
+        <span class="me-2">d.</span>To deselect a chosen answer, click on the chosen option again or click on the  <span class="text-bold">Clear Response</span> button.
+        <span class="me-2">e.</span>To mark a question for review click on <span class="text-bold">Mark for Review</span>. <span class="text-red">If an answer is selected for a question that is Marked for Review, the answer will be considered in the final evaluation.</span>
+      </ul>
+    </li>
+    <li>
+      <span class="me-2">6.</span>
+      To change an answer to a question, first select the question and then click on the new answer option followed by a click on the <span class="text-bold">Save & Next</span> button.
+    </li>
+    <li>
+      <span class="me-2">7.</span>
+      Questions that are saved or marked for review after answering will ONLY be considered for evaluation.
+    </li>
+    </ul>
+
+    <h3>Navigating through section:</h3>
+    <ul>
+      <li>
+        <span class="me-2">8.</span>
+        Sections in this question paper are displayed on the top bar of the screen. Questions in a section can be viewed by clicking on the section name. The section you are currently viewing is highlighted.
+      </li>
+      <li>
+        <span>9.</span>
+        After clicking the  <span class="text-bold"> Save & Next </span>button on the last question for a section, you will automatically be taken to the first question of the next section.
+      </li>
+      <li>
+        <span class="me-2">10.</span>
+        You can move the mouse cursor over the section names to view the status of the questions for that section.
+      </li>
+      <li>
+        <span class="me-2">11.</span>
+        You can shuffle between sections and questions anytime during the examination as per your convenience.
+      </li>
+    </ul>
+
+  </div>
+ 
+<div class="row justify-content-end">
+
+  <div class="col text-end">
+    
+  </div>
+  <div class="col text-end">
+    <button type="button" class="btn continue_btn  me-4" (click)=" back()"> Back </button>
+    <button  type="button" class="btn continue_btn-view" (click)="openGeneralInstruction()"> Continue </button>
+  </div>
+</div>
+
+</section>  
+
+
+

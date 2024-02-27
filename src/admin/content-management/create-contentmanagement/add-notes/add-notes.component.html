@@ -1,0 +1,43 @@
+<form class="form-horizontal inbuilt-form-data" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="submit()">
+  <!-- <div class="d-flex align-items-center justify-content-between ps-lg-5 pt-3 pb-3"> -->
+    <abp-modal-header [title]="'Add Notes' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+  <!-- </div> -->
+  <div class="modal-body px-lg-5 px-md-4 px-4 pb-0 pt-3">
+    <div class="form-group col-md-12 p-0">
+      <div *ngFor="let data of createContentManDto.contentManagementNotes; let i = index"
+        class="form-group row p-0  mb-2 required">
+        <label class="col-md-3 col-form-label fw-normal" for="title">
+          {{ "Title" | localize }}
+        </label>
+        <div class="col-md-9 required">
+          <div class="input-group mb-2">
+            <input [(ngModel)]="data.title" required class=" form-control dlt_input" type="text" name="title{{i}}"
+              placeholder="Enter Title" />
+          </div>
+        </div>
+        <label class="col-md-3 col-form-label fw-normal" for="notesUrl">
+          {{ "Upload PDF" | localize }}
+        </label>
+        <div class="col-md-9">
+          <div class="input-group ">
+            <input (change)="onUpload($event.target.files)" required class=" form-control dlt_input" type="file"
+              name="notesUrl{{i}}" placeholder="Enter Notes Url" accept="application/pdf" />
+            <span *ngIf="(createContentManDto.contentManagementNotes.length==i+1)" class="input-group-text icon_area curser_pointer"
+              (click)="addMultiNotes();" id="basic-addon1"><i class="fa-sharp fa-solid fa-circle-plus px-1"></i></span>
+            <span *ngIf="!(createContentManDto.contentManagementNotes.length==i+1)"
+              class="input-group-text bg-danger border border-danger curser_pointer" (click)="delNote(i);" id="basic-addon1"><i
+                class="fa-sharp fa-solid fas fa-trash px-1"></i></span>
+          </div>
+         
+          <div  *ngIf="createContentManDto.contentManagementNotes[i].showNotes!=null">
+            <a href="{{createContentManDto.contentManagementNotes[i].showNotes}}" target='_blank'><p>Preview File</p></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custm_footer">
+    <abp-modal-footer  (onCancelClick)="bsModalRef.hide()">
+    </abp-modal-footer>
+  </div>
+</form>

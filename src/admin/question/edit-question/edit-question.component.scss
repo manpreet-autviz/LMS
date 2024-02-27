@@ -1,0 +1,186 @@
+
+@import "../../../styles.scss";
+
+::ng-deep{
+    .dropdown-btn {
+    // padding: 10px 8px!important;
+    overflow: hidden;
+    height: 40px;
+    border-color: $input-border!important;
+    color: #9a9a9a!important;
+    border-radius: 5px!important;
+    line-height: 25px !important;
+    font-size: 12px;
+}
+}
+
+::ng-deep{
+.inbuilt-form-data {
+    .multiselect_button {
+        .dropdown-btn {
+            .selected-item {
+                background-color: $light-white !important;
+                border-color: $light-white !important;
+                color: $gray !important;
+                font-size: 12px;
+                font-weight: 400;
+                padding: 2px 7px !important;
+                border-radius: 4px !important;
+                &:hover{
+                    box-shadow: none ;
+                }
+            }
+        }
+    }
+}
+}
+
+.inbuilt-form-data {
+    .multiselect_button {
+        span.dropdown-btn {
+            border-radius: 5px !important;
+            color: $placeholder !important;
+            border: 1px solid #ced4da !important;
+            // padding: 12px 10px !important;
+            overflow: hidden;
+            height: 40px;
+
+            .selected-item {
+                margin: 3px;
+            }
+        }
+    }
+
+    .form-group.required {
+        .col-form-label{
+            &::after {
+            color: $primary;
+        }
+        }
+    }
+
+    input[type=file]::file-selector-button {
+        border: 2px solid $primary;
+        padding: .2em 1.6em;
+        color: $gray;
+        border-radius: 0.25rem 0 0 0.25rem;
+        background-color: $primary !important;
+        transition: 0.5s;
+        height: 40px;
+        color: $white;
+        font-size: 12px;
+    }
+
+    ::ng-deep.multiselect_button {
+        .dropdown-btn {
+            // padding: 11px 10px !important;
+            overflow: hidden;
+            height: 40px;
+            border-color: #ced4da !important;
+            color: $placeholder !important;
+            border-radius: 5px !important;
+            font-size: 12px;
+
+            &::placeholder {
+                font-size: 12px;
+                color: $placeholder !important;
+            }
+
+            .selected-item {
+                background-color: $light-white !important;
+                border-color: $light-white !important;
+                color: $gray !important;
+                font-size: 12px;
+                font-weight: 400;
+                padding: 2px 7px !important;
+                border-radius: 4px !important;
+
+                a {
+                    color: $gray !important;
+                }
+            }
+        }
+    }
+
+}
+
+.accordion_sec {
+    border: 1px solid $light-gray;
+    border-radius: 4px;
+    overflow-y: scroll;
+    height: 331px;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        height: 9px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $light-gray;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $primary;
+        outline: none;
+    }
+
+    .accordion-item {
+        border: none;
+    }
+
+    button.accordion-button {
+        border-bottom: 1px solid #DBDBDB;
+        background: transparent !important;
+        color: $light-black !important;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .box {
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid #60a36773;
+        background-color: #76b17921 !important;
+        font-weight: 400;
+
+        &:hover {
+            background: $on-hover;
+        }
+
+        .circle {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #ddd;
+            display: inline-block
+        }
+    }
+}
+
+.add_btn {
+    background-color: $primary;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 11px 22px;
+}
+
+.perview_heading {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.solution-size {
+    font-size: small;
+    line-height: 10px;
+}
+
+@media(max-width:767px) {
+    .subject {
+        font-size: 12px
+    }
+}

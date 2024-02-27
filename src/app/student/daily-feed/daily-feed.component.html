@@ -1,0 +1,44 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="buy-course">
+    <!-- <div *ngIf="data==0">
+        <h1>No data found</h1>
+
+    </div> -->
+    <div class="row">
+        <!-- <div class="col-lg-8 col-md-8 col-12 p-lg-3 p-md-3 p-1"> -->
+            <div class="col-lg-12 col-md-12 col-12 p-lg-3 p-md-3 p-1">
+            <div class="px-lg-3 px-md-3 px-0">
+                <div class="mt-2 student_tabset">
+                    <tabset>
+                        <tab [active]="activeTab=='daily-quiz'" (selectTab)="checkActive('daily-quiz')" [heading]="'Daily Quiz'" class="pt-3 px-2">
+                            <app-daily-quiz></app-daily-quiz>
+                        </tab>
+                        <tab [active]="activeTab=='current-affairs'" (selectTab)="checkActive('current-affairs')" [heading]="'Current Affairs'" class="pt-3 px-2">
+                            <app-current-affairs></app-current-affairs>
+                        </tab>
+
+                        <tab [active]="activeTab=='video'" (selectTab)="checkActive('video')" [heading]="'Video'" class="pt-3 px-2">
+                            <app-video></app-video>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="student-sidebar col-lg-4 col-md-4 col-12 p-3">
+            <h6 class="ps-3">Trending Feeds</h6>
+            <ul class="d-flex flex-wrap ps-0 justify-content-center">
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds1.png" alt="feed image"></li>
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds2.png" alt="feed image"></li>
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds3.png" alt="feed image"></li>
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds4.png" alt="feed image"></li>
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds1.png" alt="feed image"></li>
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds2.png" alt="feed image"></li>
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds3.png" alt="feed image"></li>
+                <li class="my-1 mx-1"><img src="../../assets/img/Trending-feeds4.png" alt="feed image"></li>
+            </ul> 
+        </div>-->
+    </div>
+
+</section>

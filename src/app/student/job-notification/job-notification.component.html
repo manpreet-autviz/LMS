@@ -1,0 +1,120 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="bg-white">
+    <div class="">
+
+        <!-- <h2 class="stdnt_main_hding mb-2 mt-3 text-lg-left text-md-left text-center">Current Jobs</h2>-->
+
+        <div *ngIf="allData == 0" class="no_data text-center">
+            <span class="no_data_text">No Data Found</span>
+        </div>
+    </div>
+
+    <div *ngIf="allData != 0" class="row row-cols-1 row-cols-lg-3 row-cols-lg-3 row-cols-md-1 mt-4 stnd-job-notify">
+
+        <div class="col stdnt_nav_content" *ngFor="let data of allData">
+            <div class="">
+                <!-- <div class="card">
+                    <div class="card-body">
+                        <div class="text-center card_imagebck">
+                            <img *ngIf="data.image == ''" src="../../../../assets/img/ssc.svg"
+                                class="card-img-top img-fluid" alt="..." />
+                            <img *ngIf="data.image != ''" height="" [src]="data.image"
+                                class="card-img-top img-fluid" alt="Image not found" />
+                        </div>
+
+                        <div class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-2">
+                            <h3 class="card_heading mb-0 text-lg-start text-md-start text-center overflow-hidden">{{data.nameOfJob}}
+                            </h3>
+
+                            <p class="valid_date mb-0 text-lg-end text-md-end text-center">Valid Date : {{data.lastDate
+                                | date: "dd/MM/yyyy"}}</p>
+                        </div>
+
+                        <p *ngIf="data.description!=null" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="{{data.description}}" class="card_pera overflow-hidden">
+                            {{data.description | slice:0:100}}...</p>
+                        <div class="footer d-lg-flex  d-md-flex justify-content-between align-items-center">
+                            <div
+                                class="d-flex justify-content-lg-between justify-content-md-between justify-content-center align-items-center w-100">
+                                <span *ngIf="data.startDate!=null" class="d-flex align-items-center">
+                                    Start Date : {{data.startDate | date: "dd/MM/yyyy"}}
+                                </span>
+                            </div>
+
+                            <div class="w-100 text-end">
+                                <button *ngIf="data.link!=null"
+                                    class="create_newbtn text-white mt-lg-0 mt-md-0 mt-3 me-lg-2 me-md-2"><a
+                                        href="{{data.link}}" target='_blank' class="text-white">Apply Now</a></button>
+                                <button *ngIf="data.notesUrl!=''" class="create_newbtn  my-lg-0 my-md-0 my-2">
+                                    <a class="text-white" target='_blank' href="{{data.notesUrl}}"> View
+                                        Details</a>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="card  overflow-hidden">
+<div class="text-center card_imagebck">
+    <img   [src]="data.image?data.image:'../../../../assets/img/ssc.png'" class="card-img-top img-fluid" alt="Image not found" />
+    <!-- <img  [hidden]="imageLoader" *ngIf="data.image == ''" src="../../../../assets/img/ssc.svg" class="card-img-top img-fluid" alt="..."  (load)="this.imageLoader = false;"/> -->
+    
+</div>
+                    <div class="card-body border-top-0 p-3">
+                       
+                        <div>
+                            <div
+                                class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-2">
+                                <h3 class="card_heading mb-0 text-lg-start text-md-start text-center overflow-hidden">{{data.nameOfJob}}
+                                </h3>
+
+                                <p class="valid_date mb-0 text-lg-end text-md-end text-center">Valid Date :
+                                    {{data.lastDate
+                                    | date: 'MMM dd, yyyy'}}</p>
+                            </div>
+                            <div>
+                                <div *ngIf="data.description!=null" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="{{data.description}}" class="card_pera overflow-hidden">
+                                    <span [innerHTML]="data.description | slice:0:100" class="crd_heading"></span></div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="footer d-lg-flex  d-md-flex justify-content-between align-items-center">
+                            <div
+                                class=" w-100">
+                                <p *ngIf="data.startDate!=null" class="mb-0">
+                                    Start Date : {{data.startDate | date:'MMM dd, yyyy'}}
+                                </p>
+                            </div>
+
+                            <div class="w-100 text-end d-flex justify-content-lg-end justify-content-md-end justify-content-center align-items-center">
+                            <button *ngIf="data.notesUrl!=''" class="create_newbtn my-lg-0 my-md-0 my-2 pdf_button me-lg-2 me-md-2 ">
+                                <a class="text-white" target='_blank' href="{{data.notesUrl}}"> 
+                                    <!-- <i class="fas fa-file-pdf"></i> -->
+                                    view
+                                </a>
+                            </button>
+                               
+                                <button *ngIf="data.link!=null"
+                                    class="create_newbtn text-white mt-lg-0 mt-md-0 mt-3 "><a
+                                        href="{{data.link}}" target='_blank' class="text-white">Apply</a></button>
+                                
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>

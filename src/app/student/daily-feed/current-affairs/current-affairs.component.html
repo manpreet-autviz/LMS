@@ -1,0 +1,44 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<div class="row create_heading">
+    <!-- <h4>Current Affairs List</h4> -->
+</div>
+<section class="daily-quiz-list">
+    <div class="d-flex justify-content-end align-items-center mb-2">
+        <button class="btn student_cancel_btn" type="button" (click)="back()">Back</button>
+    </div>
+    <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2 g-2 g-lg-3 mt-3 justify-content-start align-items-center">
+        <div class="col mt-0" *ngFor="let item of allFeeds; let i = index">
+            <div class="row row-cols-1 row-cols-lg-1 g-2 g-lg-3">
+                <div class="col mt-0">
+                    <div class="d-flex align-items-start current_bck">
+                        <div class="col-2">
+                            <div class="">
+                                <div *ngIf="item.image != ''" class="img_bckgrnd p-1">
+                                    <img [src]="item.image" class="card-img-top img-fluid w-00 h-100" alt="subject image">
+                                </div>
+                                <div *ngIf="item.image == ''" class="img_bckgrnd p-1">
+                                    <img src="../../assets/img/no-image.png" class="card-img-top  img-fluid  w-00 h-100"
+                                        alt="subject image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-10 current_text">
+                            <h6 class="heading-15 mb-0 sb_heading "> {{item.title}} <br> {{item.creationTime | date:
+                                'MMM dd, yyyy'}}
+                            </h6>
+
+                            <div *ngIf="item.description !=null" class=" pb-0 discription ">
+                                <span [innerHTML]="item.description | slice:0:100" class="crd_heading"></span>
+                            </div>
+                            <a *ngIf="item.description !=null" href="javascript:;" (click)="showDetail(item)"
+                                class="read_more">View
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

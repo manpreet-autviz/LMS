@@ -1,0 +1,6 @@
+﻿<div *ngIf="isResulted">
+    <app-admindashboard *ngIf="roles.includes('ADMIN')"></app-admindashboard>
+</div>
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>

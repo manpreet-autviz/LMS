@@ -1,0 +1,12 @@
+<div class="mt-2 student_tabset">
+    <tabset>
+        <tab [active]="activeTab=='upcoming'" (selectTab)="checkActive($event)" [heading]="'Upcoming'"
+            class="pt-3 px-2">
+            <app-upcoming></app-upcoming>
+        </tab>
+        <tab [active]="activeTab=='my-mock'" (selectTab)="checkActive($event)" [heading]="'Purchased Mock Test'" class="pt-3 px-2">
+            <app-my-mock-view></app-my-mock-view>
+        </tab>
+    </tabset>
+
+</div>

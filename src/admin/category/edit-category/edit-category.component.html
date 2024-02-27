@@ -1,0 +1,32 @@
+<form class="form-horizontal" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="save()">
+    <abp-modal-header [title]="'Edit Category' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+    <div class="modal-body px-lg-5 px-md-3 px-2 pt-3 pb-0">
+      <div class="form-group row " *ngIf="category.parentId!=null required mb-0">
+        <label class="col-md-3 col-form-label" for="parentId">
+          {{ "Category" | localize }}
+        </label>
+        <div class="col-md-9">
+          <select [(ngModel)]="category.parentId" class="w-100 form-control" name="parentId" id="parentId" disabled
+            placeholder="Select Category" required>
+            <option>Select Category</option>
+            <option *ngFor="let item of parentCategoryWithNullParentId"  [value]="item.id">
+              {{item.categoryName}}
+            </option>
+          </select>
+        </div>
+      </div>
+   
+      <div class="form-group row required mb-0">
+        <label class="col-md-3 col-form-label" for="categoryName">
+          {{ category.parentId!=null?"Child Category Name":"Category Name" | localize }}
+        </label>
+        <div class="col-md-9">
+          <input type="text"  (blur)="trimStart(category)"  class="form-control" name="categoryName" id="categoryName" maxlength="128" required
+            [(ngModel)]="category.categoryName" #categoryNameModel="ngModel" #categoryNameEl required />
+          <abp-validation-summary [control]="categoryNameModel" [controlEl]="categoryNameEl"></abp-validation-summary>
+        </div>
+      </div>
+    </div>
+    <abp-modal-footer  [saveDisabled]="!createTenantForm.form.valid" (onCancelClick)="bsModalRef.hide()">
+    </abp-modal-footer>
+  </form>

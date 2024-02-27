@@ -1,0 +1,48 @@
+@import "../../../../styles.scss";
+
+.modal-title {
+    font-size: 18px;
+}
+
+::ng-deep {
+    .modal-content {
+        .modal-body {
+            input.text-white {
+                color: #fff !important;
+            }
+        }
+    }
+}
+
+.cstm_chkbox {
+    width: 20px;
+    accent-color: $primary;
+}
+
+%sky-btn-style{
+    background-color: #319EAE;
+    font-size: 12px;
+    border-color: #319EAE;
+    padding: 3px 12px;
+}
+
+.sky-btn{
+    &:hover{
+        @extend %sky-btn-style;
+    }
+@extend %sky-btn-style;
+}
+.videoBorder{
+        border-bottom: 1px solid #ebebeb;
+        background-color: #17b8d02b;
+        border-radius: 8px;
+            padding: 10px;
+}
+
+.modal-content{
+    max-width: 700px;
+    margin: auto;
+}
+.disabled{
+background-color: cadetblue;
+}

@@ -1,0 +1,98 @@
+// $gray: #929292;
+// $light-white: #F9F9F9;
+// $light-border: #ced4da;
+// $dark-gray: #ccc;
+// $placeholder: #3a3a3a;
+// $primary: #319EAE;
+
+@import "../../../styles.scss";
+
+.inbuilt-form-data {
+    input,
+    select,
+    textarea {
+        border-radius: 5px;
+        width: 100%;
+        font-size: 12px;
+        color: $placeholder  !important;
+        border: 1px solid $input-border !important;
+        &::placeholder{
+            color: $placeholder;
+        }
+    }
+
+    input,
+    select {
+        height: 40px !important;
+
+    }
+
+    .form-group.required {
+        .col-form-label{
+            &::after {
+            color: $primary;
+        }
+        }
+    }
+    
+}
+::ng-deep.form-select:focus {
+    box-shadow: none !important;
+}
+
+::ng-deep.multiselect_button{
+    .dropdown-btn{
+        // padding: 11px 10px !important;
+        overflow: hidden;
+        height: 40px;
+        border-color: $input-border !important;
+        color: $placeholder !important;
+        border-radius: 5px !important;
+        font-size: 12px;
+        line-height: 25px !important;
+        &::placeholder {
+            font-size: 12px;
+            color: $placeholder  !important;
+        }
+
+        .selected-item {
+            background-color: $light-white !important;
+            border-color: $light-white  !important;
+            color: $gray !important;
+            font-size: 12px;
+            font-weight: 400;
+            padding: 0px 7px !important;
+            border-radius: 4px !important;
+
+            a{
+                color: $gray !important;
+            }
+        }
+    }
+}
+
+// select option:hover{
+//     background-color: #319dae8c !important;
+//     color: #319EAE !important;
+// }
+
+select {
+    background: white;
+    color: #000;
+    border: none !important;
+  option{
+    font-size: 13px;
+    padding: 10px 1px !important;
+    &:hover{
+        background-color: #ddd !important;
+    }
+  }
+  option:checked {
+    background-color: #319dae75;
+    color: #319EAE;
+  }
+  option:not(:checked) {
+    background-color: white;
+  }
+}
+

@@ -1,0 +1,57 @@
+<form class="form-horizontal" autocomplete="off" #editUserModal="ngForm" (ngSubmit)="save()">
+  <abp-modal-header [title]="'Edit Profile' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+
+  <div class="modal-body px-lg-5 px-md-3 px-sm-2 py-3">
+    <div class="form-group row  required">
+      <label class="col-md-2 col-form-label" for="name">{{ "Name" }}
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" name="name" id="name" [(ngModel)]="myprofile.name" #nameModel="ngModel"
+          #nameEl required />
+        <abp-validation-summary [control]="nameModel" [controlEl]="nameEl"></abp-validation-summary>
+      </div>
+    </div>
+
+
+    <div class="form-group row ">
+      <label class="col-md-2 col-form-label" for="surname">
+        {{ "Surname" }}
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="myprofile.surname" />
+      </div>
+    </div>
+
+
+    <div class="form-group row required ">
+      <label class="col-md-2 col-form-label" for="emailAddress">
+        {{ "Email" }}
+      </label>
+      <div class="col-md-10">
+        <input [disabled]="true" type="email" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}"
+          class="form-control" placeholder="Email" (keydown.space)="$event.preventDefault();" name="emailAddress"
+          id="emailAddress1" maxlength="128" required [(ngModel)]="myprofile.emailAddress" #emailModel="ngModel"
+          #emailEl />
+        <abp-validation-summary [control]="emailModel" [controlEl]="emailEl"></abp-validation-summary>
+      </div>
+    </div>
+
+
+    <div class="form-group row required ">
+      <label class="col-md-2 col-form-label" for="phoneNumber">
+        {{ "Mobile"}}
+      </label>
+      <div class="col-md-10">
+        <input type="tel" [(ngModel)]="myprofile.userName" class="form-control"
+          (keydown.space)="$event.preventDefault();" #phoneNumberModel="ngModel" #phoneNumberE1 pattern="[6789][0-9]{9}"
+          placeholder="Mobile" name="phoneNumber" maxlength="128" required />
+        <abp-validation-summary [control]="phoneNumberModel" [controlEl]="phoneNumberE1"></abp-validation-summary>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <abp-modal-footer [saveDisabled]="!editUserModal.form.valid" (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+</form>

@@ -1,0 +1,63 @@
+
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+
+<section class="bg-white">
+  <div class="tab-content stdnt_nav_content" id="nav-tabContent">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-lg-6">
+      </div>
+    </div>
+    <div class="card_bck">
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2 g-2 g-lg-3 g-2 g-lg-3 pt-2">
+        <div class="col" *ngFor="let blog of blogData; let i = index">
+          <div class="card overflow-hidden quiz_bck">
+
+
+            <div class="card-body border-0 p-3 ">
+              <!-- <div>
+                <div class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-2">
+                  <h3 class="card_heading overflow-hidden mb-0">{{ blog.title }}</h3>
+                </div>
+              </div>
+              <div class="footer d-lg-flex d-md-flex justify-content-between align-items-center">
+                <button type="button" (click)="startDailyQuizTest(blog.id)"
+                  class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                  Take Test
+                </button>
+                <button *ngIf="blog.isResulted" type="button" (click)="viewResult(blog.id)"
+                  class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                  View Result
+                </button>
+              </div> -->
+
+              <div class="d-flex align-items-center current_bck">
+                <div class="col-5">
+                  <div class="card_top_heading ">
+                    <h3 class="card_heading overflow-hidden mb-0">{{ blog.title }}</h3>
+                  </div>
+                </div>
+                <div class="col-7 current_text">
+                  <div class="footer d-lg-flex d-md-flex justify-content-end align-items-center">
+                    <button type="button" (click)="startDailyQuizTest(blog.id)"
+                      class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1">
+                      Take Test
+                    </button>
+                    <button *ngIf="blog.isResulted" type="button" (click)="viewResult(blog.id)"
+                      class="btn rounded-pill view_btn text-white mt-lg-0 mt-md-0 mt-1 ms-2">
+                      View Result
+                    </button>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

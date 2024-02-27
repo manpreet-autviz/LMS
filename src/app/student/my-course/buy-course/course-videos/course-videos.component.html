@@ -1,0 +1,79 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<section class="main-y-scroll">
+
+    <div class="form-group row p-0  mb-0 pt-1 pb-3">
+
+        <div class="col-md-3 mb-md-0 mb-2">
+            <div class="input-group ">
+                <select [(ngModel)]="subjectId" required class="w-100 form-select"
+                    (change)="onSubjectChanges($event.target.value)" type="text" name="subjectName"
+                    (change)="filterSubject($event.target.value)" placeholder="Select Subject">
+                    <option value="-1" disabled>Select Subject</option>
+                    <option value="" selected="">Show All</option>
+                    <option *ngFor="let item of allVideoSubjects" [value]="item.subjectId">
+                        {{item.subjectName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group ">
+                <select [(ngModel)]="topicsId" required class="w-100 form-select" [disabled]="(subjectId== -1 || allVideoTopics.length ===0) ? true:false" type="text" name="topicsName"
+                    (change)="filterTopic($event.target.value)" placeholder="Select Topic">
+                    <option value="-1" disabled>Select Topic</option>
+                    <option value="" selected="">Show All</option>
+                    <option *ngFor="let item of allVideoTopics" [value]="item.id">
+                        {{item.title}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="videosData == 0" class="no_data">
+            <span class="no_data_text">No Data Found</span>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-3 col-md-6 col-12 px-3" *ngFor="let item of videosData">
+            <!-- <h6 *ngIf="videosData.length>0" >{{item.topicsName}}</h6> -->
+            <div class="row student_video mb-2 justify-content-center">
+                <div class="row" *ngIf="!courseDetails.isBuy"
+                    (click)="startFreeTrialCourse(courseDetails.price,courseDetails.id)">
+                    <div class="col-12">
+                        <div class="course_video">
+                            <div class="d-flex justify-content-center align-items-center img_bck position-relative">
+                                <div class="black_back position-absolute"></div>
+                                <img class="img-fluid"
+                                    src="https://img.youtube.com/vi/{{getVideoId(item.videoUrl)}}/0.jpg" />
+                                <i class="fas fa-play position-absolute play_btn"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4 text-center">
+                        <h3 class="mb-0 text"> {{item.title}}</h3>
+                    </div>
+                </div>
+                <div class="row" *ngIf="courseDetails.isBuy " (click)="showVideo(item.id)">
+
+                    <div class="col-12">
+                        <div class="course_video">
+                            <div class="d-flex justify-content-center align-items-center img_bck position-relative">
+                                <div class="black_back position-absolute"></div>
+                                <img class="img-fluid"
+                                    src="https://img.youtube.com/vi/{{getVideoId(item.videoUrl)}}/0.jpg" />
+                                <i class="fas fa-play position-absolute play_btn"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4 text-center">
+                        <h3 class="mb-0 text"> {{item.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

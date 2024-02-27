@@ -1,0 +1,131 @@
+@import "../../../../../styles.scss";
+
+.stdnt_main_hding {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+img {
+    font-size: 12px;
+}
+.button{
+                background-color: #319EAE;
+                color: #fff;
+                font-size: 12px;
+                 font-weight: 500;
+                padding: 3px 26px !important;
+                border-radius: 25px;
+            }
+ .button:hover{
+    background-color: #319EAE;
+    color: #fff;
+ }           
+.stdnt_nav_content {
+    .card {
+        box-shadow: 0px 4px 30px #f2f2f2;
+        max-width: 92%;
+        height: 288px;
+        border-radius: 0px 0px 20px 20px;
+
+        .card-body {
+            border: 1px dashed $card-border;
+            border-radius: 0px 0px 20px 20px;
+
+            .card_top_heading {
+                .card_heading {
+                    font-size: 14px;
+                    font-weight: 600;
+                    max-width: 200px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .valid_date {
+                    font-size: 10px;
+                    font-weight: 500;
+                    color: $gray;
+                }
+            }
+
+            .card-text {
+                font-size: 12px;
+                color: $gray;
+            }
+
+            .footer {
+                span {
+                    color: $gray;
+                    font-size: 12px;
+                }
+            }
+
+            .view_btn {
+                background-color: $primary;
+                font-size: 12px;
+                font-weight: 500;
+                padding: 2px 0px;
+                width: 28%;
+            }
+        }
+    }
+}
+ .footer {
+       position: absolute;
+       right: 9px;
+       bottom: 12px;
+       width: 92%;
+   }
+
+@media screen and (max-width:991px) {
+    .stdnt_nav_content {
+        .card {
+            height: auto;
+            max-width: 100%;
+        }
+    }
+
+    .stdnt_nav_content {
+        .card {
+            .card-body {
+                .card_top_heading {
+                    .card_heading {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    .stdnt_nav_content {
+        .card {
+            .card-body {
+                .card_top_heading {
+                    text-align: center;
+
+                    .card_heading {
+                        max-width: 100%;
+                    }
+
+                    .valid_dat {
+                        font-size: 11px;
+                    }
+                }
+
+                .card-text {
+                    font-size: 12px;
+                    text-align: center;
+                }
+
+                .footer {
+                    .view_btn {
+                        width: 100%;
+                    }
+                }
+            }
+
+        }
+    }
+}

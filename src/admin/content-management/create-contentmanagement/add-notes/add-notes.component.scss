@@ -1,0 +1,15 @@
+@import "../../../../styles.scss";
+
+.modal-title{
+    font-size: 18px;
+    color: $dark_black;
+}
+::ng-deep{
+    .modal-content {
+    .modal-body {
+        input.text-white {
+            color: #fff !important;
+        }
+    }
+}
+}

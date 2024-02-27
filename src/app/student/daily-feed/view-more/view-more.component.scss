@@ -1,0 +1,74 @@
+@import "../../../../styles.scss";
+
+
+.student_cancel_btn {
+    background-color: #ddd;
+    font-size: 12px;
+    color: #343434;
+    border: 1px solid #ddd;
+    padding: 10px 21px;
+    border-radius: 4px
+}
+.blogDetails-description{
+    font-size: 14px;
+    color: #898989;
+    font-weight: 400;
+    line-height: 24px;
+}
+.img-bck {
+    background-color: #f4f4f4;
+    height: 160px;
+
+    img {
+        object-fit: contain;
+    }
+}
+
+.sb_heading {
+    font-weight: 600;
+    font-size: 17px;
+    text-decoration: underline;
+}
+
+.current_bck {
+    border-radius: 9px;
+
+    .img_bckgrnd {
+        background-color: #f4f4f4;
+        border-radius: 9px;
+        height: 160px;
+
+        img {
+            object-fit: contain;
+        }
+    }
+
+    .current_text {
+        .sb_heading {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .discription {
+            font-size: 12px;
+        }
+    }
+
+    .read_more {
+        color: #62a363;
+        font-size: 10px;
+    }
+
+    .read_less {
+        color: $primary;
+    }
+}
+
+::ng-deep.modl_dis .ytd-watch-metadata span{
+    font-size: 18px;
+    line-height: 20px;
+}
+// .modal-content .modal-body {
+//     overflow: scroll;
+//     max-height: 25vh !important;
+// }

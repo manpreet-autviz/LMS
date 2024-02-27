@@ -1,0 +1,131 @@
+﻿<section class="signin h-100">
+  <div class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center  p-4 h-100">
+      <div class="col-lg-6  col-12  signin-form text-align-left h-lg-100">
+      <div class="h-lg-100 d-flex align-items-center">
+        <form class="text-align-left" (ngSubmit)="register()">
+          <h1 class=" text-center fw-bold main_heading text-dark mb-md-3">Create account</h1>
+          
+          <div class="mb-3 w-100  form-group  required">
+            <label for="name" class="col-form-label fw-normal mb-1">Name</label>
+            <input [(ngModel)]="model.name" type="text" placeholder="Enter Name" class="form-control input-area mt-2 px-3 py-2 bg-white"
+              name="name"  #nameModel="ngModel" #nameEl required/>
+              <abp-validation-summary
+            [control]="nameModel"
+            [controlEl]="nameEl"
+          ></abp-validation-summary>
+          </div>
+          <div class="mb-3 mb-md-3 w-100 ">
+            <label for="surname" class="form-label fw-normal mb-1">SurName</label>
+            <input [(ngModel)]="model.surname" type="text" placeholder="Enter your SurName" class="form-control input-area mt-2 px-3 py-2 bg-white"
+            name="surname"    #surnameModel="ngModel" #surname/>
+            <abp-validation-summary
+            [control]="surnameModel"
+            [controlEl]="surname"
+          ></abp-validation-summary>
+          </div>
+          <div class="mb-3 mb-md-3 w-100  form-group  required">
+            <label class="col-form-label fw-normal  w-100" for="name">
+              {{ "Gender" | localize }}
+             
+            </label>
+            <div>
+              <select [(ngModel)]="model.gender" name="gender" class="form-select" aria-label="Default select example"  placeholder="Enter your Gender" required  #genderModel="ngModel" #gender>
+                <option value="-1" disabled selected>Please select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <abp-validation-summary
+              [control]="genderModel"
+              [controlEl]="gender"
+            ></abp-validation-summary>
+            </div>
+          </div>
+          <div class="mb-3 w-100  form-group  required">
+            <label for="userName" class="col-form-label fw-normal mb-1">Phone Number</label>
+            <input [(ngModel)]="model.userName" (keydown.space)="$event.preventDefault();" pattern="[6789][0-9]{9}"  type="tel" placeholder="Enter your Phone Number" class="form-control border input-area mt-2 px-3 py-2"
+            name="userName" required #userNameModel="ngModel" #userName/>
+            <abp-validation-summary
+            [control]="userNameModel"
+            [controlEl]="userName"
+          ></abp-validation-summary>
+          </div>
+          <div class="mb-3 w-100  form-group  required">
+            <label for="emailAddress" class="col-form-label fw-normal mb-1">Enter your email</label>
+            <input [(ngModel)]="model.emailAddress" (keydown.space)="$event.preventDefault();" type="email" placeholder="Enter your email" class="form-control border input-area mt-2 px-3 py-2" 
+            name="emailAddress" required #emailAddressModel="ngModel" #emailAddress/>
+            <abp-validation-summary
+            [control]="emailAddressModel"
+            [controlEl]="emailAddress"
+          ></abp-validation-summary>
+          </div>
+        
+          <div class="mb-lg-4 mb-md-3 w-100  form-group  required">
+            <label for="password" class="col-form-label fw-normal mb-1">Password</label>
+            <input [(ngModel)]="model.password" (keydown.space)="$event.preventDefault();" type="password" placeholder="Enter password" class="form-control input-area mt-2 px-3 py-2 bg-white"
+              name="password" required #passwordModel="ngModel" #password/>
+              <abp-validation-summary
+              [control]="passwordModel"
+              [controlEl]="password"
+            ></abp-validation-summary>
+          </div>
+          
+          <button class="w-100 custom-fw btn px-4 mt-3 custom-primary text-white border"   type="submit">Sign Up
+             <i class="bi bi-arrow-right ms-2" [routerLink]="['../otp']"></i>
+          
+            </button>
+          <p class="text-fs-sm my-3 text-center">Already have an account ?
+             <a href="" class="green-color custom-fw" (click)="login()" >Sign In</a>
+          </p>
+        </form>
+        
+      </div>
+      </div>
+      <div class="col-lg-6 col-12 h-lg-100 p-0">
+        <div class="signin-slider d-flex align-items-center ">
+          <div class="inner-slider-bg border border-white  m-2 ">
+            <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators align-items-center justify-content-start">
+                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active"
+                  aria-current="true" aria-label="Slide 1"></button>
+                <button type="button"  class="mx-2" data-bs-target="#carouselCaptions" data-bs-slide-to="1"
+                  aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2"
+                  aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <div class="px-lg-4 pt-lg-4 px-3 pt-3">
+                    <h1 class="text-white slide_text">Learning is not attained by chance, it must be sought for with <span class="bold_text">ARDOR AND ATTENDED</span> to with
+                      diligence.</h1>
+                  </div>
+                  <img src="../../assets/img/login-slide1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <div class="px-lg-4 pt-lg-4 px-3 pt-3">
+                    <h1 class="text-white slide_text">Learning is not attained by chance, it must be sought for with <span class="bold_text">ARDOR AND ATTENDED</span> to with
+                      diligence.</h1>
+                  </div>
+                  <img src="../../assets/img/login-slide1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <div class=" px-lg-4 pt-lg-4 px-3 pt-3">
+                    <h1 class="text-white slide_text">Learning is not attained by chance, it must be sought for with <span class="bold_text">ARDOR AND ATTENDED</span> to with
+                      diligence.</h1>
+                  </div>
+                  <img src="../../assets/img/login-slide1.png" class="d-block w-100" alt="...">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="px-lg-5 copy_right position-absolute mt-lg-0 mt-3 text-lg-start text-center d-lg-none d-md-none d-block">&copy; 2022 Teacher’s Vision. All Rights Reserved</p>
+       
+      </div>
+     
+      <!-- <p class="px-lg-5 copy_right position-absolute mt-lg-0 mt-3  d-lg-block d-md-block d-none">&copy; 2022 Teacher’s Vision. All Rights Reserved</p>
+       -->
+    </div>
+  </div>
+</section>

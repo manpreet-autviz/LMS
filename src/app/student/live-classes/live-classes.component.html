@@ -1,0 +1,66 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<div class="tittle_header">
+  <section class="bg-white">
+    <div class="tab-content mocktest_content" id="nav-tabContent">
+
+      <div class="row row-cols-1 row-cols-lg-1 row-cols-md-1 g-2 g-lg-3">
+        <!-- <div class="col" *ngFor="let item of stringifiedData">
+                        <div class="">
+                            <div class="card" >
+                                <div class="card-body">
+                                    <div class="col" *ngFor="let i of vids" 
+                                        class="d-lg-flex d-md-flex card_top_heading justify-content-between align-items-center mb-2">
+                                        <h3 class="card_heading mb-0">{{item.name}}</h3>
+                                        <span><p class="valid_date mb-0">Start Date : {{item.startTime | date: "dd/MM/yyyy"}}</p></span>
+                                    </div>
+                                    <p class="card-text mb-lg-4 mb-md-4 mb-3">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                    <div class="footer d-lg-flex  d-md-flex justify-content-between align-items-center">
+                                        <div class="d-flex justify-content-lg-between justify-content-md-between justify-content-center align-items-center" >
+                                            <span class="d-flex align-items-center"><i class="far fa-eye me-2"></i> {{item.startTime}}
+                                            </span>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="footer d-lg-flex  d-md-flex justify-content-between align-items-center">
+                                        <span ><p class="valid_date mb-0" >Vedio Url : {{item.videoUrl}}</p></span>
+                                        <button class="btn view_btn text-white mt-lg-0 mt-md-0 mt-3">Start</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+
+        <div *ngFor="let course of courseManagements" class="px-3">
+                 
+          <h2 *ngIf="course.liveVideos.length>0" class="liveclass_heading">Course : {{course.name}}</h2>
+          <div>
+           
+              <div class="row g-2 g-lg-3 position-relative live_class">
+                <!-- <div *ngFor="let videos of course.liveVideos" (click)="start(videos.id)"> -->
+                <div class="col-lg-3 col-md-3 col-12" *ngFor="let videos of course.liveVideos" (click)="start(videos.id)">
+                  <div class="live-bck">
+                    <div class=" live-tittle">
+                      Title : {{videos?.title}}
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center img_bck position-relative">
+                      <div class="black_back position-absolute"></div>
+                      <img class="fa-brands fa-youtube img-fluid"
+                        src="https://img.youtube.com/vi/{{getVideoId(videos?.videoUrl)}}/0.jpg" />
+                        <i class="fas fa-play position-absolute play_btn"></i>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

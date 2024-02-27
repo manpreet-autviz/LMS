@@ -1,0 +1,125 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<hr />
+<form class="form-horizontal inbuilt-form-data" autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="save()">
+  <div class="row px-3 create_heading">
+    <h4>Add syllabus</h4>
+  </div>
+
+  <div class="modal-body pt-0">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      <div class="col form-group required mb-0">
+        <label class="col-form-label fw-normal  w-100" for="categoryName">
+          {{ "Category" | localize }}
+        </label>
+        <div>
+          <div class="position-relative">
+          <p-treeSelect *ngIf="treeData?.length != 0" [(ngModel)]="selectedCategory"
+            (onNodeSelect)="setCategory($event)" [options]="treeData" name="categoryId" placeholder="Select Category"
+            #categoryModel="ngModel" #categoryEl required></p-treeSelect>
+            <i class="fas fa-angle-down position-absolute customeup-down"></i>
+          </div>
+          <div *ngIf="treeData.length == 0">
+            <select>
+              <option disabled>No Result Found</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col form-group required mb-0">
+        <label class="col-form-label fw-normal  w-100" for="name">
+          {{ "Course" | localize }}
+        </label>
+
+        <div>
+          <div class="position-relative">
+          <select [(ngModel)]="syllabus.courseManagementId" class="w-100 form-control" class="form-select" name="name"
+            placeholder="Select Course">
+            <option disabled value="-1"><span  *ngIf="syllabus.categoryId == -1">Please Select Category First</span>
+            <span  *ngIf="syllabus.categoryId != -1">Select Course</span></option>
+            <option *ngFor="let data of allCourses" [value]="data.id">
+              {{ data.name }}
+            </option>
+          </select>
+          <i class="fas fa-angle-down position-absolute customeup-down"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col form-group required mb-0">
+        <label class="col-form-label fw-normal  w-100" for="subjectName">
+          {{ "Subject" | localize }}
+        </label>
+        <div>
+          <div class="position-relative">
+          <select
+            [(ngModel)]="syllabus.subjectId"
+            (onDeSelect)="onItemDeSelect()"
+            (change)="getAllTopics($event.target.value)"
+            class="w-100 form-control"
+            class="form-select"
+            name="subjectName"
+            required
+            placeholder="Select Subject"
+          >
+            <option disabled value="-1">Select Subject</option>
+            <option *ngFor="let item of allSubjectItems" [value]="item.id">
+              {{ item.subjectName }}
+            </option>
+          </select>
+          <i class="fas fa-angle-down position-absolute customeup-down"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col form-group mb-0">
+        <label class="col-form-label fw-normal  w-100" for="title">
+          {{ "Topics" | localize }}
+        </label>
+        <div class="position-relative">
+          <ng-multiselect-dropdown class="multiselect_button"  name="selectedTopics" id="topics"
+            [placeholder]="'Selected Topics'" [settings]="dropdownSettings" [data]="allTopics"
+            [(ngModel)]="selectedTopics">
+           
+          </ng-multiselect-dropdown>
+          <i class="fas fa-angle-down position-absolute customeup-down"></i>
+        </div>
+      </div>
+
+      <div class="col form-group required mb-0">
+        <label class="col-form-label fw-normal  w-100" for="level">
+          {{ "Level" | localize }}
+        </label>
+        <div>
+          <div class="position-relative">
+          <select [(ngModel)]="syllabus.level" class="w-100 form-control" class="form-select" name="level"
+            #levelModel="ngModel" #levelEl placeholder="Select level">
+            <option disabled value="" selected>Select Level</option>
+            <option value="Level1">Level1</option>
+            <option value="Level2">Level2</option>
+            <option value="Level3">Level3</option>
+          </select>
+          <abp-validation-summary [control]="levelModel" [controlEl]="levelEl"></abp-validation-summary>
+          <!-- <i class="fas fa-angle-down position-absolute customeup-down"></i> -->
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 form-group mb-0">
+        <label class="col-form-label fw-normal  w-100" for="detail">
+          {{ "Details" | localize }}
+        </label>
+        <div>
+          <textarea class="form-control" placeholder="Details" name="detail" id="detail" cols="30" rows="5"
+            [(ngModel)]="syllabus.detail" #nameModel="ngModel" #nameEl></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <abp-modal-footer (onCancelClick)="cancel()">
+  </abp-modal-footer>
+</form>

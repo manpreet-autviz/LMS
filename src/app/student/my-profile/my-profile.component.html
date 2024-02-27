@@ -1,0 +1,174 @@
+<h1>Student Profile</h1>
+<form>
+
+  <div class="modal-body">
+  <div class="form-group row ">
+          <label class="col-md-2 col-form-label" for="name">
+            {{ "Name" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              id="name"
+           
+            
+              maxlength="32"
+              [(ngModel)]="myprofile.name"
+              #nameModel="ngModel"
+              #nameEl
+            />
+            <abp-validation-summary
+              [control]="nameModel"
+              [controlEl]="nameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+
+          <div class="form-group row ">
+          <label class="col-md-2 col-form-label" for="userName">
+            {{ "UserName" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="userName"
+              id="userName"
+         
+             
+              minlength="2"
+              maxlength="32"
+              [(ngModel)]="myprofile.userName"
+              #userNameModel="ngModel"
+              #userNameEl
+            />
+            <abp-validation-summary
+              [control]="userNameModel"
+              [controlEl]="userNameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+{{myprofile|json}}
+        <div class="form-group row required ">
+          <label class="col-md-2 col-form-label" for="emailAddress">
+            {{ "EmailAddress" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="email"
+              class="form-control"
+              name="emailAddress"
+              id="emailAddress"
+              required
+          
+              maxlength="256"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+              [(ngModel)]="myprofile.emailAddress"
+              #emailAddressModel="ngModel"
+              #emailAddressEl
+            />
+            <abp-validation-summary
+              [control]="emailAddressModel"
+              [controlEl]="emailAddressEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+
+      <div class="form-group required">
+        <label class=" col-md-2 col-form-label" for="name">
+          {{ "Mobile" | localize }}
+        </label>
+        <div class="col-md-9">
+          <input
+            type="tel"
+            [(ngModel)]="myprofile.phoneNumber"
+            class="form-control"
+            #phoneNumberModel="ngModel"
+            #phoneNumberE1
+            pattern="[6789][0-9]{9}"
+            placeholder="Mobile"
+            name="phoneNumber"
+            maxlength="128"
+       
+          />
+          <abp-validation-summary
+            [control]="phoneNumberModel"
+            [controlEl]="phoneNumberE1"
+          ></abp-validation-summary>
+        </div>
+      </div>
+       
+        <div class="col-md-2 form-group">
+        <label class="col-form-label fw-normal" for="name">
+          {{ "Gender" | localize }}
+        </label>
+        <div class="col-md-9">
+          <select
+            [(ngModel)]="myprofile.gender"
+            #gender="ngModel"
+            #genderE1
+       
+        
+            name="gender"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected value="undefined" disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      </div>
+
+       <div class="col form-group">
+        <label class="col-form-label" for="image">
+          {{ "Profile" | localize }}
+        </label>
+        <div>
+          <div class="col-md-12">
+            <div class="d-flex align-items-center" *ngIf="myprofile.pofileImage != ''">
+              <img style="width: 80px" [src]="myprofile.pofileImage" alt="user image" />
+              <span class="cross-icon bg-danger text-white position-absolute curser_pointer rounded-circle " (click)="myprofile.pofileImage = ''">X</span>
+            </div>
+            <input
+              *ngIf="myprofile.pofileImage == ''"
+              type="file"
+              class="form-control"
+              name="pofileImage"
+              id="pofileImage"
+              minlength="2"
+              maxlength="64"
+            
+              (change)="onUpload($event.target.files)"
+            />
+          </div>
+          <div
+            *ngIf="isImageUplodedStatus == 'start'"
+            class="progress-bar__container"
+          >
+            <div
+              [ngClass]="isImageUplodedStatus == 'end' ? 'pb-full' : ''"
+              class="progress-bar"
+            ></div>
+          </div>
+        </div> 
+      </div>
+</form>
+<button type="button" (click)="updateProfile()" class=" btn btn-primary">Update </button> &nbsp;
+<button type="button"  (click)="back()" class=" btn btn-primary">Back</button>
+
+  
+ 
+     
+ 
+  <!-- <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createStudentModal.form.valid || saving"
+   
+  ></abp-modal-footer> -->
+<!-- </form> -->

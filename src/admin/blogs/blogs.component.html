@@ -1,0 +1,84 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+
+<section class="bg-white py-lg-1 p-2">
+  <div class="container-fluid">
+    <div class="row mt-lg-3 mt-md-1 mb-lg-3 mb-md-3 mt-0 mb-3 justify-content-between align-items-center">
+      <div class="col-lg-8 col-md-9 col-12">
+        <div class="row row-cols-1 row-cols-xl-4 cols-lg-2 row-cols-md-3 align-items-center">
+          <div class="col">
+            <select [(ngModel)]="subjectId" class="form-select w-100 curser_pointer" aria-label="Default select example"
+           name="subjectId" id="subjectId" placeholder="Select Subject" (change)="getAllBlogs()">
+              <option value="0" hidden>Filter By Subject</option>
+              <option value="0">Show All Subjects</option>
+              <option *ngFor="let item of allSubjects" [value]="item.id">
+                {{item.subjectName}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-12 text-lg-end text-start mt-md-2 mt-lg-0">
+        <button class="create_btn text-white border-0" type="button" (click)="showCreateOrEditDialog()"><i
+            class="fas fa-plus-square me-2"></i>Create</button>
+      </div>
+    </div>
+    <div class="table_bck">
+      <div class="card-body table-responsive p-0">
+        <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+          <thead class=" border-0 ">
+            <tr>
+              <th class="custom-fw">Title</th>
+              <th class="custom-fw">Type</th>
+              <th class="custom-fw">Subject</th>
+              <th class="custom-fw">File Name</th>
+              <th class="custom-fw">Created Date</th>
+              <th class="text-right custom-fw">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of allBlogs">
+              <td>{{data.title}}</td>
+              <td> {{ data?.type }}
+              </td>
+              <td>
+                <div *ngIf="data.subjectName != null">
+                  {{data.subjectName}}
+                </div>
+                <div *ngIf="data.subjectName == null">
+                  ---
+                </div>
+              </td>
+              <td *ngIf="data.type!='Current Affairs'">{{data.fileName |slice: 0:15 }}</td>
+              <td *ngIf="data.type=='Current Affairs'">
+                <img *ngIf="data.image == ''" _ngcontent-ric-c100="" src="../../assets/img/user-img.png"
+                  alt="user fileName" />
+                <img *ngIf="data.image != ''" _ngcontent-ric-c100="" [src]="data.image" altu="ser image" />
+              </td>
+
+              <td>{{data.creationTime | date: "dd/MM/yyyy"}}</td>
+              <td class="text-right">
+                <ul class="action-column mb-0 ps-0">
+                  <li>
+                    <button type="button" (click)="showCreateOrEditDialog(data.id)"
+                      class=" btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center  p-2 mx-2">
+                      <img src="../../assets/img/table_edit_image.png" class="img-fluid table_edit_image">
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" (click)="delBlogs(data)"
+                      class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2">
+                      <img src="../../assets/img/delete_icon.png" class="img-fluid table_edit_image">
+                    </button>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

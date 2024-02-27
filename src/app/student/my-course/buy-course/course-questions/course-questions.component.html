@@ -1,0 +1,51 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<div class="main-y-scroll">
+    <div class="row border rounded px-2 mb-2  align-items-center" *ngFor="let mockTest of mockTests">
+        <div class="col-6  py-3">
+            <h5 class="mb-0 sb_heading">
+                {{mockTest?.mockTest?.title }}
+            </h5>
+        </div>
+        <div class="col-6">
+            <div class="d-flex  align-items-center   justify-content-end">
+
+                <button *ngIf="mockTest.isSubmitted" type="button" (click)="viewResult(mockTest.mockTestId)"
+                    class="create_btn border-0 ms-1">
+                    View Result
+                </button>
+                <div *ngIf="!mockTest.isSubmitted">
+                    <div *ngIf=" studentCourse.price!=0">
+                        <button type="button" class="lock-button color-white f border-0" (click)="startcourse(studentCourse.id)"
+                            *ngIf="mockTest.mockTest!= null && !mockTest.mockTest.isFree && !mockTest.isBuy && studentCourse.price!=0">
+                            <i class="fas fa-lock lock_icon"></i>{{mockTest.isView==false?"":"Resume"}}
+                        </button>
+                       
+                    </div>
+                    <div *ngIf="mockTest.isBuy">
+                        <button type="button" class="create_btn border-0 ms-1"
+                            (click)="showInstruction(mockTest.id,mockTest)">{{mockTest.isView==false?"Start":"Resume"}}
+                        </button>
+                    </div>
+
+                    <div *ngIf="studentCourse.price==0 && !mockTest.isBuy">
+                        <button type="button" class="create_btn border-0 ms-1" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop"
+                            (click)="startFreeTrialCourse(studentCourse.id)">{{mockTest.isView==false?"Start":"Resume"}}
+                        </button>
+                    </div>
+                    <button (click)="showInstruction(mockTest.id,mockTest)"
+                        *ngIf="mockTest.mockTest!= null && mockTest.mockTest.isFree && !mockTest.isBuy && studentCourse.price!=0"
+                        class="button">{{mockTest.isView==false?"Free":"Resume"}}
+                    </button>
+
+
+                </div>
+                <button *ngIf="mockTest.isSubmitted" type="button" class="create_btn border-0 ms-1"
+                    (click)="showReattemptMessage(mockTest.id)"> Re Attempt </button>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<!-- <div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif">
+</div> -->
+
+<section class="daily-quiz-list p-3">
+
+    <div class="row justify-content-center align-items-center ">
+        <div class="col-12 mt-0">
+            <!-- <div class="row row-cols-1 row-cols-lg-1 g-2 g-lg-3"> -->
+            <!-- <div class="col mt-0"> -->
+            <div class="img_bckgrnd ">
+                <div class="col-12">
+                    <h6 class=" mb-0 sb_heading mb-1"> {{blogDetails.title}}
+                        {{blogDetails.creationTime | date :
+                        'MMM dd, yyyy' }}
+                    </h6>
+                    <div *ngIf="blogDetails.image !=''" class="">
+                        <div *ngIf="blogDetails.image != ''" class="img_bckgrnd img-bck">
+                            <img [src]="blogDetails.image" class="card-img-top img-fluid w-100 h-100"
+                                alt="subject image">
+                        </div>
+                        <div *ngIf="blogDetails?.image == ''" class="img_bckgrnd img-bck">
+                            <img src="../../assets/img/no-image.png" class="card-img-top  img-fluid  w-100 h-100"
+                                alt="subject image">
+                        </div>
+                    </div>
+
+                </div>
+                <div [style.height.px]="setHeight()" class="col-12 current_text modal-body current_bck w-100">
+
+
+                    <div *ngIf="blogDetails.description !=null" class="pt-1 pb-0 discription">
+                        <p [innerHTML]="blogDetails.description" class="mb-0 blogDetails-description" class="modl_dis"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+            <!-- </div> -->
+        </div>
+    </div>
+    <div class="d-flex justify-content-end align-items-center mb-2 px-4">
+        <button class="border-0 student_cancel_btn" type="button" (click)="back()">Back</button>
+    </div>
+
+</section>

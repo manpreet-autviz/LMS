@@ -1,0 +1,53 @@
+<div class="loader_background" *ngIf="loading">
+  <img src="../../assets/img/output-onlinegiftools.gif">
+</div>
+<section class="bg-white mocktest_content">
+  <div class="tab-content stdnt_nav_content" id="nav-tabContent">
+    <!-- <h2 class="stdnt_main_hding text-lg-left text-md-left text-center">
+        My Course List
+      </h2> -->
+    <div *ngIf="allCourses == 0" class="col form-group no_data text-center">
+      <span class="no_data_text">No Data Found</span>
+    </div>
+    <div *ngIf="allCourses != 0" class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-2 g-lg-3">
+      <div class="col" *ngFor="let course of allCourses; let i = index">
+        <div class="">
+          <div class="card">
+            <div class="d-flex justify-content-center align-item-center w-100 overflow-hidden card_imagebck">
+              <img *ngIf="course.courseManagement.imagePath == ''" src="../../../../assets/img/ssc.png"
+                class="card-img-top w-auto img-fluid" alt="..." />
+              <img *ngIf="course.courseManagement.imagePath != ''" [src]="course.courseManagement.imagePath"
+                class="card-img-top w-auto img-fluid" height="" alt="Image not found" />
+            </div>
+            <div class="card-body border-top-0 position-relative">
+              <div
+                class="d-lg-flex d-md-flex card_top_heading justify-content-lg-between justify-content-md-between  justify-content-center align-items-center mb-2">
+                <h3 class="card_heading mb-0 text-lg-start text-md-start text-center overflow-hidden">{{
+                  course.courseManagement.name }}</h3>
+                <p  *ngIf="course.isUnlimited" class="valid_date mb-0 text-lg-end text-md-end text-center">
+                  Course Valid upto: Unlimited
+                </p>
+                <p *ngIf="!course.isUnlimited" class="valid_date mb-0 text-lg-end text-md-end text-center">
+                  Course Valid upto: {{ course.expiryDate| date:'MMM dd, yyyy' }}
+                </p>
+              </div>
+              <p *ngIf="course.courseManagement.detail !=null" class="card-text mb-3" data-bs-placement="top" title="{{course.courseManagement.detail}}">{{
+                course.courseManagement.detail | slice:0:100}}</p>
+                <p *ngIf="course.courseManagement.detail ==null" class="card-text mb-3" data-bs-placement="top">
+                 No Details available</p>
+              <div class="footer d-lg-flex d-md-flex justify-content-end align-items-center">
+                <button type="button" (click)="onclick(course.courseManagementId)"
+                  class="btn rounded-pill button text-white ">
+                  View
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</section>

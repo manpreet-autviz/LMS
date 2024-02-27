@@ -1,0 +1,19 @@
+<ul class="navbar-nav m-0">
+  <li class="nav-item toggle-hide">
+    <a class="nav-link" href="javascript:;" (click)="toggleSidebar()">
+      <!-- <i class="fas fa-bars"></i> -->
+      <img src="../../assets/img/mini-icon.svg" class="img-fluid toggle_logo">
+    </a>
+    <!-- <div class="tittle_header">
+      <h1 class="mb-0">{{data?.title}}</h1>
+      <span class="sb_heading">{{ data?.length }} List Found</span>
+    </div> -->
+  </li>
+  <li class="nav-item mock-test-heading">
+    <h3 style="margin-bottom:5px;">{{data?.title}}</h3>
+    <div class="text-fs-sm" *ngIf="data?.lengthh!=-1">{{data?.lengthh}} Records found</div>
+  </li>
+  <!-- <li class="nav-item d-none d-sm-inline-block">
+    <h2 class="ng-tns-c80-1">Dashboard</h2>
+  </li> -->
+</ul>

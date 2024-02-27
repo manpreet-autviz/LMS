@@ -1,0 +1,68 @@
+<div class="loader_background" *ngIf="loading">
+    <img src="../../assets/img/output-onlinegiftools.gif" />
+</div>
+<div class="row mt-lg-3 mt-md-1 mb-lg-3 mb-md-3 mt-0 mb-3 ">
+    <div class="col-12 text-end">
+        <button type="button" (click)="showCreateOrEditDialog()" class="create_btn text-white">
+            <i class="fas fa-plus-square me-2"></i>Create
+        </button>
+    </div>
+</div>
+
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table_bck">
+                <div class="card-body table-responsive p-0">
+                    <table class="table-data table text-nowrap" datatable [dtOptions]="dtOptions"
+                        [dtTrigger]="dtTrigger">
+                        <thead class="bg-light border-0">
+                            <tr>
+                                <th class="custom-fw" width="200">Title</th>
+                                <th class="custom-fw">Description</th>
+                                <th class="custom-fw">Images</th>
+                                <th class="custom-fw">link</th>
+                                <th class="text-right custom-fw">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of allpromotion;let i = index">
+                                <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.title }}">
+                                    {{data.title |slice:0:10}}</td>
+                                <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.discription}}">
+                                    {{data.discription |slice:0:50}}...</td>
+                                <td *ngIf="data.image!=''">
+                                    <img [src]="data.image" class="table_img" alt="user image" />
+                                </td>
+                                <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{data.link }}">{{ data.link | slice: 0:10
+                                    }}...</td>
+
+                                <td class="text-right">
+                                    <ul class="action-column mb-0 ps-0">
+                                        <li>
+                                            <button type="button" (click)="showCreateOrEditDialog(data.id)"
+                                                class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center  p-2 mx-2"
+                                                title="Edit" data-toggle="edit">
+                                                <img src="../../assets/img/table_edit_image.png"
+                                                    class="img-fluid table_edit_image">
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" (click)="delPromotion(data)"
+                                                class="btn edit-icons radius-10 d-block d-flex justify-content-center align-items-center p-2 mx-2">
+                                                <img src="../../assets/img/delete_icon.png"
+                                                    class="img-fluid table_edit_image">
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,51 @@
+<div class=" text-center top_heading pt-5">
+    <img src="../../../../assets/img/prize.svg" class="img-fluid mb-3">
+    <h2 class="">MockTest Result</h2>
+</div>
+
+<div class="modal-body px-lg-5 px-md-4 px-4 py-4">
+   
+
+<div class="row justify-content-center align-items-center prizes">
+    <div class="col"></div>
+    <div class="col text-center mock_test">
+        <img src="../../../../assets/img/rank.png" class="img-fluid mb-2">
+        <h2 class="mb-0"> {{mockTestResult.correct }}</h2>
+        <h5>Correct</h5>
+    </div>
+    <div class="col text-center mock_test">
+        <img src="../../../../assets/img/score.png" class="img-fluid mb-2">
+        <h2 class="mb-0">{{mockTestResult.attempted}}</h2>
+        <h5>Attempted </h5>
+    </div>
+    <div class="col text-center mock_test">
+        <img src="../../../../assets/img/correct.png" class="img-fluid mb-2">
+        <h2 class="mb-0"> {{mockTestResult.unattempted}}</h2>
+        <h5>Unattempted</h5>
+    </div>
+    <div class="col"></div>
+</div>
+
+<div class="row justify-content-center align-items-center prizes mt-3">
+    <div class="col"></div>
+    <div class="col text-center mock_test">
+        <img src="../../../../assets/img/wrong.png" class="img-fluid mb-2" style="width:40px;">
+        <h2 class="mb-0">{{mockTestResult.wrong}}</h2>
+        <h5>Wrong </h5>
+    </div>
+    <div class="col text-center mock_test">
+        <img src="../../../../assets/img/unattemped.png" class="img-fluid mb-2" style="width:40px;">
+        <h2 class="mb-0">{{mockTestResult.score}}</h2>
+        <h5>Score</h5>
+    </div>
+    <div class="col"></div>
+</div>
+</div>
+   <div class="row justify-content-center modal-footer pt-0">
+    <div class="col-lg-6 col-md-12 col-12 mt-0 pt-0 text-center">
+        <button type="button"  (click)="viewMockTestResult(mockTestResult.mockTestId)" class="btn btn-primary">View Explanation</button>
+        <button type="button" (click)="cancel()" class="btn btn-default ms-2"> Cancel </button>
+    </div>
+</div>
+
+

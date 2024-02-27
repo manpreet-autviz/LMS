@@ -1,0 +1,188 @@
+$primary-gradient: linear-gradient(180deg, #65A35E 0%, #2F9EB1 100%);
+$font-primary: 'Poppins', sans-serif;
+$h-font: 'Lato', Arial, sans-serif;
+$primary: #319EAE;
+$black: #212121;
+$gray: #929292;
+$dark-gray: #ccc;
+$white: #ffffff;
+$light-white: #F9F9F9;
+$dark_black: #000000;
+$light-gray: #DBDBDB;
+$green: #63A461;
+$light-black: #262626;
+$light-border: #E6E6E6;
+$card-border: #C9C17F;
+
+
+
+.stdnt_main_hding {
+    font-size: 20px;
+    font-weight: 500;
+}
+.img_bck{
+    max-width: 298px;
+    height: 78%;
+    border-radius: 10px;
+    img{
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover;
+        border-radius: 10px;
+    }  
+    .black_back{
+        height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #0000006b;
+    border-radius: inherit;
+    &:hover{
+        background-color: #00000005 !important;
+    }
+    }
+}
+.play_btn{
+    background-color: #62a363;
+    border-radius: 50px;
+    padding: 12px 12px 12px 15px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    // &:hover .black_back{
+    //         background-color: #00000005;
+    // }
+}
+
+.mocktest_content {
+    .card {
+        box-shadow: 0px 4px 30px #f2f2f2;
+        border: 1px dashed $card-border;
+        border-radius: 11px;
+        width: 97%;
+
+        .card-body {
+           
+            .card_top_heading {
+                .card_heading {
+                    font-size: 22px;
+                    font-weight: 600;
+                }
+
+                .valid_date {
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: $gray;
+                }
+            }
+
+            .card-text {
+                font-size: 14px;
+                color: $gray;
+            }
+
+            .footer {
+                span {
+                    color: $gray;
+                    font-size: 12px;
+                }
+            }
+
+            .view_btn {
+                background-color: $primary;
+                width:28%;
+                font-size: 14px;
+                font-weight: 500;
+                border-radius: 4px;
+                padding: 10px 0px;
+            }
+        }
+    }
+}
+
+.liveclass_heading{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18px;
+    margin-bottom: 17px;
+}
+.live_class{
+    .live-bck{
+        border: 2px solid #f3f3f3;
+        border-radius: 8px;
+        padding: 11px;
+        height: 255px;
+        margin-bottom: 15px;
+    }
+    .img-bck{
+        height: 200px;
+        width: 100%;
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+    }
+    .live-tittle{
+        font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    max-width: 336px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 auto 15px;
+    }
+}
+
+@media screen and (max-width:991px) {
+  
+    .mocktest_content {
+        .card {
+            height: auto;
+            .card-body {
+                .card_top_heading {
+                    .card_heading {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    .mocktest_content {
+        .card {
+            .card-body {
+                .card_top_heading {
+                    text-align: center;
+                    .card_heading{
+                        font-size: 21px;
+                    }
+                    .valid_dat {
+                        font-size: 11px;
+                    }
+                }
+
+                .card-text {
+                    font-size: 12px;
+                    text-align: center;
+                }
+
+                .footer {
+                    .view_btn {
+                        width: 100%;
+                    }
+                }
+            }
+
+        }
+    }
+    .live_class{
+        .live-bck{
+            margin-bottom: 0px;
+        }
+    }
+}
